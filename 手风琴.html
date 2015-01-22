@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+
+	<script src="js/jquery.min.js" ></script>
+    <script src="js/jquery.SuperSlide.2.1.1.js" ></script>
+    <div class="slideTxtBox">
+    <div class="hd">
+        <ul><li>教育</li><li>培训</li><li>出国</li></ul>
+    </div>
+    <div class="bd">
+        <ul>
+            <li><a href="http://www.SuperSlide2.com" target="_blank">SuperSlide2.0正式发布！</a></li>
+            ...
+        </ul>
+        <ul>
+            <li><a href="http://www.SuperSlide2.com" target="_blank">名师教作文：３妙招巧写高分</a></li>
+            ...
+        </ul>
+        <ul>
+            <li><a href="http://www.SuperSlide2.com" target="_blank">澳大利亚八大名校招生说明会</a></li>
+            ...
+        </ul>
+    </div>
+</div>
+
+<script>
+$(function(){
+	jQuery(".slideTxtBox").slide({titCell:".hd ul li", targetCell:".bd ul",defaultIndex:1,effect:"slideDown",delayTime:300,returnDefault:true});
+	});
+</script>
+</body>
+</html>

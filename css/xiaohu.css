@@ -1,0 +1,23 @@
+.xh ul.bk li{
+	float:left;
+	width:221px;height:180px;margin-right:14px;
+	
+	}
+.xh ul.bk li.mgr-no{margin-right:0}	
+	
+	.xh ul.bk li .txt{ line-height:34px; text-align:center; }
+	.xh ul.bk li {}
+	
+	.xh ul.bk li img{}
+	.xh ul.spline{ repeat-x;}
+	
+.xh *{ padding:0; margin:0; border:0; list-style:none;}
+	
+	.xh p{ font-size:14px;}
+	.xh .midtitle{color:#f08300; border-bottom: #f08300 3px solid; line-height:34px ; width:70px;  font-size:16px; font-weight:bold; margin-bottom:20px; }
+	
+	.xh ul .logo{  padding:20px;padding-left:0; height:60px; width:654px; background:url(../images/arthurlan/xuxianfenge.png) 0 95px repeat-x; }
+	
+	.xh ul.logolist li div{ float:left;}
+   .xh .icon { margin: 20px ;}
+   .clear{ clear:both;}

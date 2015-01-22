@@ -1,0 +1,46 @@
+/* CSS Document */
+body,html {margin:5px; background-color:#FFFFFF;
+	overflow:auto;
+	overflow-x:hidden;
+	SCROLLBAR-FACE-COLOR: #6a84ae;
+	SCROLLBAR-HIGHLIGHT-COLOR: #aaaaff;
+	SCROLLBAR-SHADOW-COLOR: #335997;
+	SCROLLBAR-3DLIGHT-COLOR: #335997;
+	SCROLLBAR-ARROW-COLOR: #ffffff;
+	SCROLLBAR-TRACK-COLOR: #335997;
+	SCROLLBAR-DARKSHADOW-COLOR: black;
+}
+body,td,th {color: #656565;font-size:12px;line-height:180%;word-break:break-all;}
+div{ line-height:180%;word-break:break-all;}
+form {margin: 0px;padding: 0px;}
+ul {margin: 0px;padding: 0px;}
+li {list-style-type: square;text-align: left;line-height:180%;}
+.red {color: #FF0000;}
+.white {color: #FFFFFF;}
+.black{color:#000000;}
+.blue {color: #00439D;}
+.blod{ font-weight:bold;}
+.back_southidc{COLOR:000000;}
+.table_southidc{BACKGROUND-COLOR: #A4B6D7;}
+.td_southidc{
+	BACKGROUND-COLOR: #FFFFFF;
+}
+.tr_southidc{BACKGROUND-COLOR: #ECF5FF;}
+
+.t1 {font:12px 宋体;color:#000000} 
+.t2 {font:12px 宋体;color:#ffffff} 
+.t3 {font:12px 宋体;color:#ffff00} 
+.t4 {font:12px 宋体;color:#800000} 
+.t5 {font:12px 宋体;color:#191970}
+a:link {
+	color: #000000;
+	text-decoration: none;
+}
+a:active {
+	color: #000000;
+	text-decoration: none;
+}
+a:visited {
+	color: #000000;
+	text-decoration: none;
+}
