@@ -7,16 +7,19 @@ if (confirm("真的要删除这个订单?"))
 window.location.href="Manage_Eshop.asp?id="+id+"&page="+page
 }
 </script>
-<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="table_southidc">
-  <tr>
-    <td height="25" align="center" class="back_southidc"><strong>订单管理</strong></td>
-  </tr>
-  <tr>
+<table>
+<tr>
   <td>
   <form action="manage_Eshop.asp" method="get">请输入关键词进行查询：
         <input name="keywords" value=""><input type="submit" value="搜索">
         </form></td>
   </tr>
+ </table>
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="table_southidc">
+  <tr>
+    <td height="25" align="center" class="back_southidc"><strong>订单管理</strong></td>
+  </tr>
+  
 </table>
 
 <%
@@ -76,17 +79,16 @@ Sub list()
             <table width="100%" border="0" align="center" cellpadding="4" cellspacing="1" class="table_southidc">
               <tr bgcolor="#A4B6D7" class="tr_southidc">
                 <td width="12%" align="center">订单编号</td> 
-                <td width="32%" height="25" align="center">订单详情</td>
+                <td height="25" align="center">用户名</td>
+                 <td align="center">商品金额</td>
+                 <td align="center">浮动金额</td>
+                 <td align="center">订单状态</td>
+                 <td align="center">下单时间</td>
                 <td width="10%" align="center"> 
-                  联系人</td>
+                  收货人</td>
                 <td width="13%" align="center"> 
                   联系电话</td>
-                <td width="11%" align="center"> 
-                  处理情况</td>
-                  <td width="11%" align="center"> 
-                  退款情况</td>
-                <td width="11%" align="center"> 
-                  订单详情</td>
+                
                 <td width="11%" align="center"> 
                   操作</td>
               </tr>
@@ -100,22 +102,27 @@ do while not rs.eof
                 <td align="center" bgcolor="#ECF5FF"> 
                 <%=rs("username")%></td>
                 <td align="center" bgcolor="#ECF5FF"> 
-                <%=rs("username")%></td>
+                <%=rs("totalmoney")%></td>
                 <td align="center" bgcolor="#ECF5FF"> 
-                <%=rs("mobile")%></td>
-                <td align="center" bgcolor="#ECF5FF"> 
-                  <%=rs("Flag")%>
-                </td>
+                <%=rs("floatmoney")%></td>
                 <td align="center" bgcolor="#ECF5FF"> 
                   <%=rs("refund_status")%>
                 </td>
                 <td align="center" bgcolor="#ECF5FF"> 
-                 
-                    <%response.write "<a href='Manage_Eshop_detail.asp?ID="&rs("OrderNum")&"&page="&CurrentPage&"'  >详细资料</a>"
-%>                </td>
+                  <%=rs("addtime")%>
+                </td>
+               
                 <td align="center" bgcolor="#ECF5FF"> 
-            
-                    <%response.write "<a href='javascript:confirmdel(" & rs("id") & ","& CurrentPage&")'>删除</a>"
+                  <%=rs("xm")%>
+                </td>
+                
+                 <td align="center" bgcolor="#ECF5FF"> 
+                  <%=rs("tel")%>
+                </td>
+                
+                <td align="center" bgcolor="#ECF5FF"> 
+            <%response.write "<a href='Manage_Eshop_detail.asp?ID="&rs("OrderNum")&"&page="&CurrentPage&"'  >查看/编辑</a>"
+                    response.write "&nbsp;&nbsp;<a href='javascript:confirmdel(" & rs("id") & ","& CurrentPage&")'>删除</a>"
 %>                </td>
               </tr>
               <%
