@@ -13,8 +13,8 @@ body,html {margin:5px; background-color:#FFFFFF;
 body,td,th {color: #656565;font-size:12px;line-height:180%;word-break:break-all;}
 div{ line-height:180%;word-break:break-all;}
 form {margin: 0px;padding: 0px;}
-ul {margin: 0px;padding: 0px;}
-li {list-style-type: square;text-align: left;line-height:180%;}
+ul {margin: 0px;padding: 0px; list-style:none;}
+li {list-style:none;text-align: left;line-height:180%;}
 .red {color: #FF0000;}
 .white {color: #FFFFFF;}
 .black{color:#000000;}
@@ -44,3 +44,31 @@ a:visited {
 	color: #000000;
 	text-decoration: none;
 }
+
+.addlist{margin:0;padding:0;}
+.addlist dt{padding:5px 0 5px 20px;background:#F5F8FC;margin:2px 0;overflow:hidden;}
+.addlist em{font-size:14px;margin:0;padding:0;font-style:normal;font-weight:bold;display:block;}
+.addlist dd{padding:5px 0 5px 20px;background:#F5F8FC;margin:2px 0;}
+.addlist .input{border:1px solid #93B4D2;border-right:1px solid #A3D3FF;border-bottom:1px solid #A3D3FF;}
+.addlist input{border:1px solid #B4B4B4;border-right:1px solid #E8E8E8;border-bottom:1px solid #E8E8E8;padding:5px 0 4px 5px;font-family:verdana;vertical-align:middle;}
+.addlist dd input{background:url(../images/login_bnt.gif) no-repeat;border:0;width:57px;height:25px;_height:27px;padding:0;text-align:center;color:#3E71B0;font-size:12px;margin:0 5px 0 0;}
+.addlist dt textarea{border:1px solid #B4B4B4;overflow:auto;}
+.addlist dt .b0{border:0;}
+.addlist dt span{color:#999;font-size:14px;}
+.addlist dt #imgprogress span{color:#333;font-size:12px;}
+.addlist .bnt,.addlist .bnt02,.addlist .bnt_tags,.addlist .bnt_temp,.addlist .bnt_clear,.addlist .bnt_pinyin,.addlist .bnt_english{background:#3F73B3;color:#fff;border:1px solid #3F73B3;padding:0 10px;*padding:0 2px;height:25px;cursor:pointer;}
+/*.addlist .button{background:#3F73B3;color:#fff;border:1px solid #3F73B3;padding:0 10px;*padding:0 2px;height:25px;}*/
+.addlist .bnt01{background:#3F73B3;color:#fff;border:1px solid #3F73B3;padding:0 5px;*padding:0 2px;height:25px;margin-left:1px;}
+
+/*for order*/
+.addlist .order_base{margin:5px 0 5px 20px;padding:0;list-style:none;}
+.addlist .order_base li{padding:4px 0;}
+.addlist .order_base span{display:inline-block;width:100px;text-align:right;color:#666;font-size:12px;}
+.addlist .order_pro{border-collapse:collapse;width:100%;margin:0 0 15px 0;}
+.addlist .order_pro th,.addlist .order_pro td{border:1px solid #d4d4d4;padding:2px 4px;}
+.addlist .order_pro td{font-size:12px;font-family:arial;text-align:center;background:#fff;}
+.addlist .order_pro th{background:#f2f2f2;}
+.addlist .order_pro .info{text-align:right;}
+.addlist .order_pro .info span{color:#f30;margin:0 4px;font-size:12px;font-family:arial;}
+.addlist .order_pro .price{color:#f30;}
+.addlist .order_pro del{color:#666;}

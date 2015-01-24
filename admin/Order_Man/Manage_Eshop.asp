@@ -38,7 +38,7 @@ sqltext="select * from OrderList_c  order by addtime desc"
 
 if keywords<>"" then
 strFileName=strFileName&"&keywords="&server.URLEncode(keywords)
-sqltext="select * from OrderList_c where  (ordernum like '%"&keywords&"%' or username like '%"&keywords&"%' or tel like '%"&keywords&"%'  order by addtime desc"
+sqltext="select * from OrderList_c where  (ordernum like '%"&keywords&"%' or username like '%"&keywords&"%' or tel like '%"&keywords&"%' or xm like '%"&keywords&"%') order by addtime desc"
 end if
 response.write sqltext
 rs.open sqltext,conn,1,1
@@ -106,7 +106,7 @@ do while not rs.eof
                 <td align="center" bgcolor="#ECF5FF"> 
                 <%=rs("floatmoney")%></td>
                 <td align="center" bgcolor="#ECF5FF"> 
-                  <%=rs("refund_status")%>
+                  <%=Easp.var(trim(rs("refund_status")))%>
                 </td>
                 <td align="center" bgcolor="#ECF5FF"> 
                   <%=rs("addtime")%>

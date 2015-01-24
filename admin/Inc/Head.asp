@@ -8,6 +8,7 @@
 // -->
 </script>
 <link href="<%=SystemRoot&SiteManage%>/Inc/Admin.css" rel="stylesheet" type="text/css">
+<link href="/css/base.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 <!--
 body,html {margin:5px; background-color:#FFFFFF;
@@ -24,8 +25,8 @@ body,html {margin:5px; background-color:#FFFFFF;
 body,td,th {color: #4B4B4B;font-size:12px;line-height:180%;word-break:break-all;}
 div{ line-height:180%;word-break:break-all;}
 form {margin: 0px;padding: 0px;}
-ul {margin: 0px;padding: 0px;}
-li {list-style-type: square;text-align: left;line-height:180%;}
+ul {margin: 0px;padding: 0px;list-style:none;}
+li {list-style:none;text-align: left;line-height:180%;}
 .red {color: #FF0000;}
 .white {color: #FFFFFF;}
 .black{color:#000000;}
@@ -48,7 +49,18 @@ a:visited {color: #656565;text-decoration: none;}
 </head>
 <script src="/js/jquery.min.js" type="text/javascript"></script>
 <script src="/js/jQuery.ColorPicker.js" type="text/javascript"></script>
+<script src="/js/base.js" type="text/javascript"></script>
 <body>
 
 <!--#include file="privilege.asp"-->
 <!--#include file="aspjpeg.asp"-->
+<%
+'支付宝担保交易接口 状态
+Easp.var("WAIT_BUYER_PAY")="等待买家付款"
+Easp.var("WAIT_SELLER_SEND_GOODS")="已付款未发货"
+Easp.var("WAIT_BUYER_CONFIRM_GOODS")="已发货"
+Easp.var("TRADE_FINISHED")="订单完成"
+Easp.var("WAIT_SELLER_AGREE")="等待卖家同意退款"
+Easp.var("REFUND_SUCCESS")="退款成功"
+Easp.var("TRADE_CLOSED")="订单关闭"
+%>

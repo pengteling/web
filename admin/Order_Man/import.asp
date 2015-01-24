@@ -30,7 +30,7 @@ Response.AddHeader "Content-Disposition","attachment;filename=kyd"&date1&"-"&dat
 Set rs = Server.CreateObject("ADODB.Recordset")
 
 'response.write "select * from orderlist where addtime>=#"&date1&"# and addtime<=#"&date2&"# order by id desc"
-rs.open "select * from orderlist where addtime>=#"&date1&"# and addtime<=#"&date2&"# and isdel=0 order by id desc",conn,1,1
+rs.open "select * from orderlist where addtime>='"&date1&"' and addtime<='"&date2&"' and isdel=0 order by id desc",conn,1,1
 
 %>
 
@@ -40,15 +40,7 @@ rs.open "select * from orderlist where addtime>=#"&date1&"# and addtime<=#"&date
                 <td>下单时间</td> 
                 <td>产品名称</td>
                 <td>购买时间</td>
-                <td>购买商场</td>
-                <td>是否延保</td>                
-                <td>联系人</td>
-                <td>联系手机</td>
-                <td>联系固话</td>
-                <td>联系地址</td>
-                <td>E-mail</td>
-                <td>具体要求</td>
-                <td>处理情况</td>
+               
               </tr>
               <%
 if not rs.eof then
@@ -63,19 +55,7 @@ do while not rs.eof
                 <%=rs("productname")%></td>
                
                 <td><%=rs("buydate")%></td>
-                <td><%=rs("buyplace")%></td> 
-                
-                <td><%if rs("isyb") then response.write "是" else response.write "否" end if%></td>
-                
-                <td><%=rs("username")%></td>
-                <td > 
-                <%=rs("mobile")%></td>
-                 <td><%=rs("tel")%></td>
-                  <td><%=rs("addr")%></td>
-                  <td><%=rs("email")%></td>
-                  
-                   <td><%=rs("list_tr")%></td> 
-                <td><%=rs("Flag")%></td>
+             
              
               </tr>
               <%
