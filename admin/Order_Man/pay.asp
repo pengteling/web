@@ -5,36 +5,40 @@
 
 
 'response.write Easp.var("WAIT_BUYER_PAY")
-id=request("id")
-page=request("page")
+id=chkformstr(request("id"))
+if request.Form("send")<>"" then
+
+
+	Easp.Db.Begin '开始事务
+	
+		response.write Easp.Var("t1")
+	result = Easp.Db.Ins("user_order_pay", "ordernum:{id},payway:'线下支付',totalmoney:{totalmoney},bankname:{t1},bankno:{t2},remark:{t5}")
+Easp.Db.Commit '提交事务
+
+	 If result > 0 Then
+	 	Easp.str.JsAlertUrl "确认付款成功！","?id={=id}"	  
+	 end if
+	 
+	 'result = Easp.Db.Upd("orderList", "refund_status='WAIT_SELLER_SEND_GOODS'", "ordernum={id}")
+	 
+	
+	 
+end if
+
 set rs=server.createobject("adodb.recordset")
 sqltext="select * from OrderList where OrderNum='"&id&"'"
 rs.open sqltext,conn,1,1
 
+if rs.eof then response.write "订单有误":response.End()
 refund_status = trim(rs("refund_status"))
+totalmoeny =rs("totalmoney")
 %>
 
 <script>
-$(function(){
-	$("#t0_0").click(function(){$(".bank").css("display","none");$(".api").css("display","none");})
-	$("#t0_1").click(function(){$(".bank").css("display","block");$(".api").css("display","none");})
-	$("#t0_2").click(function(){$(".bank").css("display","none");$(".api").css("display","block");})
-})
+
 function checkdata(the,id,sta,keyword,page)
 {
-	var t0="0";
-	for(i=0;i<the.t0.length;i++)
-	{
-		if(the.t0[i].checked)
-		{
-			t0=the.t0[i].value;
-		}
-	}
-	switch (t0)
-	{
-		case "-1":
-		break;
-		case "-2":
+	
 			if($.trim(the.t1.value)=="")
 			{
 				$.message({content:"收款的银行不能为空"});
@@ -47,73 +51,26 @@ function checkdata(the,id,sta,keyword,page)
 				the.t2.focus();
 				return false
 			}
-		break;
-		case "-3":
-			if($.trim(the.t3.value)=="")
-			{
-				$.message({content:"服务商不能为空"});
-				the.t3.focus();
-				return false
-			}
-			if($.trim(the.t4.value)=="")
-			{
-				$.message({content:"收款账户不能为空"});
-				the.t4.focus();
-				return false
-			}
-		break;
-	}
+	
+
 	if(confirm("确认提交付款信息都正确？\n\n不可恢复！"))
 	{
-		var url,data;
-		url="?act=paydb&id="+id;
-		data="t0="+encodeURIComponent(t0);
-		data+="&t1="+encodeURIComponent($.trim(the.t1.value));
-		data+="&t2="+encodeURIComponent($.trim(the.t2.value));
-		data+="&t3="+encodeURIComponent($.trim(the.t3.value));
-		data+="&t4="+encodeURIComponent($.trim(the.t4.value));
-		data+="&t5="+encodeURIComponent($.trim(the.t5.value));
-		$.ajax({
-		type:"post",
-		cache:false,
-		url:url,
-		data:data,
-		error:function(){$.message({type:"error",content:"\u670d\u52a1\u5668\u9519\u8bef\uff0c\u64cd\u4f5c\u5931\u8d25\uff01"});},
-		success:function(_)
-		{
-			var act=_.substring(0,1);
-			var info=_.substring(1);
-			switch(act)
-			{
-				case "0":
-					$.message({type:"error",content:info,time:5000});
-					break;
-				case "1":
-					the.send.disabled=true;
-					$.message({type:"ok",content:info});
-					setTimeout('location.href="?act=list&sta='+sta+'&keyword='+keyword+'&page='+page+'"',1000);
-					break;
-				default:
-					alert(_);
-					break;
-			}
-		}
-		});
+		return true;
 	}
 	return false
 }
 </script>
 
-    <div id="notice"><span>当前位置：</span>订单 > <a href="?act=list">订单管理</a> > <a href="?act=pay&id=3&page=1&sta=0&keyword=">为订单付款</a></div>
     <div class="clear_fixed">
-    <form onSubmit="return checkdata(this,3,'0','',1)">
+    <form onSubmit="return checkdata(this,3,'0','',1)" method="post">
       <dl class="addlist">
            
            <dt><em>订单信息：</em>
                <ul class="order_base">
-                   <li><span>订单编号：</span>2015124123194691</li>
-                   <li><span>订单总金额：</span>¥200.00 元</li>
-                   <li><span>订单状态：</span>未付款</li>
+                   <li><span>订单编号：</span><%=rs("orderNum")%><input type="hidden" name="id" value="<%=id%>"></li>
+                   <li><span>商品总金额：</span>¥ <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=totalmoeny%> </strong>元</li>
+                   <li><span>实际需付款金额：</span>¥ <strong style="color:red; font-size:14px; font-family:Arial, Helvetica, sans-serif;"><%=rs("totalmoney") + rs("floatmoney")%> </strong>元<input type="hidden" value="<%=rs("totalmoney") + rs("floatmoney")%>" name="totalmoney"></li>
+                   <li><span>订单状态：</span><%=Easp.var(refund_status)%></li>
                </ul>
            </dt>
 
