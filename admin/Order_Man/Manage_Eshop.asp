@@ -40,7 +40,7 @@ if keywords<>"" then
 strFileName=strFileName&"&keywords="&server.URLEncode(keywords)
 sqltext="select * from OrderList_c where  (ordernum like '%"&keywords&"%' or username like '%"&keywords&"%' or tel like '%"&keywords&"%' or xm like '%"&keywords&"%') order by addtime desc"
 end if
-response.write sqltext
+'response.write sqltext
 rs.open sqltext,conn,1,1
 
 dim MaxPerPage
@@ -133,7 +133,7 @@ loop
 end if
 %>
               <tr class="tr_southidc"> 
-                <td height="25" colspan="7">&nbsp;&nbsp; 
+                <td height="25" colspan="9">&nbsp;&nbsp; 
                   <%
 Response.write "<strong><font color='#000000'>-> 全部-</font>"
 Response.write "共</font>" & "<font color=#FF0000>" & Cstr(Rs.RecordCount) & "</font>" & "<font color='#000000'>个订单</font></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"

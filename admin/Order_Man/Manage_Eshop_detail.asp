@@ -9,7 +9,7 @@ id=chkformstr(request("id"))
 if request.Form("send")<>"" then
 
 	
-	result = Easp.Db.Upd("orderList", "floatmoney={t0},xm={t1},tel={t2},zipcode={t4},addr={t5},remark={t6},beizu={t7}", "ordernum={id}")
+	result = Easp.Db.Upd("orderList", "floatmoney={t0},xm={t1},tel={t2},zipcode={t4},addr={t5},remark={t6},beizu={t7},lastModifyTime='"&now()&"'", "ordernum={id}")
 
 
 	 If result > 0 Then
@@ -18,6 +18,24 @@ if request.Form("send")<>"" then
 	 
 end if
 
+if ucase(request("act"))="CONFIRMGOODS" then
+	result = Easp.Db.Upd("orderList", "refund_status='TRADE_FINISHED',confirmISuser=0,confirmAdminUser='"&session("AdminName")&"',confirmTime='"&now()&"'", "ordernum={id}")
+
+	 If result > 0 Then
+	 	Easp.str.JsAlertUrl "确认收货成功！","?id={=id}"	  
+	 end if
+end if
+
+
+if ucase(request("act"))="OVER" then
+	result = Easp.Db.Upd("orderList", "refund_status='TRADE_CLOSED',closeAdminUser='"&session("AdminName")&"',closeTime='"&now()&"'", "ordernum={id}")
+
+	 If result > 0 Then
+	 	Easp.str.JsAlertUrl "已关闭订单！","?id={=id}"	  
+	 end if
+end if
+
+
 
 set rs=server.createobject("adodb.recordset")
 sqltext="select * from OrderList where OrderNum='"&id&"'"
@@ -25,6 +43,7 @@ rs.open sqltext,conn,1,1
 if rs.eof then response.write "订单有误":response.End()
 refund_status = trim(rs("refund_status"))
 totalmoeny =rs("totalmoney")
+
 %>
 
 
@@ -65,6 +84,24 @@ function checkdata(the,id,sta,keyword,page)
 	return true;
 }
 
+
+$(function(){
+	$(".over").click(function(){
+		if(confirm("确定要关闭订单？\n\n不可恢复！")){
+			return true;
+		};
+		return false;
+	});
+});
+
+$(function(){
+	$(".finish").click(function(){
+		if(confirm("确定要确认收货？\n\n不可恢复！")){
+			return true;
+		};
+		return false;
+	});
+});
 </script>
 
 
@@ -83,21 +120,31 @@ function checkdata(the,id,sta,keyword,page)
                    <%if refund_status="WAIT_BUYER_PAY" then
 				   		response.write "<a href=""pay.asp?act=pay&id="&rs("orderNum")&""">[为订单付款]</a>　"
 				   elseif  refund_status="WAIT_SELLER_SEND_GOODS" then
-				   		response.write "<a href=""?act=sendgoods&id="&rs("orderNum")&""">[为订单发货]</a>　"
+				   		response.write "<a href=""send.asp?act=sendgoods&id="&rs("orderNum")&""">[为订单发货]</a>　"
 				   elseif  refund_status="WAIT_BUYER_CONFIRM_GOODS" then
-				   		response.write "<a href=""?act=sendgoods&id="&rs("orderNum")&""">[确认买家已收货]</a>"
+				   		response.write "<a href=""?act=confirmGoods&id="&rs("orderNum")&""" class=""finish"">[确认买家已收货]</a>"
 				   end if
+				   
+				   if refund_status="WAIT_BUYER_PAY" and datediff("d",rs("addtime"),date())>30 then
+				   		response.write "<a href=""?act=over&id="&rs("orderNum")&""" class=""over"" title=""超过30天未付款"">[关闭订单]</a>"
+					end if
+					
+					
+				   
 				   %>
                    
                    
                    </li>
                </ul>
            </dt>
+           
+           
            <dt><em>金额操作：</em>
                <ul class="order_base">
-                   <li><span>浮动金额：</span><input type="text" name="t0" size="10" maxlength="10" value="<%=rs("floatmoney")%>" />　<u>可以对订单总金额进行加减，可输入负数</u></li>
+                   <li><span>浮动金额：</span><input type="text" name="t0" size="10" maxlength="10" value="<%=rs("floatmoney")%>" <%if refund_status<>"WAIT_BUYER_PAY" then response.write "disabled readonly"%>/>　<u>付款前可以对订单总金额进行加减，可输入负数，默认为会员折扣金额</u></li>
                </ul>
            </dt>
+        
            <dt><em>收货信息：</em>
                <ul class="order_base">
                    <li><span>收货人：</span><input type="text" name="t1" size="30" maxlength="50" value="<%=rs("xm")%>" /></li>
@@ -161,6 +208,61 @@ function checkdata(the,id,sta,keyword,page)
            
        </dl>
    </form>
+   
+   <div class="clear_fixed">
+   
+    <dl class="addlist">
+           
+           <dt><em>订单日志：</em>
+           <ul>
+
+
+<%
+		   '读取记录集
+Set rs = Easp.Db.Sel("Select * From orderlist_c where ordernum = {id} ")
+if not rs.eof then
+	response.write "<li>会员："&rs("username")&"于 "&rs("addtime")&" 创建订单  </li>"
+end if
+rs.close
+
+
+		   '读取记录集
+Set rs = Easp.Db.Sel("Select * From user_order_pay where ordernum = {id} Order By ID Desc")
+if not rs.eof then
+	response.write "<li>管理员："&rs("adminUser")&"于 "&rs("createdate")&" 确认付款  <a href=""pay.asp?id="&id&""">详情</a></li>"
+end if
+rs.close
+
+
+ '读取记录集
+Set rs = Easp.Db.Sel("Select * From user_order_post where ordernum = {id} Order By ID Desc")
+if not rs.eof then
+	response.write "<li>管理员："&rs("adminUser")&"于 "&rs("createdate")&" 确认发货  <a href=""send.asp?id="&id&""">详情</a></li>"
+end if
+rs.close
+
+		   '读取记录集
+Set rs = Easp.Db.Sel("Select * From orderlist_c where ordernum = {id} ")
+if not rs.eof then
+	if rs("refund_status")="TRADE_FINISHED" then
+		if rs("confirmISuser")=1 then 
+			response.write "<li>会员："&rs("username")&"于 "&rs("confirmTime")&" 确认收货  </li>"
+		else
+			response.write "<li>管理员："&rs("confirmAdminuser")&"于 "&rs("confirmTime")&" 确认收货  </li>"
+		end if
+		
+	end if
+end if
+rs.close
+
+
+%>
+         
+           
+           </ul>
+           </dt>
+           </dl>
+   
 </div>
 
 <!-- #include file="../Inc/Foot.asp" -->

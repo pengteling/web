@@ -10,18 +10,19 @@ if request.Form("send")<>"" then
 
 
 	Easp.Db.Begin '开始事务
-	
-		response.write Easp.Var("t1")
-	result = Easp.Db.Ins("user_order_pay", "ordernum:{id},payway:'线下支付',totalmoney:{totalmoney},bankname:{t1},bankno:{t2},remark:{t5}")
-Easp.Db.Commit '提交事务
-
-	 If result > 0 Then
-	 	Easp.str.JsAlertUrl "确认付款成功！","?id={=id}"	  
+		
+	'response.write Easp.Var("t1")
+	result = Easp.Db.Ins("user_order_pay", "ordernum:{id},payway:'线下支付',totalmoney:{totalmoney},bankname:{t1},bankno:{t2},remark:{t5},adminUser:'"&session("AdminName")&"'")
+	 
+	 result2 = Easp.Db.Upd("orderList", "refund_status='WAIT_SELLER_SEND_GOODS'", "ordernum={id}")
+	 
+	 Easp.Db.Commit '提交事务
+	 
+	 
+	  If result > 0 and result2>0 Then
+	 	Easp.str.JsAlertUrl "确认付款成功！","Manage_Eshop_detail.asp?id={=id}"	  
 	 end if
 	 
-	 'result = Easp.Db.Upd("orderList", "refund_status='WAIT_SELLER_SEND_GOODS'", "ordernum={id}")
-	 
-	
 	 
 end if
 
@@ -73,6 +74,9 @@ function checkdata(the,id,sta,keyword,page)
                    <li><span>订单状态：</span><%=Easp.var(refund_status)%></li>
                </ul>
            </dt>
+<%
+if refund_status="WAIT_BUYER_PAY" then
+%>
 
            <dt><em>付款信息：</em>
                <ul class="order_base">
@@ -91,6 +95,29 @@ function checkdata(the,id,sta,keyword,page)
            </dt>
            
            <dd><input type="submit" name="send" value="保存" /><input type="button" value="返回" onClick="location.href='javascript:history.go(-1)'" /></dd>
+           <%else%>
+           <dt><em>付款信息：</em>
+               <ul class="order_base">
+               <%
+			    rs.close
+			   rs.open "Select * from user_order_pay where orderNum='"& id&"'",conn,1,1
+			   if not rs.eof then
+			   %>
+                   <li><span>收款的银行：</span><%=rs("bankname")%></li>
+                   <li><span>收款的银行卡号：</span><%=rs("bankno")%></li>
+                   <li><span>订单金额：</span><%=rs("totalmoney")%></li>
+                   <li><span>付款备注：</span><%=rs("remark")%></li>
+                   <%
+				end if 
+				   rs.close
+				   %>
+               </ul>
+           </dt>
+           
+           <dd><input type="button" value="返回" onClick="location.href='javascript:history.go(-1)'" /></dd>
+           
+           <%end if%>
+           
            
        </dl>
    </form>
