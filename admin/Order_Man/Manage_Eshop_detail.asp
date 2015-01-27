@@ -250,7 +250,9 @@ if not rs.eof then
 		else
 			response.write "<li>管理员："&rs("confirmAdminuser")&"于 "&rs("confirmTime")&" 确认收货  </li>"
 		end if
-		
+	
+	elseif  rs("refund_status")="TRADE_CLOSED" then
+			response.write "<li>管理员："&rs("CloseAdminuser")&"于 "&rs("CloseTime")&" 关闭订单  </li>"
 	end if
 end if
 rs.close
