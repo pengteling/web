@@ -276,7 +276,7 @@ sub showContent
             <td align="center"  bgcolor="#ECF5FF">
 <a href=news_manage.asp?cateid=<%=rs("cateid")%>><%=rs("catename")%></a></td>
             <td align="center" bgcolor="#ECF5FF"><%= FormatDateTime(rs("PostTime"),2) %> </td>
-            <td align="center" bgcolor="#ECF5FF"><!--<a href="/<%=rs("dynamicurl")%>" target="_blank"></a> <a href="News_check.asp?action=check&ID=<%=rs("id")%>"><%if rs("passed") then response.write "取消审核" else response.Write "<font color=red>通过审核</font>" end if%></a>--> <a href="News_modi.asp?ID=<%=rs("id")%>">修改</a> <a href="News_exec.asp?ID=<%=rs("ID")%>&Action=Del" onClick="return ConfirmDel();">删除</a> </td>
+            <td align="center" bgcolor="#ECF5FF"><!--<a href="/<%=rs("id")%>" target="_blank"></a> <a href="News_check.asp?action=check&ID=<%=rs("id")%>"><%if rs("passed") then response.write "取消审核" else response.Write "<font color=red>通过审核</font>" end if%></a>--> <a href="News_modi.asp?ID=<%=rs("id")%>">修改</a> <a href="News_exec.asp?ID=<%=rs("ID")%>&Action=Del" onClick="return ConfirmDel();">删除</a> </td>
           </tr>
           <%
 	i=i+1

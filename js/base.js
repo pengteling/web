@@ -53,7 +53,7 @@ $(function(){
 
 //字符限制
 
-function strlen_verify(obj, checklen, maxlen) {
+function strlen_verify(obj, checklen, maxlen) { //obj表示文本框  checklen 要显示的剩余字数的span id   maxlen
 	var v = obj.value;
 	var len =v.length;
 	

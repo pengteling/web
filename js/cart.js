@@ -10,7 +10,7 @@ function loadcart() {
     })
 }
 function editcard(a, b) {
-    var c = $(a).attr("value"),
+    var c = $(a).val(),
     d = $(a).attr("productid"),
     e = /^\+?[0-9][0-9]*$/;
     return e.test(c) ? 0 == c ? (delcart(d), !1) : (editnum(d, c), void 0) : ($(a).val(b), $.message({
@@ -40,14 +40,14 @@ function delcart(a) {
 }
 $(function() {
     $("#cartlist").length > 0 && loadcart(),
-    $("#cartlist .min").live("click",
+    $("#cartlist").on("click",".min",
     function() {
         var a = $(this).attr("old"),
         b = $(this).attr("productid");
         return a--,
         0 == a ? (delcart(b), !1) : (editnum(b, a), void 0)
     }),
-    $("#cartlist .max").live("click",
+    $("#cartlist").on("click"," .max",
     function() {
         var a = $(this).attr("old"),
         b = $(this).attr("productid");
@@ -56,3 +56,42 @@ $(function() {
         editnum(b, a)
     })
 });
+
+function get_cartnum()
+{
+	if($("#cartnum").length>0)
+	{
+		$.ajax({type:"post",cache:false,url:webroot+"cart.asp?act=cartnum",success:function(_){$("#cartnum").html(_);}});
+	}
+}
+
+$(function(){
+	$("#cartlist").on("blur",".quantity",function(){
+			editcard( $(this), $(this).val());
+			
+	});
+});
+
+
+$(function(){
+	//获取购物车商品数量
+	get_cartnum();
+	//清空购物车
+	$("#cartlist").on("click","#clearcart",function(){
+		if(confirm("确定要清空购物车？"))
+		{
+			$.ajax(
+			{
+				type:"post",
+				cache:false,
+				url:webroot+"cart.asp?act=clearcart",
+				success:function(_)
+				{
+					$.message({type:"ok",content:_});
+					get_cartnum();
+					if($("#cartlist").length>0){loadcart();}
+				}
+			});
+		}
+	})
+})
