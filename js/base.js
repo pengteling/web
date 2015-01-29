@@ -64,3 +64,10 @@ function strlen_verify(obj, checklen, maxlen) { //obj表示文本框  checklen �
 	}
 }
 
+function valid_tel(mobile) {    var patten = new RegExp(/^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$|(^(13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$)/);    return patten.test(mobile);   } 
+
+
+function strlen(str) {
+	return  str.length;
+}
+

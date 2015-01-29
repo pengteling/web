@@ -60,10 +60,10 @@ sub loadcart()
      
       <td>¥<%=rs("price")%></td>
       <td><a title="减少" class="min" productid="<%=rs("shopid")%>" old="<%=rs("shopnum")%>">-</a>
-        <input name="quantity" class="quantity" onblur="editcard(this,this.value)" type="text" maxlength="4" value="<%=rs("shopnum")%>" productid="<%=rs("shopid")%>">
+        <input name="quantity" class="quantity" onBlur="editcard(this,this.value)" type="text" maxlength="4" value="<%=rs("shopnum")%>" productid="<%=rs("shopid")%>">
         <a title="增加" class="max" productid="<%=rs("shopid")%>" old="<%=rs("shopnum")%>">+</a></td>
       <td class="price">¥<%=rs("shopnum")*rs("price")%></td>
-      <td><a class="del" onclick="delcart(<%=rs("id")%>)" href="javascript:">删除</a></td>
+      <td><a class="del" onClick="delcart(<%=rs("id")%>)" href="javascript:">删除</a></td>
     </tr>
       
 		  <%
@@ -84,7 +84,7 @@ sub loadcart()
   </tbody>
 </table>
 <%if cartIsempty<>1 then '清空购物车后不显示%>
-<div id="cart_action"><span><a href="?act=order">去结算</a></span><a class="goon" href="http://localhost:1688">继续购物</a>　<a class="clear" id="clearcart" href="javascript:;">清空购物车</a></div>
+<div id="cart_action"><span><a href="order.asp">去结算</a></span><a class="goon" href="/">继续购物</a>　<a class="clear" id="clearcart" href="javascript:;">清空购物车</a></div>
 <%
 end if
 	response.End()

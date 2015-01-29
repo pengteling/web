@@ -53,9 +53,9 @@ Easp.Debug = True
 '仅前端输入的token和这里设置一致时，才会输出控制台信息
 'Easp.Console.Token         = ""
 ''是否开启控制台
-'Easp.Console.Enable        = True
+Easp.Console.Enable        = True
 ''是否在控制台中自动显示执行的SQL语句
-'Easp.Console.ShowSql       = True
+Easp.Console.ShowSql       = True
 ''是否在控制台中自动显示执行的SQL语句的执行时间
 'Easp.Console.ShowSqlTime   = True
 ''控制台中缓存的内容最大字节数
