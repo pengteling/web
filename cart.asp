@@ -1,16 +1,8 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
+<!--#include virtual="/User_Config.asp"-->
 
 <%
-response.Cookies("userid")=20
-response.cookies("username")="user01"
-if request.Cookies("userid")="" or request.Cookies("username")="" then
 
-	Easp.str.JsAlertUrl "订购产品请先登陆！","/user_login.asp"	  
-else
-	userid = clng(request.Cookies("userid"))
-	username=request.Cookies("username")
-end if
-Easp.var("userid")=userid
   
 select case Easp.var("act")
 	case "addcart":addcart()

@@ -1,16 +1,7 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
-
+<!--#include virtual="/User_Config.asp"-->
 <%
-response.Cookies("userid")=20
-response.cookies("username")="user01"
-if request.Cookies("userid")="" or request.Cookies("username")="" then
 
-	Easp.str.JsAlertUrl "订购产品请先登陆！","/user_login.asp"	  
-else
-	userid = clng(request.Cookies("userid"))
-	username=request.Cookies("username")
-end if
-Easp.var("userid")=userid
 
 user_rate=1 '默认折扣为1 即不打折
 set rs=Easp.Db.sel("select * from [User_rate_c] where userid={userid}")
@@ -100,7 +91,7 @@ if Easp.var("act") ="orderdb" then '提交订单的处理函数
 			  
 			  if user_rate<>1 then
 			 
-			  		floatmoney =cart_totalprice-round( cart_totalprice* cdbl(user_rate),2)
+			  		floatmoney = -cart_totalprice + round( cart_totalprice* cdbl(user_rate),2)
 			  end if
 			  
 			 
@@ -247,7 +238,7 @@ function checkdb(the)
 				break;
 			case "1":
 				$.message({type:"ok",content:"\u8ba2\u5355\u63d0\u4ea4\u6210\u529f",time:2500});
-				setTimeout(function(){location.href="orderShow?act=show&newid="+info+""},3500);
+				setTimeout(function(){location.href="orderShow.asp?act=show&newid="+info+""},3500);
 				break;
 			default:
 				alert("提交订单出错，请检查后重新提交订单")

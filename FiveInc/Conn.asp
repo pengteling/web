@@ -59,5 +59,13 @@ mailhost="smtp.ym.163.com" '邮件服务器地址
 mail_user="" '接受邮件邮箱
 mail_usert="" '接受邮件邮箱
 senduser=SiteName '发件人名称
-%>
 
+'支付宝担保交易接口 状态
+Easp.var("WAIT_BUYER_PAY")="等待买家付款"
+Easp.var("WAIT_SELLER_SEND_GOODS")="已付款未发货"
+Easp.var("WAIT_BUYER_CONFIRM_GOODS")="已发货"
+Easp.var("TRADE_FINISHED")="订单完成"
+Easp.var("WAIT_SELLER_AGREE")="等待卖家同意退款"
+Easp.var("REFUND_SUCCESS")="退款成功"
+Easp.var("TRADE_CLOSED")="订单关闭"
+%>

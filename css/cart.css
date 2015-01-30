@@ -498,3 +498,20 @@ message_content{padding:15px 0;line-height:22px;}
 #cart_order{margin:30px 12px;}
 #cart_order .title{font-size:14px;font-weight:bold;border-bottom:1px solid #f0f0f0;line-height:30px;height:30px;margin:0 0 15px 0;}
 #cart_order .title a{font-size:12px;font-weight:normal;}
+
+
+/*总容器样式*/ 
+.pager { padding: 3px; text-align: center; color:#66C;font-size:12px; font-family:Tahoma;}   
+/*分页链接样式*/ 
+.pager a { margin: 2px; padding:2px 5px; color: #FC8257; text-decoration: none; border: 1px solid #FC8257; }   
+/*分页链接鼠标移过的样式*/ 
+.pager a:hover { color: #FC8257; border: 1px solid #FC8257; background-color:#DCDCF3; }   
+/*当前页码的样式*/ 
+.pager span{ background:none;}
+.pager span.current { font-weight: bold; margin: 0 2px; padding: 2px 5px; color: #fff; background-color: #FC8257; border: 1px solid #FC8257; }   
+/*不可用分页链接的样式(比如第1页时的“上一页”链接)*/ 
+.pager span.disabled { margin: 0 2px; padding: 2px 5px; color: #FC8257; border: 1px solid #FC8257; }   
+/*跳转下拉菜单的样式*/ 
+.pager select {margin: 0px 2px -2px 2px; color:#66C;font-size:12px; font-family:Tahoma;}   
+/*跳转文本框的样式*/ 
+.pager input {margin: 0px 2px -2px 2px; color:#66C; border: 1px solid #DDD; padding:2px; text-align:center;font-size:12px; font-family:Tahoma;}   

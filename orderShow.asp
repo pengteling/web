@@ -1,18 +1,14 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
-
+<!--#include virtual="/User_Config.asp"-->
 <%
-response.Cookies("userid")=20
-response.cookies("username")="user01"
-if request.Cookies("userid")="" or request.Cookies("username")="" then
 
-	Easp.str.JsAlertUrl "订购产品请先登陆！","/user_login.asp"	  
-else
-	userid = clng(request.Cookies("userid"))
-	username=request.Cookies("username")
-end if
-Easp.var("userid")=userid
 
-  
+set rs=Easp.Db.Sel("Select * from orderList_c where orderNum={newid}  ")
+if rs.eof then response.Write "订单有误":response.End() 
+
+ orderMoney =rs("totalmoney") + rs("floatmoney")
+
+
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -74,19 +70,19 @@ function checkdb(the,payway,total,id)
             
             <div id="cartshow">
                 <div class="tips"><img src="/images/ok.gif" align="absmiddle" />　您的订单已经成功提交！</div>
-                <form onsubmit="return checkdb(this,'-2',800,7)">
+                <form onsubmit="return checkdb(this,'0',<%=orderMoney%>,'<%=rs("orderNum")%>')">
                 <table>
                     <tr>
                         <th colspan="2">订单信息</th>
                     </tr>
                     <tr>
                         <td class="info">订单编号：</td>
-                        <td>20151291749482201　<a href="user/order.asp?act=show&id=7">[查看订单详情]</a>
+                        <td><%=rs("orderNum")%>　<a href="orderDetial.asp?act=show&id=<%=rs("orderNum")%>">[查看订单详情]</a>
                         </td>
                     </tr>
                     <tr>
                         <td class="info">订单总金额：</td>
-                        <td><span>¥800.00 元</span></td>
+                        <td><span>¥<%=orderMoney%> 元</span></td>
                     </tr>
                 </table>
                 <table>
@@ -95,10 +91,10 @@ function checkdb(the,payway,total,id)
                     </tr>
                     <tr>
                         <td class="info">支付方式：</td>
-                        <td>线下汇款　<a href="javascript:;" class="chanagepay" payway="-2">[更换支付方式]</a></td>
+                        <td>线下汇款　</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="submit" name="send" value="立即支付" class="bnt" />　<input type="button" value="我的订单" class="bnt" onclick="location.href='user/order.asp'" /></td>
+                        <td colspan="2"><input type="submit" name="send" value="立即支付" class="bnt" />　<input type="button" value="我的订单" class="bnt" onclick="location.href='orderlist.asp'" /></td>
                     </tr>
                 </table>
                 </form>
