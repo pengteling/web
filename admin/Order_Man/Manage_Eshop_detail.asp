@@ -19,9 +19,20 @@ if request.Form("send")<>"" then
 end if
 
 if ucase(request("act"))="CONFIRMGOODS" then
-	result = Easp.Db.Upd("orderList", "refund_status='TRADE_FINISHED',confirmISuser=0,confirmAdminUser='"&session("AdminName")&"',confirmTime='"&now()&"'", "ordernum={id}")
 
-	 If result > 0 Then
+	Easp.Db.Begin '开始事务
+	result = Easp.Db.Upd("orderList", "refund_status='TRADE_FINISHED',confirmISuser=0,confirmAdminUser='"&session("AdminName")&"',confirmTime='"&now()&"'", "ordernum={id}")
+	
+	set rs=Easp.Db.Sel("select floatmoney , totalmoney  from orderList where ordernum={id}")
+	if not rs.eof then
+		totalpoints = cint(rs(0)+rs(1))
+	end if
+	
+	result2= Easp.Db.Upd("User","points=points+"&totalpoints&"","userId={userid}") '积分策略
+	
+
+	 If result > 0 and result2>0 Then
+	 	Easp.Db.Commit '提交事务	 
 	 	Easp.str.JsAlertUrl "确认收货成功！","?id={=id}"	  
 	 end if
 end if
