@@ -25,6 +25,11 @@ Easp.Db.SetConnection "default", "MSSQL", "jdb", "jdb_f:jadeboxadm@122.114.121.6
 connstr="Provider=SQLOLEDB.1;Server=JADEBOXSERVER\SQLEXPRESS;User ID=jdb_f;Password=jadeboxadm;Database=jdb;"
 Easp.Db.SetConnection "default", "MSSQL", "jdb", "jdb_f:jadeboxadm@JADEBOXSERVER\SQLEXPRESS"
 
+
+connstr="Provider=SQLOLEDB.1;Server=PTL-PC\SQLEXPRESS;User ID=jdb_f;Password=jadeboxadm;Database=jdb;"
+Easp.Db.SetConnection "default", "MSSQL", "jdb", "jdb_f:jadeboxadm@PTL-PC\SQLEXPRESS"
+
+
 else
 
 MyDbPath =systemroot
