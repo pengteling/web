@@ -16,7 +16,7 @@
 </head>
 <script>
 $(function(){
-	$(".ico02").addClass("hover ico02_");
+	$(".ico01").addClass("hover ico01_");
 	$(".user_title_more li").eq(<%=clng(request("v"))%>).addClass("hover");
 })
 </script>
@@ -121,92 +121,13 @@ $(function(){
 <div class="width">
         <div class="user_bg">
             <div id="uleft">
-    <ul>
-        <li class="ico01"><a href="./">会员中心</a></li>
-        <li class="ico02"><span></span><a href="order.asp">我的订单</a></li>
-        <li class="ico03"><span></span><a href="favorite.asp">我的收藏</a></li>
-        <li class="ico04"><span></span><a href="message.asp">我的消息</a></li>
-        <li class="ico05"><span></span><a href="money.asp">财务管理</a></li>
-        <li class="ico06"><span></span><a href="base.asp">我的账户</a></li>
-        <li class="ico07"><a href="/user/login.asp?act=out&gourl=http://localhost:1688/user/order.asp" onclick="return confirm('\u786e\u5b9a\u8981\u9000\u51fa\uff1f')">退出登录</a></li>
-    </ul>
+    <!--#include virtual="/uleft.asp"-->
 </div>
             <!--左侧结束-->
             <div id="uright">
                 
-                 <div class="user_title_more">
-                    <ul>
-                        <li><a href="?">全部订单</a></li>
-                        <li><a href="?v=1">等待买家付款</a></li>
-                        <li><a href="?v=2">已付款未发货</a></li>
-                        <li><a href="?v=3">已发货待确认</a></li>
-                        <li><a href="?v=4">交易完成</a></li>
-                    </ul>
-                </div>
-                <div class="page_content">
-                    <div class="mt10"></div>
-                     <table id="tablelist">
-                        <tr>
-                            <th>订单编号</th>
-                            <th width="80">收货人</th>
-                            <th width="100">订单总金额</th>
-                            <th width="100">下单日期</th>
-                            <th width="100">支付方式</th>
-                            <th width="100">状态</th>
-                            <th width="80">操作</th>
-                        </tr>
-    <%
-	if request("v")<>"" then
-		select case Easp.var("v")
-		
-		case 1
-			sql_where = " and refund_status='WAIT_BUYER_PAY'"
-		case 2
-			sql_where = " and refund_status='WAIT_SELLER_SEND_GOODS'"
-		case 3
-			sql_where = " and refund_status='WAIT_BUYER_CONFIRM_GOODS'"
-		case 4
-			sql_where = " and refund_status='TRADE_FINISHED'"
-		
-		
-		
-			
-			
-		end select
-    else
-		sql_where =""
-	end if
-	
-	Easp.Db.PageSize = 3
-	sql = "select * from orderList_c where userid={userid}" & sql_where
-	Set rs = Easp.Db.GetRS(sql)
-	
-
-	while not rs.eof
-
-	%>                    
-                        
-                        <tr>
-                            <td class="item"><a href="orderDetail.asp?id=<%=rs("orderNum")%>"><%=rs("orderNum")%></a></td>
-                            <td align="center"><%=rs("xm")%></td>
-                            <td align="center">¥<%=rs("totalmoney") + rs("floatmoney")%> 元</td>
-                            <td align="center"><%=rs("addtime")%></td>
-                            <td align="center">线下汇款</td>
-                            <td align="center"><span><%=Easp.Var(trim(rs("refund_status")))%></span></td>
-                            <td align="center"><a href="javascript:;" class="paynow" id="7" payway="-2" total="¥800.00">现在付款</a><br /><a href="?act=show&id=7"><span>订单详情</span></a></td>
-                        </tr>
-           <%
-		   rs.movenext
-		   wend
-		   rs.close
-		   
-Easp.Db.SetPager "default2", "{first}{prev}{liststart}{list}{listend}{next}{last} ", Array()
-%>             
-                        
-        
-                    </table>
-                    <div class="list_page"><%  Easp.Print Easp.Db.GetPager("default2")%></div>
-                </div>
+                 
+                <div class="page_content"></div>
             </div>
             <!--右侧结束-->
             <div class="clear"></div>
