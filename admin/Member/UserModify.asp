@@ -119,7 +119,7 @@ else
           
           <TR class="tdbg" > 
             <TD width="120" align="right" class="tr_southidc"><b>联系人：</b></TD>
-            <TD class="tr_southidc"> <INPUT name=UserName value="<%=rsUser("Somane")%>" ></TD>
+            <TD class="tr_southidc"> <INPUT name=Somane value="<%=rsUser("Somane")%>" ></TD>
           </TR>
           
           <TR class="tdbg" > 

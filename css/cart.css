@@ -388,7 +388,7 @@ margin-left:10px;padding:2px 7px;text-decoration:none;}
 #reg dd a{color:#06f;text-decoration:underline;font-size:14px;}
 #reg dd a:hover{color:#f30;}
 #reg #strength{width:190px;height:16px;line-height:16px;display:block;text-indent:110px;font-size:12px;color:#999;}
-#reg div{background:url(../../../lib/images/strength.gif) 0 0 no-repeat;margin:0;}
+#reg div{background:url(../images/strength.gif) 0 0 no-repeat;margin:0;}
 #reg .nothing{background-position:0 0;}
 #reg .normal{background-position:0 -12px;}
 #reg .general{background-position:0 -26px;}

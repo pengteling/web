@@ -1,6 +1,42 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
+<!--#include virtual="/fiveinc/md5.asp"-->
 <!--#include virtual="/User_Config.asp"-->
 <%
+
+if request("act")="checkdb" then
+
+result = Easp.Db.Upd("user","somane={truename},sex={sex},phone={tel},email={email},zip={zipcode},[add]={address}","userid={userid}")
+if result>0 then
+
+	response.write "1修改成功"
+else
+	response.write "0修改失败！"
+end if
+response.End()
+end if
+
+
+if request("act")="checkdb2" then
+
+Easp.Var("oldpwd") = md5(Easp.var("oldpass"))
+Easp.Var("password") = md5(Easp.var("password"))
+set rs =Easp.Db.Sel("select * from [user] where userid={userid} and password={oldpwd}")
+if  rs.eof then
+	response.write "0旧密码输入不正确！"
+	response.End()	
+end if
+
+
+result = Easp.Db.Upd("user","password={password}","userid={userid}")
+if result>0 then
+
+	response.write "1修改成功"
+else
+	response.write "0修改失败！"
+end if
+response.End()
+end if
+
 
 %>
 
@@ -26,6 +62,217 @@ $(function(){
 </script>
 <script>
 
+function checkdb(the)
+{
+	var sex="0";
+	for(i=0;i<the.sex.length;i++)
+	{
+		if(the.sex[i].checked)
+		{
+			sex=the.sex[i].value;
+		}
+	}
+	
+	if($.trim(the.truename.value)=="")
+	{
+		$.message({content:"联系人不能为空"});
+		the.truename.focus();
+		return false;
+	}
+	
+	if($.trim(the.truename.value)=="")
+	{
+		$.message({content:"联系人不能为空"});
+		the.truename.focus();
+		return false;
+	}
+	
+	if(!valid_tel(the.tel.value)){
+			
+			$.message({content:"电话格式不对，请输入座机或手机号码！"});
+			the.tel.focus();
+			return false
+		}
+	if(!valid_email(the.email.value)){
+			
+			$.message({content:"电子邮箱格式不对！"});
+			the.email.focus();
+			return false
+		}	
+	if(!valid_zipcode(the.zipcode.value)){
+			
+			$.message({content:"请输入正确的邮政编码！"});
+			the.zipcode.focus();
+			return false
+		}		
+	if(the.address.value==""){
+			
+			$.message({content:"请输入详细地址！"});
+			the.address.focus();
+			return false
+		}		
+
+	var url,data;
+	url="?act=checkdb";
+	data="truename="+encodeURIComponent($.trim(the.truename.value));
+	data+="&sex="+encodeURIComponent(sex);	
+	data+="&tel="+encodeURIComponent($.trim(the.tel.value));
+	data+="&email="+encodeURIComponent($.trim(the.email.value));
+	data+="&zipcode="+encodeURIComponent($.trim(the.zipcode.value));
+	data+="&address="+encodeURIComponent($.trim(the.address.value));
+	$.ajax({
+	type:"post",
+	cache:false,
+	url:url,
+	data:data,
+	error:function(_a){alert(_a);},
+	success:function(_)
+	{
+		var act=_.substring(0,1);
+		var info=_.substring(1);
+		switch(act)
+		{
+			case "0":
+				$.message({type:"error",content:info});
+				break;
+			case "1":
+				$.message({type:"ok",content:info,time:2500});
+				//setTimeout(function(){location.href="user.asp?t="+Math.random()+""},3500);
+				break;
+			
+			default:
+				alert(_)
+				break;
+		}
+	}});
+	return false;
+}
+
+$(function(){
+	$(".c_truename").focus(function(){$('#reg_truename').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_truename").blur(function(){$('#reg_truename').removeClass();$('#reg_truename').addClass('tip');$(this).removeClass('ipon');});
+	
+	
+	$(".c_tel").focus(function(){$('#reg_tel').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_tel").blur(function(){$('#reg_tel').removeClass();$('#reg_tel').addClass('tip');$(this).removeClass('ipon');});
+	
+	$(".c_email").focus(function(){$('#reg_email').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_email").blur(function(){$('#reg_email').removeClass();$('#reg_email').addClass('tip');$(this).removeClass('ipon');});
+	
+	
+	$(".c_zipcode").focus(function(){$('#reg_zipcode').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_zipcode").blur(function(){$('#reg_zipcode').removeClass();$('#reg_zipcode').addClass('tip');$(this).removeClass('ipon');});
+	$(".c_address").focus(function(){$('#reg_address').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_address").blur(function(){$('#reg_address').removeClass();$('#reg_address').addClass('tip');$(this).removeClass('ipon');});
+	$("#user_menu_10").addClass("hover");
+})
+
+
+
+
+
+
+
+
+
+function checkdb2(the)
+{
+	the.bnt.disabled=true;
+	if(strlen(the.oldpass.value)<6||strlen(the.oldpass.value)>16)
+	{
+		the.oldpass.focus();
+		the.bnt.disabled=false;
+		return false
+	}
+	if(strlen(the.password.value)<6||strlen(the.password.value)>16)
+	{
+		the.password.focus();
+		the.bnt.disabled=false;
+		return false
+	}
+	if(strlen(the.repass.value)<6||strlen(the.repass.value)>16)
+	{
+		the.repass.focus();
+		the.bnt.disabled=false;
+		return false
+	}
+	if($.trim(the.password.value)!=$.trim(the.repass.value))
+	{
+		the.repass.focus();
+		the.bnt.disabled=false;
+		return false
+	}
+	var url,data;
+	url="?act=checkdb2";
+	data="oldpass="+encodeURIComponent($.trim(the.oldpass.value));
+	data+="&password="+encodeURIComponent($.trim(the.password.value));
+	data+="&repass="+encodeURIComponent($.trim(the.repass.value));
+	$.ajax({
+	type:"post",
+	cache:false,
+	url:url,
+	data:data,
+	error:function(_a){alert(_a);},
+	success:function(_)
+	{
+		var act=_.substring(0,1);
+		var info=_.substring(1);
+		switch(act)
+		{
+			case "0":
+				$(".c_oldpass").focus();
+				$.message({type:"error",content:info,time:3000});
+				the.bnt.disabled=false;
+				break;
+			case "1":
+				the.oldpass.value="";
+				the.password.value="";
+				the.repass.value="";
+				$("#reg_oldpass").html("请输入原密码");
+				$("#reg_password").html("由6-16个数字、字母、下划线组成");
+				$("#reg_repass").html("请再次输入密码");
+				$("#strength").removeClass().addClass('nothing').text('');
+				$.message({type:"ok",content:info,time:3000});
+				setTimeout("location.href='?act=pwd'",2500);
+				break;
+			default:
+				alert(_)
+				break;
+		}
+
+	}});
+	return false
+};
+$(function(){
+	$(".c_oldpass").focus(function(){$('#reg_oldpass').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_oldpass").blur(function(){$('#reg_oldpass').removeClass();$('#reg_oldpass').addClass('tip');$(this).removeClass('ipon');});
+	$(".c_password").focus(function(){$('#reg_password').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_password").blur(function(){$('#reg_password').removeClass();$('#reg_password').addClass('tip');$(this).removeClass('ipon');
+	var value=$(this).val();
+	var box=$('#strength');
+	if (value==''||value==null){
+				box.removeClass().addClass('nothing').text('');
+				return false;
+			} else if (value.length<6){
+				box.removeClass().addClass('nothing').text('密码过短');
+			} else {
+				var score=passwordGrade(value);
+				if (score<11){
+					box.removeClass().addClass('nothing').text('不安全');
+				} else if (score<21){
+					box.removeClass().addClass('strength normal').text('安全程度：低');
+				} else if (score<31){
+					box.removeClass().addClass('strength general').text('安全程度：中');
+				} else if (score>30){
+					box.removeClass().addClass('strength special').text('安全程度：高');
+				}
+			}
+	});
+	$(".c_repass").focus(function(){$('#reg_repass').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_repass").blur(function(){$('#reg_repass').removeClass();$('#reg_repass').addClass('tip');$(this).removeClass('ipon');
+	});
+	$("#user_menu_12").addClass("hover");
+});
 
 </script>
 
@@ -55,117 +302,53 @@ $(function(){
                   
                     </ul>
                 </div>
+                
+               <%
+			   if request("act")="pwd" then
+			   %>
+               
+               <div class="page_content">
+                   <form onSubmit="return checkdb2(this)">
+                   <ul id="reg">
+                       <li><span>用户名：</span>pengteling</li>
+                       <li><span>原密码：</span><input type="password" name="oldpass" class="ip w01 c_oldpass" maxlength="16" /><span class="tip" id="reg_oldpass">请输入原密码</span></li>
+                       <li><span>新密码：</span><input type="password" name="password" class="ip w01 c_password" maxlength="16" /><span class="tip" id="reg_password">由6-16个数字、字母、下划线组成</span></li>
+                       <dd><div id="strength"></div></dd>
+                       <li><span>再次输入密码：</span><input type="password" name="repass" class="ip w01 c_repass" maxlength="16" /><span class="tip" id="reg_repass">请再次输入密码</span></li>
+                       <dd><input type="submit" value="修改密码" class="bnt" name="bnt" /> <input type="button" value="取消" onClick="location.href='javascript:history.go(-1)'" class="bnt" /></dd>
+                   </ul>
+                   </form>
+                </div>
+
+
+               
+               <%else%>
                 <div class="page_content">
-                    
+    <%set rs =Easp.Db.sel("select * from [user] where userid={userid}")
+	if rs.eof then response.Redirect "user_login.asp":response.End()
+	%>                
                <form onSubmit="return checkdb(this)">
                <ul id="reg">
                
                 <li><span>用户名：</span>pengteling</li>
-                   <li><span>真实姓名：</span><input type="text" name="truename" class="ip w03 c_truename" maxlength="4" /><span class="tip" id="reg_truename">由2-4位汉字组成</span></li>
+                   <li><span>联系人：</span><input type="text" name="truename" class="ip w03 c_truename" maxlength="20" value="<%=rs("Somane")%>"/><span class="tip" id="reg_truename"></span></li>
                    <li><span>性别：</span>
-                   <input type="radio" name="sex" id="sex_1" value="1" /><label for="sex_1">男</label>
-                   <input type="radio" name="sex" id="sex_2" value="2" /><label for="sex_2">女</label>
+                   <input type="radio" name="sex" id="sex_1" value="1" <%if rs("sex")=1 then response.write "checked='checked'"%> /><label for="sex_1">男</label>
+                   <input type="radio" name="sex" id="sex_2" value="0" <%if rs("sex")=0 then response.write "checked='checked'"%>/><label for="sex_2">女</label>
                    </li>
-                   <li><span>生日：</span><select name="birthday_year" id="year" style="width:60px"><option value="0">----</option></select>&nbsp;年 
-<select name="birthday_month" id="month"><option value="0">----</option></select>&nbsp;月 
-<select name="birthday_day" id="day"><option value="0">----</option></select>&nbsp;日</li>
-                   <li><span>QQ：</span><input type="text" name="qq" class="ip w03 c_qq" maxlength="15" /><span class="tip" id="reg_qq">由5-15位数字组成</span></li>
-                   <li><span>MSN：</span><input type="text" name="msn" class="ip w01 c_msn" maxlength="50" /><span class="tip" id="reg_msn">格式：user@domain.com</span></li>
-                   <li><span>手机：</span><input type="text" name="mobile" class="ip w04 c_mobile" maxlength="11" /><span class="tip" id="reg_mobile">由11位数字组成</span></li>
-                   <li><span>电话：</span><input type="text" name="tel" class="ip w04 c_tel" maxlength="13" /><span class="tip" id="reg_tel">格式：010-66668888</span></li>
-                   <li><span>职业：</span><input type="text" name="job" class="ip w03 c_job" maxlength="10" /><span class="tip" id="reg_job"></span></li>
-                   <li><span>邮编：</span><input type="text" name="zipcode" class="ip w03 c_zipcode" maxlength="6" /><span class="tip" id="reg_zipcode">由6位数字组成</span></li>
-                   <li><span>地址：</span><input type="text" name="address" class="ip w01 c_address" maxlength="50" /><span class="tip" id="reg_address"></span></li> <dd><input type="submit" value="修改资料" class="bnt" name="bnt" /> <input type="button" value="取消" onClick="location.href='javascript:history.go(-1)'" class="bnt" /></dd>
+                  <li><span>邮箱：</span><input type="text" name="email" class="ip w04 c_email" maxlength="50"  value="<%=rs("Email")%>"/><span class="tip" id="reg_email">格式：username@qq.com</span></li>
+                   
+                   <li><span>电话：</span><input type="text" name="tel" class="ip w04 c_tel" maxlength="13"  value="<%=rs("phone")%>"/><span class="tip" id="reg_tel">格式：010-66668888 或 11位手机号</span></li>
+                   
+                   <li><span>邮编：</span><input type="text" name="zipcode" class="ip w03 c_zipcode" maxlength="6"  value="<%=rs("zip")%>"/><span class="tip" id="reg_zipcode">由6位数字组成</span></li>
+                   <li><span>地址：</span><input type="text" name="address" class="ip w01 c_address" maxlength="50"  value="<%=rs("add")%>"/><span class="tip" id="reg_address"></span></li> <dd><input type="submit" value="修改资料" class="bnt" name="bnt" /> <input type="button" value="取消" onClick="location.href='javascript:history.go(-1)'" class="bnt" /></dd>
                </dl>
                </form>
               
-               <script>
-			   var u_birthday = "0000-00-00";	   
-				var days = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-				var selectStr = '<option value="0">----</option>';
-				var check_m_d = false;
-				function isLeap(year) {
-				return ((0 == year % 4) && (0 != (year % 100))) || (0 == year % 400) ? true : false; 
-				}
-				function isDate(date) {
-				var d = date.split('-');
-				return (d[0] =='0000' || d[1] == '00' || d[2] == '00')?false:true;
-				}
-				function setYear(b) {
-				var html = '';
-				var now = new Date(); 
-				var year = now.getFullYear(); 
-				var select = '';
-				var b_array =new Array();
-				if(isDate(b)) {
-				b_array = b.split('-');
-				check_m_d = true;
-				} else {
-				b_array = [0,0,0];
-				}
-				 
-				for(var i=year;i>1909;i--) {
-				select = (i ==b_array[0] )?' selected="selected"':'';
-				html += '<option value="'+i+'" '+select+'>'+i+'</option>';
-				}
-				$("#year").append(html);
-				if(check_m_d) {
-				setMonth(b_array[1]);
-				setDay(b_array[0],b_array[1],b_array[2]);
-				}
-				};
-				function setMonth(m) {
-				var html = selectStr;
-				for(var i=1;i<13;i++) {
-				i = (i>=10) ? i : '0' + i;
-				select = (i ==m )?' selected="selected"':'';
-				html += '<option value="'+i+'" '+select+'>'+i+'</option>';
-				}
-				$("#month").empty().append(html);
-				}
-				function setDay(y,m,d) {
-				ds = days[m-1];
-				if(isLeap(y) && (m == '02')) {
-				ds++;
-				}
-				var html = selectStr;
-				for(var i=1;i<=ds;i++) {
-				i = (i>=10) ? i : '0' + i;
-				select = (i == d )?' selected="selected"':'';
-				html += '<option value="'+i+'" '+select+'>'+i+'</option>';
-				}
-				$("#day").empty().append(html);
-				}
-				$(function(){
-				var y = $("#year");
-				var m = $("#month");
-				var d = $("#day");
-				var daySelect = function(){
-				if(y.val() ==0 || m.val() == 0) {
-				d.empty().append(selectStr);
-				return;
-				}
-				setDay(y.val(),m.val(),1);
-				};
-				var daySelect2 = function() {
-				if(y.val() == 0) {
-				m.empty().append(selectStr);
-				d.empty().append(selectStr);
-				return;
-				} else {
-				var m_set = m.val()>1?m.val():1;
-				setMonth(m_set);
-				setDay(y.val(),m_set,1);
-				}
-				};
-				y.change(daySelect2);
-				m.change(daySelect);
-				setYear(u_birthday);
-				});
-
-			   </script>
+               
                
                 </div>
+                <%end if%>
             </div>
             <!--右侧结束-->
 

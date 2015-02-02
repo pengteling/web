@@ -66,8 +66,37 @@ function strlen_verify(obj, checklen, maxlen) { //obj表示文本框  checklen �
 
 function valid_tel(mobile) {    var patten = new RegExp(/^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$|(^(13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$)/);    return patten.test(mobile);   } 
 
+function valid_email(email) {    var patten = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);    return patten.test(email);   } 
+
+function valid_zipcode(zip) {    var patten = new RegExp(/^\d{6}$/);    return patten.test(zip);   } 
+
 
 function strlen(str) {
 	return  str.length;
 }
 
+
+//密码强度检测
+function passwordGrade(pwd) {
+	var score = 0;
+	var regexArr = ['[0-9]', '[a-z]', '[A-Z]', '[\\W_]'];
+	var repeatCount = 0;
+	var prevChar = '';
+	//check length
+	var len = pwd.length;
+	score += len > 18 ? 18 : len;
+	//check type
+	for (var i = 0, num = regexArr.length; i < num; i++) { if (eval('/' + regexArr[i] + '/').test(pwd)) score += 4; }
+	//bonus point
+	for (var i = 0, num = regexArr.length; i < num; i++) {
+		if (pwd.match(eval('/' + regexArr[i] + '/g')) && pwd.match(eval('/' + regexArr[i] + '/g')).length >= 2) score += 2;
+		if (pwd.match(eval('/' + regexArr[i] + '/g')) && pwd.match(eval('/' + regexArr[i] + '/g')).length >= 5) score += 2;
+	}
+	//deduction
+	for (var i = 0, num = pwd.length; i < num; i++) {
+		if (pwd.charAt(i) == prevChar) repeatCount++;
+		else prevChar = pwd.charAt(i);
+	}
+	score -= repeatCount * 1;
+	return score;
+ }
