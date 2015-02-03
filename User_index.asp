@@ -24,21 +24,22 @@ $(function(){
         <div class="user_index_head">
           <div class="fr"><a href="/"><img src="/images/gotocart.jpg" width="310" height="144" alt="" /></a></div>
           <div class="fl">
-          <div class="username">欢迎您，pengteling</div>
-          <div class="userproperty">
-          您已登陆：34次<br />
-我的积分：10909 <br />
-会员等级：普通会员<br />
+          <div class="username">欢迎您，<%=Easp.Var("username")%></div>
+          <div class="userproperty mt10">
+          您已登陆：<%=Easp.var("userlogins")%>次<br />
+我的积分：<span class="red"><%=Easp.var("userpoints")%></span> <br />
+会员等级：<%=Easp.var("usergroupname")%><br />
           </div>
           
           </div>
           <div class="clear"></div>
         </div>
-        <div class="user_index_midline">
+        <div class="user_index_midline mt20">
         
-        快捷方式:  <a href="user.asp">修改个人资料</a>   <a href="user.asp?act=pwd&V=1">修改登陆密码</a>   <a href="address.asp">管理收货地址</a>
+        <span>快捷方式:</span>  <a href="user.asp">修改个人资料</a>  | <a href="user.asp?act=pwd&V=1">修改登陆密码</a>  | <a href="address.asp">管理收货地址</a>
         </div>
-        <div class="user_index_plist">
+        <div class="user_index_plist mt20">
+        <div class="tit">热销产品</div>
         <ul>
         	<li>
         		<div class="pic"><a href="">

@@ -110,7 +110,7 @@ else
           </TR>
           <TR class="tdbg" > 
             <TD width="120" align="right" class="tr_southidc"><b>用户名：</b></TD>
-            <TD class="tr_southidc"> <INPUT name=UserName value="<%=rsUser("UserName")%>" disabled></TD>
+            <TD class="tr_southidc"> <INPUT name=UserName value="<%=rsUser("UserName")%>" id="username2" readonly disabled></TD>
           </TR>
           <TR class="tdbg" > 
             <TD width="120" align="right" class="tr_southidc"><B>用户密码：</B></TD>
