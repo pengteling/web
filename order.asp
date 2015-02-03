@@ -57,7 +57,8 @@ if Easp.var("act") ="orderdb" then '提交订单的处理函数
 	  
 	   RANDOMIZE
 	  	ranNum=int(999*rnd)+1000
-		iddata=year(now)&month(now)&day(now)&hour(now)&minute(now)&second(now)&ranNum
+		'iddata=year(now)&month(now)&day(now)&hour(now)&minute(now)&second(now)&ranNum
+		iddata = GetYYYYMMDDHHIISS(now(),now()) & ranNum
 		Easp.Var("OrderNum") ="RC"&iddata
 	  
 	  'response.write "0"&Easp.Var("OrderNum")

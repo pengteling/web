@@ -2,17 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh">
 <head>
 <meta charset="UTF-8">
-<title><%=curpageTitle%></title>
+<title><%=curpageTitle&"-"&SiteTitle %></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="<%=SiteKey%>" />
 <meta name="description" content="<%=SiteDescription%>" />
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/css.css">
-<link rel="stylesheet" href="css/xiaohu.css">
+<link rel="stylesheet" href="/css/style.css">
+<link href="/css/base.css" rel="stylesheet" type="text/css">
+<link href="/css/cart.css" rel="stylesheet" type="text/css">
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<script src="/js/cart.js" type="text/javascript"></script>
+<script src="/js/comm.js" type="text/javascript"></script>
+<script src="/js/dialog/jquery.artDialog.js?skin=default" language="javascript"></script>
 </head>
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
 
-<script type="text/javascript" src="js/neiyei.js"></script>
 
-<body>
+
+

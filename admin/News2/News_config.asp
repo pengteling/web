@@ -1,4 +1,4 @@
 <%
 news_table="product"
-cateid_parent_m = 4
+cateid_parent_m = 37
 %>

@@ -719,6 +719,34 @@ If IP="" Then IP=Request.ServerVariables("REMOTE_ADDR")
 GetIP=IP 
 End Function
 
+Function GetYYYYMMDDHHIISS(d,t)
+
+YYYY=Year(d)
+MM=Month(d)
+DD=Day(d)
+HH=Hour(t)
+II=Minute(t)
+SS=Second(t)
+If Len(YYYY) =2 then
+YYYY="20" & YYYY
+End If
+If Len(MM)=1 then
+MM="0" & MM
+End If
+If Len(DD)=1 then
+DD="0" & DD
+End If
+If Len(HH)=1 then
+HH="0" & HH
+End If
+If Len(II)=1 then
+II="0" & II
+End If
+If Len(SS)=1 then
+SS="0" & SS
+End If
+GetYYYYMMDDHHIISS=YYYY & MM & DD & HH & II & SS
+End Function
 
 '该函数作用：按指定参数格式化显示时间。
 'numformat=1:将时间转化为yyyy-mm-dd hh:nn格式。

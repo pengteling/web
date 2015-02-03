@@ -1,9 +1,6 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
 <!--#include virtual="/User_Config.asp"-->
-
-<%
-
-  
+<%  
 select case Easp.var("act")
 	case "addcart":addcart()
 	case "editcart":editcart()
@@ -111,6 +108,16 @@ sub clearcart()
 	result = Easp.Db.Del("user_cart", "userid={userid}")
 	response.write "清空购物车成功"
 	response.End()
+end sub
+
+sub cartnum()
+	
+	set rs=Easp.Db.Sel("Select sum(shopnum) from user_cart where userid={userid}")
+	if not rs.eof then
+		response.write rs(0)
+	else
+		response.write "0"
+	end if
 end sub
 
 %>

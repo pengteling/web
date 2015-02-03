@@ -11,9 +11,6 @@ ul,
 li,
 img,
 p,
-dl,
-dt,
-dd,
 form,
 h2 {
   margin: 0;
@@ -22,7 +19,7 @@ h2 {
 }
 body {
   font-family: "Microsoft YaHei", "微软雅黑", Arial;
-  max-width: 1920px;
+  max-width: 1440px;
   margin: 0 auto;
   min-width: 1002px;
 }
