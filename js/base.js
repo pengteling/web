@@ -67,7 +67,15 @@ function strlen_verify(obj, checklen, maxlen) { //obj表示文本框  checklen �
 function valid_tel(mobile) {    var patten = new RegExp(/^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$|(^(13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$)/);    return patten.test(mobile);   } 
 
 function valid_email(email) {    var patten = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);    return patten.test(email);   } 
-
+//电子邮件验证
+var emailOnly=function(str){
+	var regEmail=/[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/;
+	if (regEmail.test(str)){
+		return true;
+	} else {
+		return false;
+	}
+}
 function valid_zipcode(zip) {    var patten = new RegExp(/^\d{6}$/);    return patten.test(zip);   } 
 
 

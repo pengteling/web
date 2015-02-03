@@ -351,6 +351,7 @@ End Function
 '返回值：True  ----Email地址合法
 '       False ----Email地址不合法
 '********************************************
+
 Function IsValidEmail(email)
 	dim names, name, i, c
 	IsValidEmail = true

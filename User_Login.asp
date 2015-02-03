@@ -82,106 +82,68 @@ Session("RandomNumber")=GetRndPassword(16)
 
 
 
-nid=4
-rs.open "select * from category where cateid="&nid,conn,1,1
-if not rs.eof then
-	parentid=rs("parentid")
-	sonid=rs("sonid")
-	followid=rs("followid")	
-	catetype=rs("catetype")
-	modeltype=rs("modeltype")
-	catename= rs("catename")		
-	title=rs("title")
-	Com_Content=rs("content")
-	defaultpicurl=rs("defaultpicurl")
 
-else
-	response.write "网址传递参数有误"
-	response.End()
-
-end if
-rs.close
 
 %>
 
 
-<!--#include virtual="/lmenu.asp"-->
-<!--#include virtual="/top.asp"-->
-<div class="greybg">
-<div class="nmain-t"></div>
-<div class="nmain-m">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/css/base.css" rel="stylesheet" type="text/css">
+<link href="/css/cart.css" rel="stylesheet" type="text/css">
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<script src="/js/cart.js" type="text/javascript"></script>
+<title>会员登陆</title>
+</head>
+<script>
+$(function(){
+	$(".ico01").addClass("hover ico01_");
+	$(".user_title_more li").eq(<%=clng(request("v"))%>).addClass("hover");
+})
+</script>
 
-<div class="main">
-  
-  <div class="dymain">
-  
-    <div class="tit"><img src="<%=defaultpicurl%>" height="50" />
-    </div>
-    
-    <div class="maincontent" > 
-    	<!--<div class="tit"><%=com_title%></div>     -->
-        
 
-      <div class="mcontent login-form">
-	  <form action='User_Login.asp' method='post' name='UserLogin' id="UserLogin">
-        <dl>        
-          <dt>用户名：</dt>
-          <dd>
-            <input name="mx_username" class="ipt_text_l" value="<%=mx_username%>"   maxlength="20"/>
-          </dd>
-        </dl>
-        <dl>
-          <dt>密码：</dt>
-          <dd>
-            <input  type="password" maxlength="16" name="mx_password" class="ipt_text_l"/>
-          </dd>
-        </dl>
-        
-        <dl>
-          <dt>&nbsp;</dt>
-          <dd style="text-align:center">
-            <%If FoundErr=true then%>
+<body>
+
+<div class="width">
+        <div class="user_bg">
+            <div id="uleft">
+    <!--#include virtual="/uleft.asp"-->
+</div>
+            <!--左侧结束-->
+            <div id="uright">
+                
+                 
+                 <div class="user_title_more">
+                    <ul>
+                        <li><a href="user_login.asp">用户登录</a></li>                      
+                       <li><a href="user_reg.asp">用户注册</a></li>                 
+                  
+                    </ul>
+                </div>
+                <div class="page_content">
+                
+                <%If FoundErr=true then%>
 <%=ErrMsg%>
 <%else%>
-*所有信息，不能为空！
+
 <%end if%>
-          </dd>
-        </dl>
-        <!--<dl>
-          <dt>验证码：</dt>
-          <dd>
-            <input name="CheckCode" type="text" class="ipt_text_y" id="VerifyCode3" size="9" maxlength="4" autocomplete="off" />
-            <img src="../FiveInc/GetCode_zh.asp" alt="验证码,看不清楚?请点击刷新验证码" height="15" style="cursor : pointer;" onclick="this.src='../FiveInc/getcode_zh.asp?t='+(new Date().getTime());" /> </dd>
-        </dl>-->
-            <div class="s_l"> 
-            <input name="RanNumber" type="hidden" id="Act" value="<%=Session("RandomNumber")%>" />
-                        <input id="work" type="hidden" value="add" name="work" />
-     
-        <input type="submit" name="imageField2" class="bg_b" value="" />        
-        
-      
-        
-   
-    </form>
-      
-      </div>
+                    <form method="post">
+                    <ul id="login">
+                        <li class="msg">请先登录</li>
+                        <li>账户：<input type="text" name="mx_username" class="ip" /></li>
+                        <li>密码：<input type="password" name="mx_password" class="ip" /></li>
+                        <li class="p42"><input type="hidden" name="gourl" value="<%=request("gourl")%>" /><input type="hidden" value="add" name="work"/><input type="submit" value="登录" class="bnt" /> <input type="button" value="注册用户" onClick="location.href='user_reg.asp'" class="bnt" /></li>
+                    </ul>
+                    </form>  
+                </div>
+
+            </div>
+            <!--右侧结束-->
+            <div class="clear"></div>
+        </div>
     </div>
-  </div>
-  <div class="clear"></div>
-</div>
-</div>
-
-</div>
-<div class="nmain-b"></div>
-
-
-
-
-<!--#include virtual="/foot.asp"-->
-
-
-
-
     
-  
-

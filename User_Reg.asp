@@ -1,262 +1,262 @@
-<!--#include file="FiveInc/Inc.asp"-->
-<!--#include file="FiveInc/Check_Sql.asp"-->
-<!--#include file="FiveInc/md5.asp"-->
+<!--#include virtual="/FiveInc/inc.asp"-->
+<!--#include virtual="/fiveinc/md5.asp"-->
+
 <%
-if CheckRequest(Request.Form(("work")))="add" then
-ChkPost
-dim UserName,Password,PwdConfirm,Email,CheckCode
-UserName=trim(request.Form("UserName"))
-Password=trim(request.Form("Password"))
-PwdConfirm=trim(request.Form("PwdConfirm"))
-Email=trim(request.Form("Email"))
-CheckCode=CheckSQL(Request.Form("CheckCode"))
-sex=trim(request.Form("sex"))
-job=trim(request.Form("job"))
-Comane=trim(request.Form("Comane"))
-Add=trim(request.Form("Add"))
-Phone=trim(request.Form("Phone"))
-UserDemo=trim(request.Form("UserDemo"))
-isRecive=trim(request.Form("isRecive"))
-'birthday=trim(request.Form("birthday"))
+if Easp.var("act")="db" and Easp.var("username")<>"" and Easp.var("password")<>"" then
 
-if isRecive<>"" then 
-	isRecive=1
-else
-	isRecive=0
-end if
-founderr=false
-if UserName="" or strLength(UserName)>14 or strLength(UserName)<4 then
-	founderr=true
-	errmsg=errmsg & "<br>·请输入用户名(不能大于14小于4)"
-else
-  	if Instr(UserName,"=")>0 or Instr(UserName,"%")>0 or Instr(UserName,chr(32))>0 or Instr(UserName,"?")>0 or Instr(UserName,"&")>0 or Instr(UserName,";")>0 or Instr(UserName,",")>0 or Instr(UserName,"'")>0 or Instr(UserName,",")>0 or Instr(UserName,chr(34))>0 or Instr(UserName,chr(9))>0 or Instr(UserName,"")>0 or Instr(UserName,"$")>0 then
-		errmsg=errmsg+"<br>·用户名中含有非法字符"
-		founderr=true
-	end if
-end if
-if Password="" or strLength(Password)>12 or strLength(Password)<6 then
-	founderr=true
-	errmsg=errmsg & "<br>·请输入密码(不能大于12小于6)"
-else
-	if Instr(Password,"=")>0 or Instr(Password,"%")>0 or Instr(Password,chr(32))>0 or Instr(Password,"?")>0 or Instr(Password,"&")>0 or Instr(Password,";")>0 or Instr(Password,",")>0 or Instr(Password,"'")>0 or Instr(Password,",")>0 or Instr(Password,chr(34))>0 or Instr(Password,chr(9))>0 or Instr(Password,"")>0 or Instr(Password,"$")>0 then
-		errmsg=errmsg+"<br>·密码中含有非法字符"
-		founderr=true
-	end if
-end if
-if PwdConfirm="" then
-	founderr=true
-	errmsg=errmsg & "<br>·请输入确认密码(不能大于12小于6)"
-else
-	if Password<>PwdConfirm then
-		founderr=true
-		errmsg=errmsg & "<br>·密码和确认密码不一致"
-	end if
-end if
-if Email="" then
-	founderr=true
-	errmsg=errmsg & "<br>·Email不能为空"
-else
-	if IsValidEmail(Email)=false then
-		errmsg=errmsg & "<br>·您的Email有错误"
-   		founderr=true
-	end if
-end if
+Easp.var("md5pwd") =md5(Easp.var("password"))
+Easp.var("IP") = getIP()
 
-if phone<>"" then
-		Set re=new RegExp
-		re.IgnoreCase =True
-		re.Global=True
+result = Easp.Db.Ins("user","username:{username},password:{md5pwd},email:{email},groupid:1,loginIP:{IP},lockuser:1") '注册时先锁定账户，审核后才可以登陆
+if result>0 then
+
 		
-		re.Pattern = "((\(\d{3}\))|(\d{3}\-))?13\d{9}|(15\d{1}\d{8})|(18\d{1}\d{8})"
-		If re.test(phone) Then
-		
-		else
-		FoundErr=true
-		ErrMsg=ErrMsg & "<br><li>·您输入的手机号码格式错误！</li>"
-		end if
+
+response.write "4注册成功！待审核成功后即可正常登陆"
+else 
+
+response.write "0注册出错，请联系管理员"
 end if
 
-'if birthday="" then
-'	founderr=true
-'	errmsg=errmsg & "<br>·生日不能为空"
-'else
-'	if isdate(birthday)=false then
-'		errmsg=errmsg & "<br>·您的生日格式有错误"
-'   		founderr=true
-'	end if
-'end if
-
-
-If CheckCode="" or isempty(CheckCode)=true or isnull(CheckCode) Then
-	FoundErr=True
-	ErrMsg=ErrMsg & "<br>·请输入验证码!"
-ElseIf CStr(Session("getcode"))<>CStr(Trim(Request("CheckCode"))) Then
-	FoundErr=True
-	ErrMsg=ErrMsg & "<br>·您输入的确认码和系统产生的不一致，请重新输入!"
-	Session("getcode") = ""
-End If
-
-if founderr=false then
-	dim sqlReg,rsReg
-	sqlReg="select * from [User] where UserName='" & Username & "' or Email='"&Email&"'"
-	set rsReg=server.createobject("adodb.recordset")
-	rsReg.open sqlReg,conn,1,3
-	if not(rsReg.bof and rsReg.eof) then
-		founderr=true
-		errmsg=errmsg & "<br>·你注册的用户或邮箱已经存在！请换一个用户名再试试！"
-	else
-		rsReg.addnew
-		rsReg("UserName")=UserName
-		rsReg("Password")=md5(Password)
-		rsReg("Email")=Email
-		rsReg("logins")=1
-		rsReg("sex")=sex
-		rsReg("add")=add
-		rsReg("phone")=phone
-		rsReg("sex")=sex
-		rsReg("isRecive")=isRecive
-		rsReg("job")=job
-		rsReg("Comane")=Comane
-		rsReg("UserDemo")=UserDemo
-		rsReg("LoginIP")=GetIP()
-		'rsReg("birthday")=birthday
-		
-		rsReg.update
-		founderr=false
-		Response.Cookies("mx_UserName")=UserName
-		Response.Cookies("mx_password")=md5(Password)
-		Response.Redirect("user.asp")
-	end if
-	rsReg.close
-	set rsReg=nothing
-	Session("RandomNumber")=""
-End If
-End If
-Session("RandomNumber")=GetRndPassword(16)
-
-
-nid=4
-rs.open "select * from category where cateid="&nid,conn,1,1
-if not rs.eof then
-	parentid=rs("parentid")
-	sonid=rs("sonid")
-	followid=rs("followid")	
-	catetype=rs("catetype")
-	modeltype=rs("modeltype")
-	catename= rs("catename")		
-	title=rs("title")
-	Com_Content=rs("content")
-
-else
-	response.write "网址传递参数有误"
-	response.End()
-
+response.End()
 end if
-rs.close
-
 %>
 
-<!--#include virtual="/lmenu.asp"-->
-<!--#include virtual="/top.asp"-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/css/base.css" rel="stylesheet" type="text/css">
+<link href="/css/cart.css" rel="stylesheet" type="text/css">
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<script src="/js/cart.js" type="text/javascript"></script>
+<title>会员注册</title>
+</head>
+<script>
+$(function(){
+	$(".ico01").addClass("hover ico01_");
+	$(".user_title_more li").eq(<%=clng(request("v"))%>).addClass("hover");
+})
 
-<div class="main">
-<div class="cleft"> 
-  <!--#include virtual="/cleft.asp"--> 
+
+</script>
+<script>
+function checkreg(the)
+{
+	if(strlen(the.username.value)<5||strlen(the.username.value)>20)
+	{
+		the.username.focus();
+		return false
+	}
+	if(strlen(the.password.value)<6||strlen(the.password.value)>16)
+	{
+		the.password.focus();
+		return false
+	}
+	if(the.username.value==the.password.value)
+	{
+		the.password.focus();
+		return false
+	}
+	if(strlen(the.repass.value)<6||strlen(the.repass.value)>16)
+	{
+		the.repass.focus();
+		return false
+	}
+	if($.trim(the.password.value)!=$.trim(the.repass.value))
+	{
+		the.repass.focus();
+		return false
+	}
+	if($.trim(the.email.value)==""||!emailOnly($.trim(the.email.value)))
+	{
+		the.email.focus();
+		return false
+	}
+	if($.trim(the.imgcode.value)=="")
+	{
+		the.imgcode.focus();
+		return false
+	}
+	var url,data;
+	url="?act=db";
+	data="username="+encodeURIComponent($.trim(the.username.value));
+	data+="&password="+encodeURIComponent($.trim(the.password.value));
+	data+="&repass="+encodeURIComponent($.trim(the.repass.value));
+	data+="&email="+encodeURIComponent($.trim(the.email.value));
+	data+="&imgcode="+encodeURIComponent($.trim(the.imgcode.value));
+	$.ajax({
+	type:"post",
+	cache:false,
+	url:url,
+	data:data,
+	error:function(){alert("\u670d\u52a1\u5668\u9519\u8bef\uff0c\u64cd\u4f5c\u5931\u8d25");},
+	success:function(_)
+	{
+		var act=_.substring(0,1);
+		var info=_.substring(1);
+		if(act>1)
+		{
+			the.username.value="";
+			the.password.value="";
+			the.repass.value="";
+			the.email.value="";
+			the.imgcode.value="";
+			$("#reg_username").html("由5-20位数字、字母、下划线组成");
+			$("#reg_password").html("由6-16个数字、字母、下划线组成");
+			$("#reg_repass").html("请再次输入密码");
+			$("#reg_email").html("请输入常用邮箱");
+			$("#reg_code").html("请输入左侧图片上的文字");
+			$("#imgcode")[0].src='/lib/imgcode.asp?t0=80&t1=20&'+Math.random();
+			$("#strength").removeClass().addClass('nothing').text('');
+		}
+		switch(act)
+		{
+			case "0":
+				$.message({content:info});
+				break;
+			case "1":
+				$(".c_"+info).focus();
+				break;
+			case "2":
+				$.message({type:"ok",content:info,time:10000});
+				break;
+			case "3":
+				$.message({type:"ok",content:info,time:5000});
+				break;
+			case "4":
+				$.message({type:"ok",content:info,time:2000});
+				var gourl=$.trim(the.gourl.value);
+				if(gourl==""){gourl="./user_index.asp"}
+				if(gourl.indexOf("login.asp")!=-1||gourl.indexOf("reg.asp")!=-1){gourl="./user_index.asp"}
+				$.message({type:"ok",content:info});
+				setTimeout(function(){location.href=gourl},2500);
+				break;
+			default:
+				alert(_)
+				break;
+		}
+	}});
+	return false
+}
+$(function(){
+	$(".c_username").focus(function(){$('#reg_username').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_username").blur(function(){$('#reg_username').removeClass();$('#reg_username').addClass('tip');$(this).removeClass('ipon');
+	if($(this)[0].value!=""){ajaxcheck("username","");}});
+	$(".c_password").focus(function(){$('#reg_password').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_password").blur(function(){$('#reg_password').removeClass();$('#reg_password').addClass('tip');$(this).removeClass('ipon');if($(this)[0].value!=""){ajaxcheck("password",$(".c_username")[0].value);};
+	var value=$(this).val();
+	var box=$('#strength');
+	if (value==''||value==null){
+				box.removeClass().addClass('nothing').text('');
+				return false;
+			} else if (value.length<6){
+				box.removeClass().addClass('nothing').text('密码过短');
+			} else {
+				var score=passwordGrade(value);
+				if (score<11){
+					box.removeClass().addClass('nothing').text('不安全');
+				} else if (score<21){
+					box.removeClass().addClass('strength normal').text('安全程度：低');
+				} else if (score<31){
+					box.removeClass().addClass('strength general').text('安全程度：中');
+				} else if (score>30){
+					box.removeClass().addClass('strength special').text('安全程度：高');
+				}
+			}
+	});
+	$(".c_repass").focus(function(){$('#reg_repass').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_repass").blur(function(){$('#reg_repass').removeClass();$('#reg_repass').addClass('tip');$(this).removeClass('ipon');
+	if($(this)[0].value!=""){ajaxcheck("repass",$(".c_password")[0].value);}});
+	$(".c_email").focus(function(){$('#reg_email').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_email").blur(function(){$('#reg_email').removeClass();$('#reg_email').addClass('tip');$(this).removeClass('ipon');if($(this)[0].value!=""){ajaxcheck("email","");};});
+	$(".c_code").focus(function(){$('#reg_code').addClass('tipred');$(this).addClass('ipon');});
+	$(".c_code").blur(function(){$('#reg_code').removeClass();$('#reg_code').addClass('tip');$(this).removeClass('ipon');if($(this)[0].value!=""){ajaxcheck("code","");};});
+});
+function ajaxcheck(t0,t1)
+{
+	var t2=$(".c_"+t0)[0].value;
+	var t3="reg_"+t0;
+	var url,data;
+	url="ajax_user.asp";
+	data="act="+encodeURIComponent($.trim(t0));
+	data+="&formvalue="+encodeURIComponent($.trim(t2));
+	data+="&checkvalue="+encodeURIComponent($.trim(t1));
+	$.ajax({
+	type:"post",
+	cache:false,
+	url:url,
+	data:data,
+	error:function(){$("#"+t3).html("fail");},
+	success:function(_)
+	{
+		
+		
+		
+		
+		var act=_.substring(0,1);
+		var info=_.substring(1);
+		switch(act)
+		{
+			case "0":
+				$("#"+t3).html(info);
+				//$(".c_"+t0).focus();
+				$("#sendreg")[0].disabled=true;
+				break;
+			case "1":
+				$("#"+t3).html(info);
+				$("#sendreg")[0].disabled=false;
+				break;
+			default:
+				$("#"+t3).html("异步验证出错");
+				break;
+		}
+	}});
+}
+</script>
+
+
+<body>
+
+<div class="width">
+        <div class="user_bg">
+            <div id="uleft">
+    <!--#include virtual="/uleft.asp"-->
 </div>
-<div class="cright">
-  <div class="curlocation clearfix">
-    <div class="fr"><img src="/images/home.jpg" /> 您当前位置：<%=menustr%></div>
-  </div>
-  <div class="maincontent" >
-    <div class="tit"><%=catename%></div>
-    <div class="newszy">1.以下信息务必填写正确、清楚 (<span class="blue">信息完全保密，不对外公开。带红色 <span class="red">*</span> 必需填写</span>)。 2.注册并登录后，可以使用会员的众多功能，如免
-      费使用SCI写作宝典,论文上传等。 3.下载一些重要的资料和信息</div>
-    <%If FoundErr=true then%>
-    <div class="error"><%=ErrMsg%></div>
-    <%end if%>
-    <div class="regform">
-    <form action='User_Reg.asp' method='post' name='UserReg' id="UserReg">
-      <dl>
-        <dt>用户名：<span class="red">*</span></dt>
-        <dd>
-          <input name="UserName" value="<%=UserName%>"   maxlength="14" class="txtinput"/>
-        </dd>
-      </dl>
-      <dl>
-        <dt>密码：<span class="red">*</span></dt>
-        <dd>
-          <input  type="password" maxlength="16" name="Password"  class="txtinput"/>
-          &nbsp;密码必须为6~16位</dd>
-      </dl>
-      <dl>
-        <dt>确认密码：<span class="red">*</span></dt>
-        <dd>
-          <input  type="password" maxlength="16" name="PwdConfirm"  class="txtinput"/>
-          &nbsp;两次输入的密码必须相同</dd>
-      </dl>
-      <dl>
-        <dt>手机号码：<span class="red">*</span></dt>
-        <dd>
-          <input name="phone" value="<%=phone%>"   class="txtinput"/>
-        </dd>
-      </dl>
-      <dl>
-        <dt>E-mail：<span class="red">*</span></dt>
-        <dd>
-          <input name="Email" value="<%=Email%>"   class="txtinput"/>
-        </dd>
-      </dl>
-      <dl>
-        <dt>称谓：<span class="red">*</span></dt>
-        <dd>
-          <input type="radio" name="sex" value="0" checked/>
-          女士/小姐
-          <input type="radio" name="sex" value="1" />
-          先生</dd>
-      </dl>
-      <!--   <dl> 
-    <dt>生日：<span class="red">*</span></dt>
-    <dd> <input  type="text" maxlength="16" name="birthday"  class="txtinput Wdate" style="width:100px;"  onClick="WdatePicker();"/>&nbsp;点击选择你的生日</dd>
-    </dl>-->
-      
-      <dl>
-        <dt>单位名称及科室：</dt>
-        <dd>
-          <input name="Comane" value="<%=Comane%>"   class="txtinput"/>
-        </dd>
-      </dl>
-      <dl>
-        <dt>联系地址：</dt>
-        <dd>
-          <input name="add" value="<%=add%>"   class="txtinput"/>
-        </dd>
-      </dl>
-      <dl>
-        <dt>验证码：<span class="red">*</span></dt>
-        <dd>
-          <input name="CheckCode" type="text" class="ipt_text_y" id="VerifyCode3" size="9" maxlength="4" autocomplete="off" />
-          <img src="../FiveInc/GetCode_zh.asp" alt="验证码,看不清楚?请点击刷新验证码" height="10" style="cursor : pointer;" onclick="this.src='../FiveInc/getcode_zh.asp?t='+(new Date().getTime());" /> </dd>
-      </dl>
-      <!-- <dl>
-      <dt>&nbsp;</dt>
-      <dd>
-        <input type="checkbox" name="isrecive" value="1"/>
-        我希望收到活动信息和电子期刊
-       
-      </dd>
-    </dl>-->
-      
-      <input name="RanNumber" type="hidden" id="Act" value="<%=Session("RandomNumber")%>" />
-      <input id="work" type="hidden" value="add" name="work" />
-      <div class="s_l"> <a class="btn_r">
-        <input type="submit" name="imageField2" class="bg_b" value="提交注册" />
-        </a><a class="btn_l">
-        <input type="button" class="bg_b" value="重新填写" onclick="javascript:document.forms['UserReg'].reset(); return false;" />
-        </a> </div>
-      </div>
-    </form>
-  </div>
-</div>
-<div class="clear"></div>
-</div>
-<!--#include file="foot.asp"-->
+            <!--左侧结束-->
+            <div id="uright">
+                
+                 
+                 <div class="user_title_more">
+                    <ul>
+                    <li><a href="user_reg.asp">用户注册</a></li>              
+                        <li><a href="user_login.asp">用户登录</a></li>                      
+                          
+                  
+                    </ul>
+                </div>
+                  <div class="page_content">
+                   
+                   <form onSubmit="return checkreg(this)">
+                   <ul id="reg">
+                       <li><span>用户名：</span><input type="text" name="username" class="ip w01 c_username" maxlength="20" /><span class="tip" id="reg_username">由5-20位数字、字母、下划线组成</span></li>
+                       <li><span>密码：</span><input type="password" name="password" class="ip w01 c_password" maxlength="16" /><span class="tip" id="reg_password">由6-16个数字、字母、下划线组成</span></li>
+                       <dd><div id="strength"></div></dd>
+                       <li><span>再次输入密码：</span><input type="password" name="repass" class="ip w01 c_repass" maxlength="16" /><span class="tip" id="reg_repass">请再次输入密码</span></li>
+                       <li><span>电子邮箱：</span><input type="text" name="email" class="ip w01 c_email" maxlength="20" /><span class="tip" id="reg_email">请输入常用邮箱</span></li>
+                       <li><span>验证码：</span><input type="text" name="imgcode" class="ip w02 c_code" maxlength="4" /> <img src="/fiveinc/imgcode.asp?t0=80&t1=20" title="看不清楚？点击刷新！" align="absmiddle" id="imgcode" onClick="this.src+='&'+Math.random();" /><span class="tip" id="reg_code">请输入左侧图片上的文字</span></li>
+                      
+                       <dd><input type="hidden" name="gourl" value="<%=request("gourl")%>" /><input type="submit" value="注 册" class="bnt" id="sendreg"/></dd>
+                   </ul>
+                   </form>
+                   
+                   
+                </div>
+            </div>
+            <!--右侧结束-->
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    

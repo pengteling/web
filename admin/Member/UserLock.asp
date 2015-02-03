@@ -6,9 +6,9 @@ UserID=trim(Request("UserID"))
 Action=trim(request("Action"))
 if UserID<>"" then
 	if Action="Lock" then
-		sql="Update [User] set LockUser=true where UserID=" & CLng(UserID)
+		sql="Update [User] set LockUser=1 where UserID=" & CLng(UserID)
 	else
-		sql="Update [User] set LockUser=false where UserID=" & CLng(UserID)
+		sql="Update [User] set LockUser=0 where UserID=" & CLng(UserID)
 	end if
 	conn.Execute sql
     call CloseConn()      
