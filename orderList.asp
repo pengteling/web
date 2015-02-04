@@ -197,7 +197,7 @@ $(function(){
 	end if
 	
 	Easp.Db.PageSize = 3
-	sql = "select * from orderList_c where userid={userid}" & sql_where
+	sql = "select * from orderList_c where userid={userid}" & sql_where &" order by id desc"
 	Set rs = Easp.Db.GetRS(sql)
 	
 

@@ -1,4 +1,4 @@
-body{background:#FCF9F0;}
+/*body{background:#FCF9F0;}*/
 body,form,input,textarea{margin:0;padding:0;}
 input{vertical-align:middle;outline:none;}
 textarea{vertical-align:top;outline:none;resize:none;}
@@ -293,7 +293,7 @@ margin-left:10px;padding:2px 7px;text-decoration:none;}
 
 #cart_div{border:1px solid #e3e3e3;background:#fff;padding:20px;overflow:hidden;}
 #cart_div .cart_quick{overflow:hidden;}
-#cart_div .cart_ico{float:left;background:url(../images/cart.gif) no-repeat left;padding-left:80px;height:45px;line-height:45px;font-family:microsoft yahei;font-size:22px;color:#666;}
+#cart_div .cart_ico{float:left;background:url(../images/cart.gif) no-repeat left;padding-left:80px;height:65px;line-height:65px;font-family:microsoft yahei;font-size:22px;color:#666;}
 
 
 .cart_step{width:700px;overflow:hidden;float:left;margin:0 0 0 50px;}

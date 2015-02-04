@@ -266,7 +266,7 @@ $(function(){
 </script>
 
 
-<body>
+
 
 
 
@@ -299,7 +299,7 @@ $(function(){
                <div class="page_content">
                    <form onSubmit="return checkdb2(this)">
                    <ul id="reg">
-                       <li><span>用户名：</span>pengteling</li>
+                       <li><span>用户名：</span><%=Easp.Var("username")%></li>
                        <li><span>原密码：</span><input type="password" name="oldpass" class="ip w01 c_oldpass" maxlength="16" /><span class="tip" id="reg_oldpass">请输入原密码</span></li>
                        <li><span>新密码：</span><input type="password" name="password" class="ip w01 c_password" maxlength="16" /><span class="tip" id="reg_password">由6-16个数字、字母、下划线组成</span></li>
                        <dd><div id="strength"></div></dd>
@@ -319,7 +319,7 @@ $(function(){
                <form onSubmit="return checkdb(this)">
                <ul id="reg">
                
-                <li><span>用户名：</span>pengteling</li>
+                <li><span>用户名：</span><%=Easp.Var("username")%></li>
                    <li><span>联系人：</span><input type="text" name="truename" class="ip w03 c_truename" maxlength="20" value="<%=rs("Somane")%>"/><span class="tip" id="reg_truename"></span></li>
                    <li><span>性别：</span>
                    <input type="radio" name="sex" id="sex_1" value="1" <%if rs("sex")=1 then response.write "checked='checked'"%> /><label for="sex_1">男</label>
