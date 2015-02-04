@@ -1,6 +1,7 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
 <!--#include virtual="/User_Config.asp"-->
 <%
+curpageTitle = "我的收货地址"
  if Easp.var("act") ="del" then
  
  result =Easp.Db.Del("user_address","id={id}")
@@ -91,20 +92,7 @@ else
  end if
 %>
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/css/base.css" rel="stylesheet" type="text/css">
-<link href="/css/cart.css" rel="stylesheet" type="text/css">
-<script src="/js/jquery.min.js" type="text/javascript"></script>
-<script src="/js/base.js" type="text/javascript"></script>
-<script src="/js/cart.js" type="text/javascript"></script>
-<script src="/js/dialog/jquery.artDialog.js?skin=default" language="javascript"></script>
-
-<title>我的收货地址</title>
-</head>
+<!--#include virtual="/top.asp"-->
 <script>
 $(function(){
 	$(".ico03").addClass("hover ico03_");
@@ -231,7 +219,7 @@ function checkdb(the)
 </script>
 
 
-<body>
+
 
 
 
@@ -355,3 +343,4 @@ function checkdb(the)
             <div class="clear"></div>
         </div>
     </div>
+<!--#include virtual="/foot.asp"-->

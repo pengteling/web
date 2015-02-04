@@ -1,7 +1,7 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
 <!--#include virtual="/User_Config.asp"-->
 <%
-
+curpageTitle = "完成订单"
 
 set rs=Easp.Db.Sel("Select * from orderList_c where orderNum={newid}  ")
 if rs.eof then response.Write "订单有误":response.End() 
@@ -11,17 +11,7 @@ if rs.eof then response.Write "订单有误":response.End()
 
 
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/css/base.css" rel="stylesheet" type="text/css">
-<link href="/css/cart.css" rel="stylesheet" type="text/css">
-<script src="/js/jquery.min.js" type="text/javascript"></script>
-<script src="/js/base.js" type="text/javascript"></script>
-<script src="/js/cart.js" type="text/javascript"></script>
-<title>完成订单</title>
-</head>
+<!--#include virtual="/top.asp"-->
 <script>
 function checkdb(the,payway,total,id)
 {
@@ -47,7 +37,7 @@ function checkdb(the,payway,total,id)
 }
 
 </script>
-<body>
+
 
 
  <div class="width">
@@ -106,5 +96,4 @@ function checkdb(the,payway,total,id)
     </div>
 
 
-</body>
-</html>
+<!--#include virtual="/foot.asp"-->
