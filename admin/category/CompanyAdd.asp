@@ -106,7 +106,7 @@ rs5.close
 		Rs.Close	
 		if parentid_f<>"" then	
 		'response.write ("update category set sonid=sonid&',"&cid&"' where cateid in ("&parentid_f&") ")
-		conn.execute ("update category set sonid=sonid&',"&cid&"' where cateid in ("&parentid_f&") ")
+		conn.execute ("update category set sonid=sonid+',"&cid&"' where cateid in ("&parentid_f&") ")
 		end if
 		
 		dirpath(cid) '更新静态页面路径

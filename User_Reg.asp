@@ -2,6 +2,8 @@
 <!--#include virtual="/fiveinc/md5.asp"-->
 
 <%
+curpageTitle = "用户注册"
+
 if Easp.var("act")="db" and Easp.var("username")<>"" and Easp.var("password")<>"" then
 
 Easp.var("md5pwd") =md5(Easp.var("password"))
@@ -22,17 +24,7 @@ response.End()
 end if
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/css/base.css" rel="stylesheet" type="text/css">
-<link href="/css/cart.css" rel="stylesheet" type="text/css">
-<script src="/js/jquery.min.js" type="text/javascript"></script>
-<script src="/js/base.js" type="text/javascript"></script>
-<script src="/js/cart.js" type="text/javascript"></script>
-<title>会员注册</title>
-</head>
+<!--#include virtual="/top.asp"-->
 <script>
 $(function(){
 	$(".ico01").addClass("hover ico01_");
@@ -217,7 +209,7 @@ function ajaxcheck(t0,t1)
 </script>
 
 
-<body>
+
 
 <div class="width">
         <div class="user_bg">
@@ -260,3 +252,4 @@ function ajaxcheck(t0,t1)
         </div>
     </div>
     
+<!--#include virtual="/foot.asp"-->

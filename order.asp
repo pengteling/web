@@ -1,7 +1,7 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
 <!--#include virtual="/User_Config.asp"-->
 <%
-
+curpageTitle = "填写购物信息"
 
 user_rate=1 '默认折扣为1 即不打折
 set rs=Easp.Db.sel("select * from [User_rate_c] where userid={userid}")
@@ -128,17 +128,7 @@ if Easp.var("act") ="orderdb" then '提交订单的处理函数
 
 end if
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/css/base.css" rel="stylesheet" type="text/css">
-<link href="/css/cart.css" rel="stylesheet" type="text/css">
-<script src="/js/jquery.min.js" type="text/javascript"></script>
-<script src="/js/base.js" type="text/javascript"></script>
-<script src="/js/cart.js" type="text/javascript"></script>
-<title>填写购物信息</title>
-</head>
+<!--#include virtual="/top.asp"-->
 <script>
 $(function(){
 	$(".is_address").click(function(){$("#address").css("display","block");});
@@ -250,7 +240,7 @@ function checkdb(the)
 }
 </script>
 
-<body>
+
 <div class="width">
   <div id="cart_div" class="mt10">
     <div class="cart_quick">
@@ -266,7 +256,7 @@ function checkdb(the)
     <!--a-->
     <div id="cart_order">
       <form onSubmit="return checkdb(this)">
-        <div class="title">确认收货地址　<a href="user/address.asp">[管理收货地址]</a></div>
+        <div class="title">确认收货地址　<a href="address.asp">[管理收货地址]</a></div>
         <div class="radio">
           <input name="t0" value="" type="hidden" />
           <ul>
@@ -365,7 +355,7 @@ while not rs.eof
       <td><a href="/show.asp?id=<%=rs("shopid")%>" target="_blank"><%=rs("pname")%></a></td>
     
        <td>¥<%=rs("price")%></td>
-        <td>¥<%=rs("shopnum")%></td>
+        <td><%=rs("shopnum")%></td>
         <td class="price">¥<%=rs("shopnum")*rs("price")%></td>
       </tr>
       
@@ -381,7 +371,7 @@ while not rs.eof
 	  
 	  %>
             <tr>
-              <td colspan="5" class="info">商品共计：<span><%=cart_num%></span>件　商品总金额：<span>¥<%=cart_totalprice%></span>元
+              <td colspan="4" class="info">商品共计：<span><%=cart_num%></span>件　商品总金额：<span>¥<%=cart_totalprice%></span>元
               <%if user_rate<>1 then
 			 
 			  	floatmoney =cart_totalprice-round( cart_totalprice* cdbl(user_rate),2)
@@ -397,12 +387,13 @@ while not rs.eof
         <div class="action_bnt"><span>
           <input type="submit" name="send" value="提交订单" class="bnt" />
           </span>
-          <input type="button" value="返回" class="bnt" onClick="location.href='?'" />
+          <input type="button" value="返回" class="bnt" onClick="location.href='cart.asp'" />
         </div>
       </form>
     </div>
     <!----> 
   </div>
 </div>
-</body>
-</html>
+
+
+<!--#include virtual="/foot.asp"-->

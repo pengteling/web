@@ -12,7 +12,7 @@ $(function(){
 })
 </script>
 
-<body>
+
 <div class="width">
   <div class="user_bg">
     <div id="uleft"> 

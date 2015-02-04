@@ -44,7 +44,6 @@ li {
 }
 .clear {
   clear: both;
-  height: 0;
 }
 .b {
   font-weight: bold;

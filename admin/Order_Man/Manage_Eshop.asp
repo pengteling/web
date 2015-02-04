@@ -82,6 +82,7 @@ Sub list()
                 <td height="25" align="center">用户名</td>
                  <td align="center">商品金额</td>
                  <td align="center">浮动金额</td>
+                 <td align="center">实际付款</td>
                  <td align="center">订单状态</td>
                  <td align="center">下单时间</td>
                 <td width="10%" align="center"> 
@@ -105,6 +106,8 @@ do while not rs.eof
                 <%=rs("totalmoney")%></td>
                 <td align="center" bgcolor="#ECF5FF"> 
                 <%=rs("floatmoney")%></td>
+                <td align="center" bgcolor="#ECF5FF"><span style="color:red" >
+                <%=rs("totalmoney")+rs("floatmoney")%></span></td>
                 <td align="center" bgcolor="#ECF5FF"> 
                   <%=Easp.var(trim(rs("refund_status")))%>
                 </td>
@@ -133,7 +136,7 @@ loop
 end if
 %>
               <tr class="tr_southidc"> 
-                <td height="25" colspan="9">&nbsp;&nbsp; 
+                <td height="25" colspan="10">&nbsp;&nbsp; 
                   <%
 Response.write "<strong><font color='#000000'>-> 全部-</font>"
 Response.write "共</font>" & "<font color=#FF0000>" & Cstr(Rs.RecordCount) & "</font>" & "<font color='#000000'>个订单</font></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"

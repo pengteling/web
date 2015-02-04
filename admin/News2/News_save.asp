@@ -14,6 +14,7 @@ hx_type=ChkFormStr(request("hx_type"))
 
 Passed=ChkFormStr(request.form("Passed"))
 cateid=strToNum(Request("cateid"))
+price = cdbl(Request("price"))
 
 DefaultPicUrl=LCase(ChkFormStr(request.form("DefaultPicUrl")))
 
@@ -68,6 +69,7 @@ If lcase(Request("Act"))="add" Then
 		rs("Content_zy")=Content_zy
 		rs("UploadFiles")=UploadFiles
 		rs("DefaultPicUrl")=DefaultPicUrl
+		rs("price")=price
 		'rs("area")=area
 		'rs("hx_type")=hx_type
 		
@@ -98,8 +100,8 @@ End if
 		rs("PostTime")=PostTime		
 		temppath = formatdate(PostTime,2)		
 		rs.update		
-		rs("dynamicUrl") = "readnews.asp?id="&rs("id")
-		rs("staticUrl")=temppath&"/"&rs("id")&".html"
+		'rs("dynamicUrl") = "readnews.asp?id="&rs("id")
+		'rs("staticUrl")=temppath&"/"&rs("id")&".html"
 		rs.update		
 		rs.close
 		set rs=nothing
@@ -131,6 +133,7 @@ If supportAspjpeg="1" And DefaultPicUrl<>"images/nopic.jpg" and rs("DefaultPicUr
 	'thumb2 = Thumb(DefaultPicUrl,"s2",182,95)
 End if
 		rs("DefaultPicUrl")=DefaultPicUrl
+		rs("price")=price
 		'rs("area")=area
 		'rs("hx_type")=hx_type
 		

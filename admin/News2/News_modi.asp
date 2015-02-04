@@ -122,6 +122,12 @@ If data(3,i)>1 then class_list=class_list& "├"
 %>    </select></td>
     </tr>
     
+      <tr bgcolor="#ECF5FF">
+      <td width="133" height="25" align="center">产品价格：</td>
+      <td colspan="2"><input name="price" type="text" class="input" value="<%=NewsRs("price")%>" size="30">元 RMB
+		  </td>
+    </tr>
+    
 <tr>
       <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">产品小图：</span></td>
       <td width="314" height="30" bgcolor="#ECF5FF"><span class="tr_southidc">

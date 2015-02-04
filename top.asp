@@ -15,7 +15,7 @@
 <script src="/js/comm.js" type="text/javascript"></script>
 <script src="/js/dialog/jquery.artDialog.js?skin=default" language="javascript"></script>
 </head>
-
+<body>
 
 
 

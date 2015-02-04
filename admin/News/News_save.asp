@@ -96,9 +96,9 @@ End if
 		
 		rs.update
 		
-		rs("dynamicUrl") = "readnews.asp?id="&rs("id")
-		rs("staticUrl")=temppath&"/"&rs("id")&".html"
-		rs.update
+		'rs("dynamicUrl") = "readnews.asp?id="&rs("id")
+		'rs("staticUrl")=temppath&"/"&rs("id")&".html"
+		'rs.update
 		
 		rs.close
 		set rs=nothing
