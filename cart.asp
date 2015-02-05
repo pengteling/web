@@ -119,6 +119,7 @@ sub cartnum()
 	else
 		response.write "0"
 	end if
+	response.End()
 end sub
 
 %>

@@ -1,0 +1,284 @@
+body, ul, li, h1, h2 {
+	padding: 0;
+	border: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.clear {
+	clear: both;
+}
+body {
+	background: #fff;
+	font-size: 12px;
+}
+.main {
+	width: 1000px;
+	margin: 0 auto;
+}
+.banner {
+	width: 100%;
+	top: 0px;
+	z-index: 5;
+	height: 330px;
+	text-align: center;
+}
+.head {
+	position: relative;
+	height: 172px;
+	z-index:999999;
+}
+.login {
+	position: absolute;
+	right: 0;
+	top: 24px;
+}
+.i-btnbg {
+	color: white;
+	margin-left: 22px;
+	margin-top: 4px;
+	width: 90px;
+	height: 22px;
+	text-align: center;
+	line-height: 22px;
+	background: url(../images/login_03.png) no-repeat;
+	float: left;
+}
+.i-btnbg a{color:#fff; display:block; width:100%; height:100%}
+.log-jxs {
+	font-family: Arial;
+	font-weight: bold;
+}
+.logo {
+	position: absolute;
+	left: 0;
+	top: 24px;
+}
+.nav {
+	width: 660px;
+	position: absolute;
+	right:0px;
+	top: 94px;
+	height: 30px;
+	font-size: 14px;
+	z-index: 10;
+}
+ul li {
+	list-style: none;
+}
+.nav ul li {
+	width: 105px;
+	margin-left:5px;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	color: #333;
+	text-align: center;
+	position: relative;
+	
+}
+.nav ul li a {
+	font-family: "微软雅黑";
+	color: #163a6b;
+	font-weight: bold;
+	font-size: 14px;
+}
+.imain {
+	height: 300px;
+	background: url(../images/imainback2.png) center top no-repeat;
+}
+.imainback {
+	position: absolute;
+	left: 434px;
+	top: 502px;
+}
+.nav ul li:hover ,.nav ul li.select{
+	background:url(../images/nav-li-bg.jpg);
+	}
+.nav ul li:hover a,.nav ul li.select a{color: #fff;
+}
+.hid {
+	display: none;
+}
+.nav ul li a{display:block; width:100%; height:100%;}
+.nav ul li .xiala {
+	position: absolute;
+	left:0; top:30px;
+	z-index:99999;
+	display:none;
+	
+}
+.nav ul li .xiala li {
+	float: none;
+	width:105px; height:30px; 
+	background:url(../images/nav-xiala-li-bg.jpg);
+	margin-top:2px;
+	margin-left:0;
+}
+.nav ul li .xiala li:hover{
+background:url(../images/nav-xiala-li-bg-h.jpg);	
+
+	}
+
+.im1, .im2, .im3 {
+	padding: 10px;
+	float: left;
+}
+.im1 {
+	width: 256px;
+	height: 260px;
+	padding-top: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.im2 {
+	width: 396px;
+	height: 260px;
+	padding: 40px 19px 0 19px;
+}
+.im3 {
+	width: 238px;
+	height: 268px;
+	padding-top: 32px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+.tit {
+	font-family: 宋体;
+	font-size: 14px;
+	color: #20559d;
+	font-weight: bold;
+}
+.im3-head{height:36px; overflow:hidden; margin-bottom:12px;}
+.news {
+	
+    width: 106px;
+    height: 36px;
+    text-align: center;   
+	float:left;
+	font-family:"微软雅黑";
+	color:#3f80d8;
+	font-weight:bold;
+	font-size:14px;
+	margin-right:4px;
+	line-height:36px;
+}
+.news a{color:#3f80d8;}
+
+.im3-head .news:hover,.im3-head .news.on{
+	background: url(../images/newshover.png) no-repeat;
+	color:white;
+	}
+.im3-head .news:hover a,.im3-head .news.on a{
+	color:#fff;
+	}
+.more {
+	font-family: Arial;
+	font-size: 12px;
+	color: #999
+}
+.more a{
+	color: #999
+	}
+v .im1-body, p {
+	font-size: 12px;
+	line-height: 24px;
+	text-indent: 2em;
+}
+/*.im2-body {
+	padding-top: 24px;
+	width: 410px;
+	height: 179px;
+}
+.im2-body ul li {
+	float: left;
+	height: 179px;
+	width: 120px;
+	margin-right: 16px;
+}*/
+
+.im2-body {
+	width: 396px;
+	height: 179px;
+	padding-top: 0px;
+}
+.im2-body ul li {
+	float: left;
+	margin-right: 18px;
+	border: #ddd 1px solid;
+	width: 118px;
+	height: 177px;
+	position: relative;
+}
+.im2-body ul li.last {
+	margin-right: 0;
+}
+.im2-body ul li .pic {
+	width: 118px;
+	height: 153px;
+}
+.im2-body ul li .txt {
+	width: 118px;
+	height: 24px;
+	line-height: 24px;
+	padding-top: 4px;
+	background: url(../images/jiantou.png);
+	text-align: center;
+	position: absolute;
+	bottom: 1px;
+	left: 0;
+}
+.im2-body ul li .txt a {
+	color: #fff;
+}
+.im2-body ul li:hover .pic {
+	background:#f2f2f2
+}
+.im2-body ul li:hover .txt {
+	background: url(../images/hover.png);
+	font-weight: bold;
+}
+.pro-tit1 {
+	position: absolute;
+	margin-left: 35px;
+	margin-top: 160px;
+	color: #FFF;
+}
+.pro-tit2 {
+	position: absolute;
+	margin-left: 46px;
+	margin-top: 160px;
+	color: #FFF;
+}
+
+.im3-fl {
+	
+    width: 106px;
+    height: 24px;
+    text-align: center;
+    padding-top: 12px;
+}
+.foot {
+	width:100%;
+	height:194px;
+	background:#f2f2f2;
+	}
+.mainfoot {
+	
+    width: 1440px;
+    height: 194px;
+    margin: auto;
+}
+
+	
+.im1-head .tit a{color:#20559d;}
+.newslist .more{line-height:30px;}
+	
+	

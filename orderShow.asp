@@ -2,7 +2,9 @@
 <!--#include virtual="/User_Config.asp"-->
 <%
 curpageTitle = "完成订单"
-
+%>
+<!--#include virtual="/top.asp"-->
+<%
 set rs=Easp.Db.Sel("Select * from orderList_c where orderNum={newid}  ")
 if rs.eof then response.Write "订单有误":response.End() 
 
@@ -11,7 +13,7 @@ if rs.eof then response.Write "订单有误":response.End()
 
 
 %>
-<!--#include virtual="/top.asp"-->
+
 <script>
 function checkdb(the,payway,total,id)
 {

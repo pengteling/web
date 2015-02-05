@@ -1,14 +1,18 @@
 <!--#include virtual="/fiveinc/conn.asp"-->
 <!--#include virtual="/User_Config.asp"-->
+
 <%
 curpageTitle = "我的订单详情"
+%>
+<!--#include virtual="/top.asp"-->
+<%
 set rs=Easp.Db.Sel("select * from OrderList where OrderNum={id}")
 
 if rs.eof then response.write "订单有误":response.End()
 refund_status = trim(rs("refund_status"))
 totalmoeny =rs("totalmoney")
 %>
-<!--#include virtual="/top.asp"-->
+
 
 
 <script>

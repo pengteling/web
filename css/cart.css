@@ -22,7 +22,7 @@ a:hover{color:#f30;}
 
 #mleft{width:740px;overflow:hidden;float:left;margin:0 10px 0 0;}
 #mright{width:240px;overflow:hidden;float:left;margin:0;}
-.width{width:990px;overflow:hidden;clear:both;margin:auto;}
+.width{width:990px;overflow:hidden;clear:both;margin:20px auto; }
 
 #topbar{background:url(../images/bg_topbar.gif) repeat-x top;overflow:hidden;}
 #topbar .width{color:#333;height:30px;line-height:30px;}
