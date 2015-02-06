@@ -6,7 +6,7 @@ curpageTitle = "我的账户"
 
 if request("act")="checkdb" then
 
-result = Easp.Db.Upd("user","somane={truename},sex={sex},phone={tel},email={email},zip={zipcode},[add]={address}","userid={userid}")
+result = Easp.Db.Upd("user","somane={truename},comane={comane},sex={sex},phone={tel},email={email},zip={zipcode},[add]={address}","userid={userid}")
 if result>0 then
 
 	response.write "1修改成功"
@@ -105,6 +105,7 @@ function checkdb(the)
 	url="?act=checkdb";
 	data="truename="+encodeURIComponent($.trim(the.truename.value));
 	data+="&sex="+encodeURIComponent(sex);	
+	data+="&comane="+encodeURIComponent($.trim(the.comane.value));
 	data+="&tel="+encodeURIComponent($.trim(the.tel.value));
 	data+="&email="+encodeURIComponent($.trim(the.email.value));
 	data+="&zipcode="+encodeURIComponent($.trim(the.zipcode.value));
@@ -320,11 +321,14 @@ $(function(){
                <ul id="reg">
                
                 <li><span>用户名：</span><%=Easp.Var("username")%></li>
+               
                    <li><span>联系人：</span><input type="text" name="truename" class="ip w03 c_truename" maxlength="20" value="<%=rs("Somane")%>"/><span class="tip" id="reg_truename"></span></li>
+                    
                    <li><span>性别：</span>
                    <input type="radio" name="sex" id="sex_1" value="1" <%if rs("sex")=1 then response.write "checked='checked'"%> /><label for="sex_1">男</label>
                    <input type="radio" name="sex" id="sex_2" value="0" <%if rs("sex")=0 then response.write "checked='checked'"%>/><label for="sex_2">女</label>
                    </li>
+                    <li><span>单位名称：</span><input type="text" name="comane" class="ip w04 c_comane" maxlength="20" value="<%=rs("comane")%>"/><span class="tip" id="reg_comane"></span></li>
                   <li><span>邮箱：</span><input type="text" name="email" class="ip w04 c_email" maxlength="50"  value="<%=rs("Email")%>"/><span class="tip" id="reg_email">格式：username@qq.com</span></li>
                    
                    <li><span>电话：</span><input type="text" name="tel" class="ip w04 c_tel" maxlength="13"  value="<%=rs("phone")%>"/><span class="tip" id="reg_tel">格式：010-66668888 或 11位手机号</span></li>

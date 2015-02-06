@@ -95,9 +95,15 @@ if Easp.var("act") ="orderdb" then '提交订单的处理函数
 			  		floatmoney = -cart_totalprice + round( cart_totalprice* cdbl(user_rate),2)
 			  end if
 			  
+			  if Easp.var("wuliucompany")<>"" then
+			  
+			  	Easp.var("beizu")="客户建议物流公司名称："&Easp.var("wuliucompany")&"    电话："&Easp.var("wuliutel")
+			  else
+			  Easp.var("beizu")=""
+			  end if
 			 
 			'增加订单
-			  result2 =Easp.Db.Ins("OrderList","orderNum:{orderNum},userid:{userid},totalmoney:"&cart_totalprice&",floatmoney:"&floatmoney&",xm:'"&xm&"',tel:'"&tel&"',zipcode:'"&zip&"',addr:'"&addr&"',payway:{t1},remark:'"&remark&"',refund_status:'WAIT_BUYER_PAY'")
+			  result2 =Easp.Db.Ins("OrderList","orderNum:{orderNum},userid:{userid},totalmoney:"&cart_totalprice&",floatmoney:"&floatmoney&",xm:'"&xm&"',tel:'"&tel&"',zipcode:'"&zip&"',addr:'"&addr&"',payway:{t1},remark:{t2},beizu:{beizu},refund_status:'WAIT_BUYER_PAY'")
 			  
 			 '清除购物车
 			 result = Easp.Db.Del("user_cart", "userid={userid}")
@@ -211,6 +217,8 @@ function checkdb(the)
 	data+="&a3="+encodeURIComponent($.trim(the.a3.value));
 	data+="&a4="+encodeURIComponent($.trim(the.a4.value));
 	data+="&a5="+encodeURIComponent(a5);
+	data+="&wuliucompany="+encodeURIComponent($.trim(the.wuliucompany.value));
+	data+="&wuliutel="+encodeURIComponent($.trim(the.wuliutel.value));
 	$.ajax({
 	type:"post",
 	cache:false,
@@ -317,11 +325,18 @@ while not rs.eof
             </li>
           </ul>
         </div>
-        <div class="title">订单备注</div>
+        <div class="title">订单备注 <a>[选填]</a></div>
         <div class="radio">
           <dl>
-            <dt><span>订单附言：</span>
-              <textarea name="t2" onKeyUp="strlen_verify(this,'remark_len',255)"></textarea>还可输入<u id="remark_len">255</u> 个字符
+          <dt ><span>物流公司：</span>
+                <input type="text" name="wuliucompany" maxlength="10" /> 我们发货时将优先选择您填写的物流
+              </dt>
+              <dt class="mt10"><span>物流电话：</span>
+                <input type="text" name="wuliutel" maxlength="20" />
+              </dt>
+              
+            <dt class="mt10"><span>订单附言：</span>
+              <textarea name="t2" onKeyUp="strlen_verify(this,'remark_len',255)"></textarea> 还可输入<u id="remark_len">255</u> 个字符
             </dt>
           </dl>
         </div>
