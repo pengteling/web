@@ -24,22 +24,32 @@
 date1=cdate(request.Form("date1"))
 date2=cdate(request.Form("date2"))
 
-Response.AddHeader "Content-Disposition","attachment;filename=kyd"&date1&"-"&date2&".xls"
+Response.AddHeader "Content-Disposition","attachment;filename=hc"&date1&"-"&date2&".xls"
 
 
 Set rs = Server.CreateObject("ADODB.Recordset")
 
 'response.write "select * from orderlist where addtime>=#"&date1&"# and addtime<=#"&date2&"# order by id desc"
-rs.open "select * from orderlist where addtime>='"&date1&"' and addtime<='"&date2&"' and isdel=0 order by id desc",conn,1,1
+rs.open "select * from orderlist_c where addtime>='"&date1&"' and addtime<='"&date2&"' and isdel=0 order by id desc",conn,1,1
 
 %>
 
             <table >
               <tr >
-                <td >订单编号</td>
-                <td>下单时间</td> 
-                <td>产品名称</td>
-                <td>购买时间</td>
+                <td >订单编号</td>               
+                  <td>用户名</td>
+                 <td >商品金额</td>
+                 <td >浮动金额</td>
+                 <td >实际付款</td>
+                 <td >订单状态</td>
+                 <td >下单时间</td>
+                <td > 
+                  收货人</td>
+                <td > 
+                  联系电话</td>
+                
+               
+                
                
               </tr>
               <%
@@ -48,13 +58,30 @@ i=0
 do while not rs.eof
 %>
               <tr>
-                <td ><%=rs("OrderNum")%></td> 
-                <td><%=rs("addtime")%></td>
-                
-                <td > 
-                <%=rs("productname")%></td>
+                <td><%=rs("OrderNum")%></td> 
+                <td> 
+                <%=rs("username")%></td>
+                <td> 
+                <%=rs("totalmoney")%></td>
+                <td> 
+                <%=rs("floatmoney")%></td>
+                <td><span style="color:red" >
+                <%=rs("totalmoney")+rs("floatmoney")%></span></td>
+                <td> 
+                  <%=Easp.var(trim(rs("refund_status")))%>
+                </td>
+                <td> 
+                  <%=rs("addtime")%>
+                </td>
                
-                <td><%=rs("buydate")%></td>
+                <td> 
+                  <%=rs("xm")%>
+                </td>
+                
+                 <td> 
+                  <%=rs("tel")%>
+                </td>
+                
              
              
               </tr>

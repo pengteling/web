@@ -104,7 +104,9 @@ sub showContent
 	  	response.write "正常"
 	  end if
 	  %>                  </td>
-                  <td align="center" bgcolor="#ECF5FF"><a href="UserModify.asp?UserID=<%=rs("UserID")%>">修改</a>&nbsp; 
+                  <td align="center" bgcolor="#ECF5FF">
+                  <a href="../order_man/manage_Eshop.asp?cuserid=<%=rs("UserID")%>">查看订单</a>&nbsp; 
+                  <a href="UserModify.asp?UserID=<%=rs("UserID")%>">修改</a>&nbsp; 
                     <%if rs("LockUser")=False then %>
                     <a href="UserLock.asp?Action=Lock&UserID=<%=rs("UserID")%>">锁定</a> 
                     <%else%>

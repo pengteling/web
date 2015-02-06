@@ -30,11 +30,12 @@
   </div>
   <%else%>
   <div class="login">
-    <div>
-      <div class="i-btnbg log-jxs"><a href="">English</a></div>
-    </div>
+   
     <div>
       <div class="i-btnbg "><a href="user_login.asp">经销商登陆</a></div>
+    </div>
+     <div>
+      <div class="i-btnbg log-jxs"><a href="">English</a></div>
     </div>
   </div>
   <%end if%>

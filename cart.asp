@@ -115,10 +115,14 @@ sub cartnum()
 	
 	set rs=Easp.Db.Sel("Select sum(shopnum) from user_cart where userid={userid}")
 	if not rs.eof then
-		response.write rs(0)
+		tnum= rs(0)
 	else
-		response.write "0"
+		tnum= "0"
 	end if
+	if isnull(tnum) then
+		tnum=0
+	end if
+	response.write tnum
 	response.End()
 end sub
 

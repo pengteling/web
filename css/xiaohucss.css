@@ -39,6 +39,8 @@ body {
 	position: absolute;
 	right: 0;
 	top: 24px;
+	width:224px;
+	height:26px;
 }
 .i-btnbg {
 	color: white;

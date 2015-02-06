@@ -85,7 +85,7 @@ else
 end if
 
 
-sql="select news.*,c.catename from news left join category c on news.cateid=c.cateid where isdel=True"
+sql="select news.*,c.catename from news left join category c on news.cateid=c.cateid where isdel=1"
 if cateid<>0 then
 	sql=sql & " and news.cateid in (" & sonid & ")"	
 end if

@@ -399,7 +399,7 @@ End Function
 '       False ----没有安装
 '***************************************************
 Function IsObjInstalled(strClassString)
-	'on error resume next
+	on error resume next
 	IsObjInstalled = False
 	Err = 0
 	Dim xTestObj
@@ -1175,7 +1175,8 @@ function Thumb_getUrl(filename,width,height)
 if filename="" or cint(width)<10 or cint(height)<10 then 
  
  	'Thumb_getUrl ="/images/nopic.jpg" '//如果没有需要生成的图片或者祝宽度和高度小于10像素，则用默认图替代
-	ThumbUrl=Thumb_getUrl(DefaultPicUrl,width,height)
+	'ThumbUrl=Thumb_getUrl(DefaultPicUrl,width,height)
+	ThumbUrl=filename
 else
 
 	
@@ -1262,7 +1263,10 @@ case 4
 case else
     exit function
 end select
+ojpg.Interpolation =2
 ojpg.Quality = 100
+' 设定锐化效果
+ojpg.Sharpen 1, 120
 ojpg.save saveName
 Set ojpg = nothing
 end function

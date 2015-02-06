@@ -11,9 +11,9 @@ isindex=1
 <div class="banner">
   <div class="hd">
     <ul>
-      <li><img src="images/banner2_02.jpg" /></li>
-      <li><img src="images/banner2_02.jpg" /></li>
-      <li><img src="images/banner2_02.jpg" /></li>
+      <li><img src="<%=Thumb_getUrl("images/banner2_02.jpg",121,48)%>" /></li>
+      <li><img src="<%=Thumb_getUrl("images/banner2_02.jpg",121,48)%>" /></li>
+      <li><img src="<%=Thumb_getUrl("images/banner2_02.jpg",121,48)%>" /></li>
     </ul>
   </div>
   <div class="bd">
@@ -99,7 +99,7 @@ jQuery(".banner").slide({mainCell:".bd ul",titCell:".hd ul li",effect:"left",aut
           <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
           <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
           <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <div class="more fr">MORE +</div>
+          <div class="more fr"><a href="">MORE +</a></div>
         </ul>
         <ul class="newslist">
           <li> <a href="readnews.asp?id=5"> · 2大理州政府领导莅临俊发地产考察 </a> </li>

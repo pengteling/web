@@ -2,9 +2,9 @@
 <!--#include file="../admin.asp"-->
 <!-- #include file="../Inc/Head.asp" -->
 <script language="javascript">
-function confirmdel(id,page){
+function confirmdel(id,oid,page){
 if (confirm("真的要删除这个订单?"))
-window.location.href="Manage_Eshop.asp?id="+id+"&page="+page
+window.location.href="Manage_Eshop.asp?id="+id+"&ordernum="+oid+"&page="+page
 }
 </script>
 <table>
@@ -30,6 +30,7 @@ keywords=ChkFormStr(Request("keywords"))
 id = strToNum(request("id"))
 if id > 0 then
    conn.execute("update OrderList set isdel=1 where id=" & id)
+   Easp.Db.exec("update orderDetail set isdel=1 where orderNum={orderNum}")
 end if
 
 flag="尚未处理"
@@ -40,6 +41,12 @@ if keywords<>"" then
 strFileName=strFileName&"&keywords="&server.URLEncode(keywords)
 sqltext="select * from OrderList_c where  (ordernum like '%"&keywords&"%' or username like '%"&keywords&"%' or tel like '%"&keywords&"%' or xm like '%"&keywords&"%') order by addtime desc"
 end if
+
+if Easp.var("Cuserid")<>"" then
+
+sqltext="select * from OrderList_c where userid="&Clng(Easp.var("cuserid"))&" order by addtime desc"
+end if
+
 'response.write sqltext
 rs.open sqltext,conn,1,1
 
@@ -125,7 +132,7 @@ do while not rs.eof
                 
                 <td align="center" bgcolor="#ECF5FF"> 
             <%response.write "<a href='Manage_Eshop_detail.asp?ID="&rs("OrderNum")&"&page="&CurrentPage&"'  >查看/编辑</a>"
-                    response.write "&nbsp;&nbsp;<a href='javascript:confirmdel(" & rs("id") & ","& CurrentPage&")'>删除</a>"
+                    response.write "&nbsp;&nbsp;<a href='javascript:confirmdel(" & rs("id") & ",""" & rs("orderNum") & ""","& CurrentPage&")'>删除</a>"
 %>                </td>
               </tr>
               <%

@@ -48,6 +48,7 @@ a:visited {color: #656565;text-decoration: none;}
 </style>
 </head>
 <script src="/js/jquery.min.js" type="text/javascript"></script>
+<script src="/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script src="/js/jQuery.ColorPicker.js" type="text/javascript"></script>
 <script src="/js/base.js" type="text/javascript"></script>
 <body>
