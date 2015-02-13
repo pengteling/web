@@ -1,9 +1,12 @@
 <%@ CODEPAGE=65001 %>
-<% Option Explicit %>
+
+<!--#include file="../../fiveinc/function.asp"-->
+
 <% Response.CodePage=65001 %>
 <% Response.Charset="UTF-8" %>
 <!--#include file="UpLoad_Class.asp"-->
 <!--#include file="JSON_2.0.4.asp"-->
+<!--#include file="../../fiveinc/conn2.asp"-->
 <%
 
 ' KindEditor ASP
@@ -95,8 +98,31 @@ end if
 filePath = Server.mappath(savePath & file.filename)
 fileUrl = saveUrl & file.filename
 
+
+rfilePath=savePath & file.filename
+'Easp.var("filetype2")=file.filename
+
+filetype = file.extend
+
 Set upload = nothing
 Set file = nothing
+
+if dirName="image" then
+'存缩略图
+MakeThumb filePath ,filePath,800,0,1
+end if
+
+'set result=Easp.Db.Ins("uploadfiles","path:'32434'")
+set rs=server.CreateObject("adodb.recordset")
+rs.open "select * from uploadfiles where 1=2",conn,1,3
+
+rs.addnew
+
+rs("path")=rfilePath
+rs("filetype")=filetype
+rs.update
+rs.close
+
 
 If Not fso.FileExists(filePath) Then
 	showError("上传文件失败。")

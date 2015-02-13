@@ -5,7 +5,7 @@
 <%  
 if request("action")="Backup" then
 
-conn.execute ("backup database jdb to DISK =N'f:\恒昌农具\web\FDatabase\"& formatdate(date(),2)&".bak'")
+conn.execute ("backup database yugao to DISK =N'"&Server.MapPath("../fdatabase")&"\"& formatdate(date(),2)&".bak'")
 result="备分成功！"
 end if
 %>

@@ -400,7 +400,7 @@ If data(3,i)>1 then class_list=class_list& "├"
        
           <option value="0" <%if modeltype=0 then response.write "selected"%>>文字信息列表</option>
          <option value="1" <%if modeltype=1 then response.write "selected"%>>图片信息列表</option>                 
-          <option value="2" <%if modeltype=2 then response.write "selected"%>>成长足迹列表</option>        
+          <option value="2" <%if modeltype=2 then response.write "selected"%>>图文信息列表</option>        
 
         </select></td>
     </tr>

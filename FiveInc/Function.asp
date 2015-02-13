@@ -812,7 +812,7 @@ formatdate=ystr&"年"&mstr&"月"&dstr&"日 "&WeekdayName(Weekday(shijian))
 case 8
 formatdate=right(ystr,2)&mstr&dstr
 case 9
-formatdate=mstr&dstr
+formatdate=mstr&"-"&dstr
 end select
 end function
 Public Function UMoney(ByVal money)
@@ -939,8 +939,8 @@ function companyURL(cateid,catetype,outlinkurl,modeltype,catedir,isStatic)
 				case 1 '图片信息模型
 					'companyURL = "pic.asp?id="&cateid				
 					companyURL = "pic.asp?id="&cateid	
-				case 2 '杂志信息模型
-					companyURL="zuji.asp?id="&cateid		
+				case 2 '图文信息模型
+					companyURL="picnews.asp?id="&cateid		
 				case 3 '分析师列表模型'	
 					companyURL="team.asp?id="&cateid
 			end select
@@ -967,10 +967,10 @@ end function
 
 
 function infoURL(sUrl,dUrl,isStatic)
-	if isStatic="0" then
-		infoURL= dUrl
-	else
+	if isStatic="1" then
 		infoURL= HtmlRoot&sUrl
+	else
+		infoURL= dUrl
 	end if
 end function
 
@@ -1223,11 +1223,19 @@ case 0
       ojpg.width=limitW
       ojpg.height=limitH
     end if
+'case 1
+'    Rem 只限定宽度，高度按比例
+'    if limitW>0 then
+'      ojpg.width=limitW
+'      ojpg.height=oh/ow*limitW
+'    end if
 case 1
     Rem 只限定宽度，高度按比例
-    if limitW>0 then
+    if limitW>0 and limitW<ojpg.width  then '如果比限定尺寸小 则不压缩宽度了
       ojpg.width=limitW
       ojpg.height=oh/ow*limitW
+	else
+		exit function
     end if
 case 2
     Rem 只限定高度，宽度按比例

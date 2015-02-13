@@ -302,8 +302,8 @@ while not rs.eof
               <dt><span><u>*</u>邮政编码：</span>
                 <input type="text" name="a3" maxlength="6" />
               </dt>
-              <dt><span><u>*</u>收货地址：</span>
-                <input type="text" name="a4" maxlength="255" />
+              <dt><span><u>*</u>汽运到站地址：</span>
+                <input type="text" name="a4" maxlength="255" /> <!--<u style="color:#f00">注：请填写汽车货运到站地址，需自行到该地址提货</u>-->
               </dt>
               <dt><span>设为默认：</span>
                 <input type="checkbox" name="a5" value="1" class="c" id="a5" checked="checked" />
@@ -395,6 +395,7 @@ while not rs.eof
 				
 			  end if
 			  %>
+              （<span>不含运费</span>）
               </td>
             </tr>
           </table>

@@ -25,7 +25,7 @@ If NewsRs.Eof then
 End If
 DefaultPic=Trim(NewsRs("DefaultPicUrl"))
 If DefaultPic="" then
-	DefaultPic="images/Nopic.jpg"
+	'DefaultPic="images/Nopic.jpg"
 End If
 
 
@@ -253,7 +253,7 @@ If data(3,i)>1 then class_list=class_list& "├"
         <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="<%=DefaultPic%>" size="30" maxlength="120" /> <input name="UploadFiles" type="hidden" id="UploadFiles" value="<%=NewsRs("UploadFiles")%>" />
       </span></td>
       <td width="499" bgcolor="#ECF5FF"><span class="tr_southidc">
-        <input type="button" name="Submit22" value="直接从上传图片中选择" onClick="window.open('../SelectPic.asp','','status=no,scrollbars=yes,top=300,left=200,width=396,height=254');" />
+        <!--<input type="button" name="Submit22" value="直接从上传图片中选择" onClick="window.open('../SelectPic.asp','','status=no,scrollbars=yes,top=300,left=200,width=396,height=254');" />-->
         <input name="Submit222" type="button" value="上传图片"   id="image3"><input type="button" id="J_selectImage" value="批量上传" />
       </span></td>
     </tr>

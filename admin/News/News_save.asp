@@ -26,6 +26,15 @@ end if
 'if UploadFiles<>"" and right(UploadFiles,1)<>"|" then
 '	UploadFiles=UploadFiles&"|"
 'end if
+
+rfiles= relativeUploadfiles(Content,"/uploadfiles","gif|jpg|bmp|png|jpeg|zip|rar|doc|xls|docx|xlsx|pdf|mp4|flv|wmv" )
+'response.write rfiles
+rfiles=split(rfiles,"|")
+
+if DefaultPicUrl="" and ubound(rfiles)>0 then
+DefaultPicUrl=rfiles(0)
+end if
+'response.End()
 Elite=ChkFormStr(request.form("Elite"))
 cateid=strToNum(request("cateid"))
 PostTime=Request("PostTime")
@@ -102,6 +111,27 @@ End if
 		
 		rs.close
 		set rs=nothing
+		
+set rs=Easp.Db.Sel("	select IDENT_CURRENT('news')")
+id =rs(0)
+
+for i = 0 to ubound(rfiles)		
+		
+		result = Easp.Db.upd("uploadfiles","newsid="&ID&"","path='"&rfiles(i)&"'" )		'关联附件ID哦
+next
+		result = Easp.Db.upd("uploadfiles","newsid="&ID&"","path='"&DefaultPicUrl&"'" )		'关联首页图片
+
+set rs=server.CreateObject("adodb.recordset")
+rs.open "select * from news where id="&Id,conn,1,3
+if not rs.eof then
+
+rs("dynamicUrl") = "readnews.asp?id="&rs("id")
+		rs("staticUrl")=temppath&"/"&rs("id")&".html"
+		rs.update
+end if
+rs.close
+
+		
 		conn.close  
 		set conn=nothing
 		response.write "<script language='javascript'>" & chr(13)
@@ -129,6 +159,10 @@ If supportAspjpeg="1" And DefaultPicUrl<>"images/nopic.jpg" and rs("DefaultPicUr
 	'thumb1 = Thumb(DefaultPicUrl,"s1",742,231)
 	'thumb2 = Thumb(DefaultPicUrl,"s2",182,95)
 End if
+		
+		
+		
+		
 		rs("DefaultPicUrl")=DefaultPicUrl
 		
 
@@ -154,6 +188,22 @@ End if
 		rs.update
 		rs.close
 		set rs=nothing
+		
+		for i = 0 to ubound(rfiles)		
+		
+			result = Easp.Db.upd("uploadfiles","newsid="&ID&"","path='"&rfiles(i)&"'" )		'关联附件ID哦
+		next
+		result = Easp.Db.upd("uploadfiles","newsid="&ID&"","path='"&DefaultPicUrl&"'" )		'关联首页图片
+		
+		if UploadFiles<>"" then 
+		rfiles=split(UploadFiles,"|")
+		for i = 0 to ubound(rfiles)		
+		
+			result = Easp.Db.upd("uploadfiles","newsid="&ID&"","path='"&rfiles(i)&"'" )		'关联附件ID哦
+		next
+		result = Easp.Db.upd("uploadfiles","newsid="&ID&"","path='"&DefaultPicUrl&"'" )		'关联首页图片
+		
+		end if
 		conn.close  
 		set conn=nothing
 	if Request.Cookies("xd_urljilunew")="" then

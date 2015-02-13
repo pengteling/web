@@ -5,7 +5,6 @@ Const SiteKey="恒昌农具,重庆恒昌"        '网站关键字
 Const SiteDescription="重庆市恒昌农具制造有限公司"        '网站说明
 Const SiteUrl="http://192.168.1.109:88/"        '网站地址
 Const supportAspjpeg="1"        '支持AspJepg
-Const supportHtml="0"        '支持AspJepg
 Const SiteStatus="1"        '网站状态
 Const SiteInfo="网站暂时关闭，稍候开放！"        '关闭原因
 Const SiteBeian="渝ICP备14005088号"        '网站备案号

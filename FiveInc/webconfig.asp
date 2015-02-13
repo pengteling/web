@@ -17,10 +17,11 @@ Const SiteManage="admin"	'存放管理文件目录
 Const MaxPerPage_News=20        '每页文章数
 Const MaxPerPage_Product=12        '每页产品数
 Const SaveUpFilesPath="UploadFiles"        '存放上传文件的目录
-Const DelUpFiles="No"        '删除文章时是否同时删除文章中的上传文件
+Const DelUpFiles="Yes"        '删除文章时是否同时删除文章中的上传文件
 Const Checkbook="Yes"        '发表留言时是否需要审核
 Const SessionTimeout=40        'Session会话的保持时间
 Const xdtherr="yes"  ' 产品三级是否开发
 Const xdnext="yes"  ' 是否开放下一条 下一条
 Const IsSqlserver=1  'sqlserver  ,0表示access
+Const supportHtml=0
 %>

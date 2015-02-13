@@ -254,7 +254,7 @@ function checkdb(the)
                     <li><span>联系电话：</span><input type="text" name="t1" class="ip w01" maxlength="20" value="" /></li>
                     
                     <li><span>邮政编码：</span><input type="text" name="t3" class="ip w01" maxlength="6" value="" /></li>
-                    <li><span>收货地址：</span><input type="text" name="t4" class="ip w05" maxlength="255" value="" /></li>
+                    <li><span style="font-size:12px;">汽车货运到站地址：</span><input type="text" name="t4" class="ip w05" maxlength="255" value="" /></li>
                     <li><span>设为默认：</span><input type="checkbox" name="t5" id="t5"  checked="checked" /><label for="t5">是</label></li>
                     <dd><input type="submit" value="保存" class="bnt" name="bnt" /> <input type="button" value="取消" onClick="location.href='javascript:history.go(-1)'" class="bnt" /></dd>
                 </ul>
@@ -276,7 +276,7 @@ function checkdb(the)
                     <li><span>联系电话：</span><input type="text" name="t1" class="ip w01" maxlength="20" value="<%=rs("tel")%>" /></li>
                    
                     <li><span>邮政编码：</span><input type="text" name="t3" class="ip w01" maxlength="6" value="<%=rs("zipcode")%>" /></li>
-                    <li><span>收货地址：</span><input type="text" name="t4" class="ip w05" maxlength="255" value="<%=rs("address")%>" /></li>
+                    <li><span style="font-size:12px;">汽车货运到站地址：</span><input type="text" name="t4" class="ip w05" maxlength="255" value="<%=rs("address")%>" /></li>
                     <li><span>设为默认：</span><input type="checkbox" name="t5" id="t5"  <%if rs("isdefault")=1 then %>checked="checked" <%end if%> /><label for="t5">是</label></li>
                     <dd><input type="submit" value="保存" class="bnt" name="bnt" /> <input type="button" value="取消" onClick="location.href='javascript:history.go(-1)'" class="bnt" /></dd>
                 </ul>
@@ -294,7 +294,7 @@ function checkdb(the)
                         <th width="80">收货人姓名</th>
                         <th width="120">联系电话</th>
                         <th width="80">邮政编码</th>
-                        <th>收货地址</th>
+                        <th>汽车货运到站地址</th>
                         <th width="60">是否默认</th>
                         <th width="100">管理</th>
                     </tr>

@@ -49,7 +49,7 @@ sub DelNews(ID)
 	if FoundErr=False then
 		if DelUpFiles="Yes" and ObjInstalled=True then
 			dim fso,strUploadFiles,arrUploadFiles
-			strUploadFiles=rsDel("UploadFiles") & ""
+			strUploadFiles=rsDel("UploadFiles") & "" 
 			if strUploadFiles<>"" then
 				Set fso = CreateObject(xiaodaofso)
 				if instr(strUploadFiles,"|")>1 then
@@ -78,7 +78,29 @@ sub DelNews(ID)
 		end if
 		rsDel.delete
 		rsDel.update
-		set rsDel=nothing		
+		set rsDel=nothing	
+		
+		
+		set rs=Easp.Db.Sel("select * from uploadfiles where newsid="&ID&"")
+		while not rs.eof
+		Set fso = CreateObject("Scripting.FileSystemObject")
+			tempfile =  rs("path")
+			set rs2=Easp.Db.Sel("select * from uploadfiles where path='"&tempfile&"'")
+			if rs2.recordcount=1 then '该图片有且只关联一条信息，即这个删除后不影响其它文章中图片显示
+				
+				if fso.FileExists(server.MapPath(tempfile)) then
+								fso.DeleteFile(server.MapPath(tempfile)) '真实删除
+				end if
+				
+			end if
+			rs2.close
+		set fso=nothing
+		
+		rs.movenext
+		wend
+		rs.close
+		result = Easp.Db.Del("uploadfiles","newsid="&ID&"") '删除附件表中的数据
+			
 	end if
 end sub
 

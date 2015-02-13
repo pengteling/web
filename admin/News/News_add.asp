@@ -46,6 +46,7 @@ function SetDropDownPic(url){
 	document.myform.IncludePic.value="1";
 }
 </script>
+
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="table_southidc">
   <form name="myform" method="post" action="News_save.asp" onSubmit="return CheckForm();">
     <tr>
@@ -216,10 +217,10 @@ If data(3,i)>1 then class_list=class_list& "├"
     <tr>
       <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">首页图片：</span></td>
       <td width="301" height="30" bgcolor="#ECF5FF"><span class="tr_southidc">
-        <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="images/Nopic.jpg" size="30" maxlength="120" />
+        <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="" size="30" maxlength="120" />
       </span></td>
       <td width="495" bgcolor="#ECF5FF"><span class="tr_southidc">
-        <input type="button" name="Submit22" value="直接从上传图片中选择" onClick="window.open('../SelectPic.asp','','status=no,scrollbars=yes,top=300,left=200,width=396,height=254');" />
+       <!-- <input type="button" name="Submit22" value="直接从上传图片中选择" onClick="window.open('../SelectPic.asp','','status=no,scrollbars=yes,top=300,left=200,width=396,height=254');" />-->
         <input name="Submit222" type="button" value="上传图片"   id="image3">
       </span></td>
     </tr>

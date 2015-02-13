@@ -80,7 +80,7 @@ sub ShowConfig()
     </tr>
 
 
-<tr>
+<!--<tr>
       <td class="tr_southidc"><span style="font-weight: bold">是否生成静态</span><strong>：</strong><br>（首页和信息页生成静态html）</td>
       <td class="tr_southidc"><label>
         <input name="supportHtml" type="radio" value="1" <%if supportHtml=1 then response.Write("checked") end if%>>
@@ -88,7 +88,7 @@ sub ShowConfig()
       <input type="radio" name="supportHtml" value="0" <%if supportHtml=0 then response.Write("checked") end if%>>
 否</label></td>
     </tr>
-    
+    -->
     
     <tr>
       <td class="tr_southidc"><span style="font-weight: bold">网站状态</span><strong>：</strong></td>
@@ -204,7 +204,7 @@ sub SaveConfig()
 	content=content& "Const SiteUrl=" & chr(34) & Sqlbad(trim(request("SiteUrl"))) & chr(34) & "        '网站地址" & vbcrlf
 	content=content& "Const supportAspjpeg=" & chr(34) & Sqlbad(trim(request("supportAspjpeg"))) & chr(34) & "        '支持AspJepg" & vbcrlf
 	
-	content=content& "Const supportHtml=" & chr(34) & Sqlbad(trim(request("supportHtml"))) & chr(34) & "        '支持AspJepg" & vbcrlf
+	'content=content& "Const supportHtml=" & chr(34) & Sqlbad(trim(request("supportHtml"))) & chr(34) & "        '支持AspJepg" & vbcrlf
 	
 	content=content& "Const SiteStatus=" & chr(34) & Sqlbad(trim(request("SiteStatus"))) & chr(34) & "        '网站状态" & vbcrlf
 	content=content& "Const SiteInfo=" & chr(34) & Sqlbad(trim(request("SiteInfo"))) & chr(34) & "        '关闭原因" & vbcrlf

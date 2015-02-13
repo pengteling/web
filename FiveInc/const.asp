@@ -62,7 +62,7 @@ Function ShowNews()
 	TrNum=0
 	cateid = strToNum(Request("id"))	
 	Keyword = ChkFormStr(Request("so"))
-	msql="Select id,title,posttime,color,defaultpicurl,content,hits,staticUrl,dynamicUrl from news_c where isdel=0 and passed=True "
+	msql="Select id,title,posttime,color,defaultpicurl,content,hits,staticUrl,dynamicUrl from news_c where 1=1 "
 	If cateid<>0 Then
 		'msql=msql&" and cateid="&cateid&""
 		msql=msql&" and cateid in ("&sonid&")"
@@ -91,7 +91,7 @@ Function ShowNews()
 			
 	
 %>
-       <li class="newslist"><div class="con"><span class="time"><%=formatdate(NewsListRs("posttime"),2)%></span><a href="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><span class="icon">></span><%=NewsListRs("title")%></a>
+       <li class="newslist"><div class="con"><span class="time"><%=formatdate(NewsListRs("posttime"),2)%></span><a href="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><%=NewsListRs("title")%></a>
        </div>
        </li>
        
@@ -117,7 +117,7 @@ Function ShowPics()
 	TrNum=0
 	cateid = strToNum(Request("id"))	
 	Keyword = ChkFormStr(Request("so"))
-	msql="Select id,title,posttime,color,defaultpicurl,content,hits,staticUrl,dynamicUrl from news_c where isdel=0 and passed=True "
+	msql="Select id,title,posttime,color,defaultpicurl,content,hits,staticUrl,dynamicUrl from news_c where isdel=0 and passed=1 "
 	If cateid<>0 Then
 		'msql=msql&" and cateid="&cateid&""
 		msql=msql&" and cateid in ("&sonid&")"
@@ -146,7 +146,7 @@ Function ShowPics()
 %>
        <li>
        <div class="pro-pic">
-       <a href1="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
+       <a href="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
        </div>
               <p><a href1="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><%=NewsListRs("title")%></a></p>
             </li>
@@ -167,6 +167,66 @@ Function ShowPics()
 End Function
 
 
+
+
+Function ShowPicNews()
+	TrNum=0
+	cateid = strToNum(Request("id"))	
+	Keyword = ChkFormStr(Request("so"))
+	msql="Select id,title,posttime,color,defaultpicurl,content,hits,staticUrl,dynamicUrl from news_c where isdel=0 and passed=1 "
+	If cateid<>0 Then
+		'msql=msql&" and cateid="&cateid&""
+		msql=msql&" and cateid in ("&sonid&")"
+	End If
+	
+	If Keyword<>"" Then
+		msql=msql&" and (title like '%"&Keyword&"%' or content like '%"&Keyword&"%')"
+	End If
+	
+	msql=msql&" Order By px desc,posttime Desc,ID Desc"
+	Set mypage=new zh_Showpage
+	PSize=5
+	mypage.getconn=Conn	
+	mypage.getsql=msql
+	mypage.pagesize=PSize	
+	set NewsListRs=mypage.getrs()
+	
+	If 	NewsListRs.Eof Then
+		Response.Write "<br />&nbsp;&nbsp;&nbsp;没有找到信息!"
+	Else
+			Response.Write ("<div class=""picnewslist""><ul>")&vbcrlf
+		For TrNum=1 To mypage.pagesize
+			If NewsListRs.Eof Then Exit For
+			
+	
+%>
+       <li>
+       <div class="pic-l">
+       <a href="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
+       </div>
+       <div class="txt-r">
+       <div class="txt-rt">
+       	<div class="time"><%=formatdate(NewsListRs("posttime"),2)%></div>
+       	<div class="tit"><a href="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><%=NewsListRs("title")%></a></div>
+       </div>
+              <div class="con"><%=leftstr( clearallhtml(NewsListRs("content")),300)%> <a href="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>">浏览全文</a></div>
+              </div>
+            </li>
+            
+       
+<%
+		
+		
+			NewsListRs.MoveNext
+		Next
+			Response.Write("<div class=""clear""></div></div><div class=""dotline""></div>")&vbcrlf
+		Set NewsListRs = Nothing
+		If TrNum >=1 Then
+			Response.Write(""&mypage.showpage()&"")
+		End If
+	End If
+
+End Function
 
 
 

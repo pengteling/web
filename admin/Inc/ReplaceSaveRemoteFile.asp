@@ -91,6 +91,7 @@ If IncluR=False then
 	End If 
 End if 
 TempStr=Replace(TempStr,"""","") 
+empStr=Replace(TempStr,">","") 
 TempStr=Replace(TempStr,"'","") 
 
 'response.write TempStr
@@ -221,4 +222,33 @@ FilesPath="/uploadfiles/remoteimg"
 '开始保存图片 
 'Content=ReplaceSaveRemoteFile(Content,FilesStartStr,FilesOverStr,False,True,True,FilesPath,NewsUrl) 
 
+
+
+function relativeUploadfiles(ConStr,StartStr,OverStr)
+
+	TempStr=""
+	Set ReF = New Regexp 
+	ReF.IgnoreCase = True 
+	ReF.Global = True 
+	'ReF.Pattern = "("&StartStr&").+?("&OverStr&").+?(\s|\'|\""|/|>)"   '后网址中可能有两个或多个.jpg 一定是后面跟引号或空格或>
+	
+	ReF.Pattern = "("&StartStr&").+?("&OverStr&")"   '后网址中可能有两个或多个.jpg 一定是后面跟引号或空格或>
+	
+	Set Matches =ReF.Execute(ConStr) 
+	For Each Match in Matches 
+	
+		If Instr(TempStr,Match.Value)=0 Then 
+		If TempStr<>"" then 
+		TempStr=TempStr & "|" & Match.Value 
+		Else 
+		TempStr=Match.Value 
+		End if 
+		End If 
+	Next 
+	Set Matches=nothing 
+	Set ReF=nothing 
+	
+	relativeUploadfiles = TempStr
+	
+end function
 %>
