@@ -74,7 +74,7 @@ Function ShowNews()
 	
 	msql=msql&" Order By px desc,posttime Desc,ID Desc"
 	Set mypage=new zh_Showpage
-	PSize=10
+	PSize=15
 	mypage.getconn=Conn	
 	mypage.getsql=msql
 	mypage.pagesize=PSize	

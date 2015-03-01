@@ -78,8 +78,17 @@
 </div>
 
 
-<%if isindex<>1 then%>
-<div class="nbanner" style="background:url(../images/nbanner.jpg) center top no-repeat; height:210px;"></div>
+<%if isindex<>1 then
+
+if defaultpic_d1="" then
+ nbanner ="../images/nbanner.jpg"
+else
+ nbanner =defaultpic_d1
+
+end if
+
+%>
+<div class="nbanner" style="background:url(<%=nbanner%>) center top no-repeat; height:210px;"></div>
 
 <%end if%>
 

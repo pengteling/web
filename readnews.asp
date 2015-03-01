@@ -37,14 +37,14 @@ end if
 rs.close
 
 set ReadRs=server.CreateObject("adodb.recordset")
-ReadRs.open "select top 1 * from news_c where cateid="&nid&" and isdel=false and id>"&newsid &" order by id ",conn,1,1
+ReadRs.open "select top 1 * from news_c where cateid="&nid&" and isdel=0 and id>"&newsid &" order by id ",conn,1,1
 if not ReadRs.eof then
 prelink="<a href=""readnews.asp?id="&ReadRs("id")&""">"&ReadRs("Title")&"</a>"
 else
 prelink="这是第一篇"
 end if
 ReadRs.Close
-ReadRs.open "select top 1 * from news_c where  cateid="&nid&" and isdel=false and  id<"&newsid&" order by id desc",conn,1,1
+ReadRs.open "select top 1 * from news_c where  cateid="&nid&" and isdel=0 and  id<"&newsid&" order by id desc",conn,1,1
 if not ReadRs.eof then
 nextlink="<a href=""readnews.asp?id="&ReadRs("id")&""">"&ReadRs("Title")&"</a>"
 else
@@ -78,19 +78,21 @@ rs.close
 
 <!--#include virtual="/lmenu.asp"-->
 <!--#include virtual="/top.asp"-->
+
+
 <div class="greybg">
   <div class="main">
     <div class="cleft fl">
-      <div class="nlogo"><a href="/"><img src="/images/logo-nei.png" alt="" /></a></div>
+     
       <!--#include virtual="/cleft.asp"--> 
     </div>
     <div class="cright fr">
-      <div class="subtit"><img src="images/subtitle-<%=cateid_d1%>.png" height="36" /></div>
-      <div class="subanner"><img src="<%=defaultpic_d1%>" height="140" width="680" /></div>
-     <%	
-	 if instr(sonid_d1,",")>0 then%>
-	 <!--#include virtual="/subnav.asp"-->
-     <%end if%>
+      
+    <div class="curlocation">
+      <div class="fr"><%=menustr%></div>
+     <!-- <div class="fl"><%=catename%></div>-->
+     
+    </div>
      
       <div class="maincontent" > 
        <div class="newscenter">
@@ -105,6 +107,9 @@ rs.close
     <div class="clear"></div>
   </div>
 </div>
+
+
+
 
 <!--#include virtual="/foot.asp"-->
 

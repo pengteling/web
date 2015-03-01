@@ -1,13 +1,16 @@
 <div class="lmenu">
 
+<div class="subnav">
+<div class="subnav-d1">
+ 
+ <a href="<%=companyurl_db(cateid_d1)%>"><%=catename_d1%></a>
 
+</div>
 
  <ul>
- <li>
- <a href="/">回到首页</a>
- </li>
+
  <%		
-		rs.open "Select cateid,catename,catename_en,catetype,outlinkurl,modeltype,catedir,dirpath,sonid from category_c  where followid=0 order by orderid ",conn,1,1
+		rs.open "Select cateid,catename,catename_en,catetype,outlinkurl,modeltype,catedir,dirpath,sonid from category_c  where followid="&cateid_d1&" order by orderid ",conn,1,1
 		k=0
 		while not rs.eof 
 		k=k+1
@@ -16,7 +19,7 @@
 		else
 		response.write "<li  class="""
 		end if
-		if cateId_d1=cint(rs("cateid")) then
+		if cateId_d2=cint(rs("cateid")) then
 				response.write " select"""
 		else
 			response.write """"
@@ -38,6 +41,6 @@
  
  
  </ul>
-
+</div>
  </div>
  

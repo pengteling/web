@@ -182,11 +182,11 @@ Public Sub ShowPage()
 	
 	
 	str_tmp=ShowAllCounts	
-	response.write str_tmp
+	'response.write str_tmp
 	
 	
 	
-	Response.Write ShowGoto()
+	'Response.Write ShowGoto()
 	response.write "</div></div></form></div><!--分页代码end --> "
 	end if
 	
@@ -238,12 +238,12 @@ End Function
 '====================================================================
 Private Function ShowFirstPrv()
 	Dim Str_tmp,int_prvpage	
-	'str_tmp="<a href="""&geturl  &"1"">首页</a>&nbsp;"
+	str_tmp="<a href="""&geturl  &"1"" class=""firstpage"">«</a>"
 	If int_curpage=1 Then
-		str_tmp=str_tmp&"<a class=""prepage""></a>"
+		str_tmp=str_tmp&"<a class=""prepage"">‹</a>"
 	Else
 		int_prvpage=int_curpage-1
-		str_tmp=str_tmp&"<a href="""&geturl & int_prvpage &"""  class=""prepage color""></a>"
+		str_tmp=str_tmp&"<a href="""&geturl & int_prvpage &"""  class=""prepage color"">‹</a>"
 	End If
 	ShowFirstPrv=str_tmp
 End Function
@@ -259,12 +259,12 @@ Private Function ShowNextLast()
 	Dim str_tmp,int_Nextpage
 	
 	If Int_curpage>=int_totalpage Then
-		str_tmp= "<a class=""nextpage""></a>"
+		str_tmp= "<a class=""nextpage"">›</a>"
 	Else
 		Int_NextPage=int_curpage+1
-		str_tmp="<a class=""nextpage  color"" href="""& geturl & int_NextPage &"""></a>"
+		str_tmp="<a class=""nextpage  color"" href="""& geturl & int_NextPage &""">›</a>"
 	End If
-	
+	str_tmp=str_tmp&"<a href="""&geturl  &int_totalpage&""" class=""lastpage"">»</a>"
 	
 	ShowNextLast=str_tmp
 End Function

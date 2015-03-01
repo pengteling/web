@@ -22,8 +22,8 @@ connstr="Provider=SQLOLEDB.1;Server=122.114.121.55;User ID=hcjdb_f;Password=jade
 'connstr="Provider=sqloledb.1;Data Source=122.114.121.66;Initial Catalog=jdb;User Id=jdb_f;Password=jadeboxadm;"
 Easp.Db.SetConnection "default", "MSSQL", "hcjdb", "hcjdb_f:jadeboxadm@122.114.121.55"
 
-'connstr="Provider=SQLOLEDB.1;Server=JADEBOXSERVER\SQLEXPRESS;User ID=jdb_f;Password=jadeboxadm;Database=jdb;"
-'Easp.Db.SetConnection "default", "MSSQL", "jdb", "jdb_f:jadeboxadm@JADEBOXSERVER\SQLEXPRESS"
+connstr="Provider=SQLOLEDB.1;Server=JADEBOXSERVER\SQLEXPRESS;User ID=jdb_f;Password=jadeboxadm;Database=jdb;"
+Easp.Db.SetConnection "default", "MSSQL", "jdb", "jdb_f:jadeboxadm@JADEBOXSERVER\SQLEXPRESS"
 
 
 'connstr="Provider=SQLOLEDB.1;Server=PTL-PC\SQLEXPRESS;User ID=jdb_f;Password=jadeboxadm;Database=jdb;"

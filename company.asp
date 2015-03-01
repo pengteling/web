@@ -33,58 +33,23 @@ rs.close
 <div class="greybg">
   <div class="main">
     <div class="cleft fl">
-      <div class="nlogo"><a href="/"><img src="/images/logo-nei.png" alt="" /></a></div>
+     
       <!--#include virtual="/cleft.asp"--> 
     </div>
     <div class="cright fr">
-      <div class="subtit"><img src="images/subtitle-<%=cateid_d1%>.png" height="36" /></div>
-      <div class="subanner"><img src="<%=defaultpic_d1%>" height="140" width="680" /></div>
-     <%	
-	 if instr(sonid_d1,",")>0 then%>
-	 <!--#include virtual="/subnav.asp"-->
-     <%end if%>
+      
+    <div class="curlocation">
+      <div class="fr"><%=menustr%></div>
+     <!-- <div class="fl"><%=catename%></div>-->
+     
+    </div>
      
       <div class="maincontent" > 
-      <%if cateid<>11 then%>
-       <div class="mtit"><%=com_title%></div>
-       <%end if%>
+    
         <div class="mcontent xh">
-        <%if cateid=11 then%>
-        
-        <ul class="spline">
-		<div class="spline">
-			<img src="images/arthurlan/xuxianfenge.png" alt="" />
-		</div>
-	</ul>
-	<ul class="logolist">
-    
-    
-    <%
-	rs.open "select * from links order by orderid",conn,1,1
-	while not rs.eof
-	%>
-		<li class="logo">
-			<div>
-				<a href="<%=rs("link")%>" target="_blank"><img src="<%=rs("sitepic")%>" alt="<%=rs("name")%>" /></a>
-			</div>
-			<div class="icon">
-				<a href="<%=rs("link")%>" target="_blank"><img src="images/arthurlan/anniu.png" alt="点击进入" /></a>
-			</div>
-			<div class="clear">
-			</div>
-		</li>
-		<%
-		rs.movenext
-		wend
-		rs.close
-		
-		%>
-	</ul>
-
-        
-        <%else%>
+     
          <%=Com_Content%> 
-         <%end if%>
+         
          
          
          </div>
