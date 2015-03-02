@@ -21,6 +21,17 @@ cateId_d3 = rs("Cateid")
 sonid_d3 =rs("sonid")
 end if
 
+if k=4 then
+cateId_d4 = rs("Cateid")
+sonid_d4 =rs("sonid")
+end if
+
+if k=5 then
+cateId_d5 = rs("Cateid")
+sonid_d5 =rs("sonid")
+end if
+
+
 if cateid=rs("cateid") then
 menustr = menustr &" > "&rs("catename")&""
 else

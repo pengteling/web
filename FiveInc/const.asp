@@ -111,6 +111,59 @@ End Function
 
 
 
+Function Showgoods()
+	TrNum=0
+	cateid = strToNum(Request("id"))	
+	Keyword = ChkFormStr(Request("so"))
+	msql="Select * from product where isdel=0 and passed=1 "
+	If cateid<>0 Then
+		'msql=msql&" and cateid="&cateid&""
+		msql=msql&" and cateid in ("&sonid&")"
+	End If
+	
+	If Keyword<>"" Then
+		msql=msql&" and (title like '%"&Keyword&"%' or content like '%"&Keyword&"%')"
+	End If
+	
+	msql=msql&" Order By px desc,posttime Desc,ID Desc"
+	Set mypage=new zh_Showpage
+	PSize=8
+	mypage.getconn=Conn	
+	mypage.getsql=msql
+	mypage.pagesize=PSize	
+	set NewsListRs=mypage.getrs()
+	
+	If 	NewsListRs.Eof Then
+		Response.Write "<br />&nbsp;&nbsp;&nbsp;没有找到信息!"
+	Else
+			Response.Write ("<div class=""imgpic""><ul>")&vbcrlf
+		For TrNum=1 To mypage.pagesize
+			If NewsListRs.Eof Then Exit For
+			
+	
+%>
+       <li>
+       <div class="pro-pic">
+       <a href="goodshow.asp?id=<%=NewsListRs("id")%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
+       </div>
+              <p><a href1="goodshow.asp?id=<%=NewsListRs("id")%>"><%=NewsListRs("title")%></a></p>
+            </li>
+            
+       
+<%
+		
+		
+			NewsListRs.MoveNext
+		Next
+			Response.Write("<div class=""clear""></div></div><div class=""dotline""></div>")&vbcrlf
+		Set NewsListRs = Nothing
+		If TrNum >=1 Then
+			Response.Write(""&mypage.showpage()&"")
+		End If
+	End If
+
+End Function
+
 
 
 Function ShowPics()

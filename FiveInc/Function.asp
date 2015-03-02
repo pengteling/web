@@ -941,8 +941,12 @@ function companyURL(cateid,catetype,outlinkurl,modeltype,catedir,isStatic)
 					companyURL = "pic.asp?id="&cateid	
 				case 2 '图文信息模型
 					companyURL="picnews.asp?id="&cateid		
-				case 3 '分析师列表模型'	
-					companyURL="team.asp?id="&cateid
+				case 3 '产品列表模型'	
+					companyURL="product.asp?id="&cateid
+				case 4 '商品列表模型'	
+					companyURL="goods.asp?id="&cateid
+					
+					
 			end select
 		else '静态			
 			'companyURL =HtmlRoot&catedir&"-cat"&cateid&".html"					
