@@ -75,7 +75,7 @@ function SetDropDownPic(url){
       <td height="30" colspan="3" align="center" class="blod">修改产品</td>
     </tr>
     <tr bgcolor="#ECF5FF">
-      <td width="133" height="25" align="center">产品标题：</td>
+      <td width="20%" height="25" align="center">产品标题：</td>
       <td colspan="2"><input name="title" type="text" class="input" value="<%=NewsRs("title")%>" size="30">
 		  </td>
     </tr>
@@ -123,7 +123,7 @@ If data(3,i)>1 then class_list=class_list& "├"
     </tr>
     
       <tr bgcolor="#ECF5FF">
-      <td width="133" height="25" align="center">产品价格：</td>
+      <td height="25" align="center">产品价格：</td>
       <td colspan="2"><input name="price" type="text" class="input" value="<%=NewsRs("price")%>" size="30">元 RMB
 		  </td>
     </tr>

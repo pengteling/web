@@ -18,6 +18,21 @@ select case Easp.var("act")
 		
 end select
 
+sub addcart()
+
+	if Easp.var("id")<>"" and Easp.Var("shopnum")<>"" then
+	
+		set rs=Easp.Db.Sel("select * from user_cart_c where userid={userid} and shopid={id}")
+		if not rs.eof then
+		result = Easp.Db.Upd("user_cart", "shopnum={shopnum}+shopnum", "userid={userid} and shopid={id}")
+		else
+		result = Easp.Db.Ins("user_cart", "userid:{userid},shopnum:{shopnum},shopid:{id}")
+		end if
+		response.write "添加到购物车成功！"
+	
+	end if
+	response.End()
+end sub
 sub loadcart()
 	%>
 <table>
@@ -46,7 +61,7 @@ sub loadcart()
 			  
     <tr>
       <td><a href="/show.asp?id=<%=rs("shopid")%>" target="_blank"><img class="pro" src="<%=rs("pimg")%>" border="0"></a></td>
-      <td><a href="/show.asp?id=1" target="_blank"><%=rs("pname")%></a></td>
+      <td><a href="/show.asp?id=<%=rs("shopid")%>" target="_blank"><%=rs("pname")%></a></td>
      
       <td>¥<%=rs("price")%></td>
       <td><a title="减少" class="min" productid="<%=rs("shopid")%>" old="<%=rs("shopnum")%>">-</a>

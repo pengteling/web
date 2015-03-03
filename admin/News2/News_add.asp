@@ -132,7 +132,7 @@ If data(3,i)>1 then class_list=class_list& "├"
       </span></td>
     </tr>-->
    <tr bgcolor="#ECF5FF">
-      <td width="133" height="25" align="center">产品价格：</td>
+      <td align="center" height="25" class="tr_southidc">产品价格：</td>
       <td colspan="2"><input name="price" type="text" class="input" value="" size="30">元 RMB
 		  </td>
     </tr>  

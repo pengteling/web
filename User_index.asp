@@ -22,7 +22,7 @@ $(function(){
     <div id="uright">
       <div class="page_content">
         <div class="user_index_head">
-          <div class="fr"><a href="/"><img src="/images/gotocart.jpg" width="310" height="144" alt="" /></a></div>
+          <div class="fr"><a href="<%=companyUrl_db(37)%>"><img src="/images/gotocart.jpg" width="310" height="144" alt="" /></a></div>
           <div class="fl">
           <div class="username">欢迎您，<%=Easp.Var("username")%></div>
           <div class="userproperty mt10">

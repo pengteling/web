@@ -13,12 +13,17 @@
 <link href="/css/xiaohucss.css" rel="stylesheet" type="text/css">
 <script src="/js/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="js/jquery.hoverIntent.minified.js"></script>
+
 <script src="/js/base.js" type="text/javascript"></script>
 <script src="/js/cart.js" type="text/javascript"></script>
 <script src="/js/comm.js" type="text/javascript"></script>
 <script src="/js/dialog/jquery.artDialog.js?skin=default" language="javascript"></script>
 <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<link rel="stylesheet" href="/js/jquery.jqzoom.css" type="text/css">
+<script src="/js/jquery.tools.js" type="text/javascript"></script>
+<script src="/js/shop.js" type="text/javascript"></script>
+<script src="/js/jquery.jqzoom-core-pack.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.hoverIntent.minified.js"></script>
 </head>
 <body>
 

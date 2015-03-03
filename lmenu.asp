@@ -33,7 +33,7 @@ end if
 
 
 if cateid=rs("cateid") then
-menustr = menustr &" > "&rs("catename")&""
+menustr = menustr &" > <a href="""& companyURL(rs("cateid"),rs("catetype"),rs("outlinkurl"),rs("modeltype"),rs("catedir"),supportHtml)&""">"&rs("catename")&"</a>"
 else
 menustr = menustr &" > <a href="""& companyURL(rs("cateid"),rs("catetype"),rs("outlinkurl"),rs("modeltype"),rs("catedir"),supportHtml)&""">"&rs("catename")&"</a>"
 end if

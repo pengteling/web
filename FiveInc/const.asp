@@ -127,7 +127,7 @@ Function Showgoods()
 	
 	msql=msql&" Order By px desc,posttime Desc,ID Desc"
 	Set mypage=new zh_Showpage
-	PSize=8
+	PSize=9
 	mypage.getconn=Conn	
 	mypage.getsql=msql
 	mypage.pagesize=PSize	
@@ -136,17 +136,21 @@ Function Showgoods()
 	If 	NewsListRs.Eof Then
 		Response.Write "<br />&nbsp;&nbsp;&nbsp;没有找到信息!"
 	Else
-			Response.Write ("<div class=""imgpic""><ul>")&vbcrlf
+			Response.Write ("<div class=""goodslist""><ul>")&vbcrlf
 		For TrNum=1 To mypage.pagesize
 			If NewsListRs.Eof Then Exit For
 			
 	
 %>
-       <li>
+       <li <%if TrNum mod 3=0 then response.write "style=""margin-right:0"""%>>
        <div class="pro-pic">
-       <a href="goodshow.asp?id=<%=NewsListRs("id")%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
+       <a href="show.asp?id=<%=NewsListRs("id")%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
        </div>
-              <p><a href1="goodshow.asp?id=<%=NewsListRs("id")%>"><%=NewsListRs("title")%></a></p>
+       <div class="l2">
+       <div class="price">单价：￥ <%=NewsListRs("price")%></div>
+       <div class="intro"><%=leftstr(clearAllhtml(NewsListRs("content")),50)%></div>
+       </div>
+              <div class="l3"><a href="show.asp?id=<%=NewsListRs("id")%>"><%=NewsListRs("title")%></a></div>
             </li>
             
        
