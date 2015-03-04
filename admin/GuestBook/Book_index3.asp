@@ -95,9 +95,9 @@ function check()
   <%
  shou  =Request("shou")
  if shou="" then
-  sql="select * from liuyan order By tgsh Desc"
+  sql="select * from liuyan order By id Desc"
  else
-  sql="select * from liuyan where B_name like '%"&shou&"%' or  B_dom like '%"&shou&"%' order By tgsh Desc"
+  sql="select * from liuyan where B_name like '%"&shou&"%' or  B_dom like '%"&shou&"%' order By id Desc"
  end if
  set rs=server.createobject("adodb.recordset") 
  rs.open sql,conn,1,1

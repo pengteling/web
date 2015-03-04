@@ -1,6 +1,7 @@
 <!--#include file="fiveinc/inc.asp"-->
 <!--#include file="FiveInc/Check_Sql.asp"-->
 <!--#include file="FiveInc/page.asp"-->
+<!--#include virtual="/User_Config.asp"-->
 <%
 nid=strToNum(Request.QueryString("id"))
 rs.open "select * from category where cateid="&nid,conn,1,1
@@ -46,7 +47,7 @@ rs.close
      
       <div class="maincontent" > 
     
-         <%shownews()%>
+         <%showproduct()%>
       </div>
     </div>
     <div class="clear"></div>

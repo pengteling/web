@@ -199,16 +199,16 @@ margin-left:10px;padding:2px 7px;text-decoration:none;}
 #goodsshow .right .cart{border:1px solid #ededed;padding:25px 30px;line-height:30px;}
 #goodsshow .right .cart .cart_num{height:32px;overflow:hidden;}
 #goodsshow .right .cart .cart_num .amount{float:left;width:135px;overflow:hidden;}
-#goodsshow .right .cart .cart_num input{border:1px solid #dadada;background:url(../images/bg_input.gif) repeat-x top;height:20px;padding:9px 10px 0 10px;width:50px;text-align:center;font-family:宋体;color:#666;font-size:12px;margin:0 0 0 2px;float:left;}
+#goodsshow .right .cart .cart_num input{border:1px solid #dadada;background:url(../images/bg_input.gif) repeat-x top;height:20px;padding:4px 10px 5px 10px;width:50px;text-align:center;font-family: Verdana, Geneva, sans-serif;color:#666;font-size:12px;margin:0 0 0 2px;float:left;}
 #goodsshow .right .cart .cart_num span{float:left;}
 #goodsshow .right .cart .cart_num .uamount{height:12px;border:1px solid #dadada;line-height:30px;overflow:hidden;width:16px;margin:0 0 3px 5px;background:url(../images/bg_arror.gif) no-repeat center top;cursor:pointer;}
 #goodsshow .right .cart .cart_num .damount{height:12px;border:1px solid #dadada;line-height:30px;overflow:hidden;width:16px;margin:0 0 0 5px;background:url(../images/bg_arror.gif) no-repeat center bottom;cursor:pointer;}
 #goodsshow .right .cart .cart_num .soldnum{float:left;color:#999;padding:0 10px;}
 #goodsshow .right .cart .cart_num .soldnum u{color:#666;padding:0 4px;}
 #goodsshow .right .cart .cart_bnt{clear:both;padding:15px 0 0 0;overflow:hidden;}
-#goodsshow .right .cart .cart_bnt input{margin:0 4px 0 0;border:0;text-align:center;color:#fff;font-family:microsoft yahei;width:170px;height:38px;line-height:30px;padding:0;cursor:pointer;}
-#goodsshow .right .cart .cart_bnt .addcart{border:0;background:url(../images/bg_add_cart.gif) no-repeat top;}
-#goodsshow .right .cart .cart_bnt .addfav{border:0;background:url(../images/bg_add_cart.gif) no-repeat bottom;}
+#goodsshow .right .cart .cart_bnt input{margin:0 4px 0 0;border:0;text-align:center;color:#fff;font-family:microsoft yahei;width:170px;height:42px;line-height:30px;padding:0;cursor:pointer;}
+#goodsshow .right .cart .cart_bnt .addcart{border:0;background:url(../images/addcart1.png) no-repeat top;}
+#goodsshow .right .cart .cart_bnt .addfav{border:0;background:url(../images/addcart2.png) no-repeat bottom;}
 
 .artlist{margin:5px 15px 10px 15px;padding:0;list-style:none;}
 .artlist li{height:40px;line-height:40px;border-bottom:1px dashed #ccc;}

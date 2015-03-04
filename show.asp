@@ -3,6 +3,7 @@
 <!--#include file="FiveInc/page.asp"-->
 <!--#include virtual="/User_Config.asp"-->
 <%
+ispshow=1
 newsid=strToNum(Request.QueryString("id"))
 
 rs.open "select * from product where id="&newsid&" ",conn,1,3
@@ -17,6 +18,14 @@ content_zy =rs("content_zy")
 posttime=formatdate(rs("posttime"),5)
 author=rs("ComeFrom")
 price=rs("price")
+
+ggxh=rs("ggxh")
+		syfw=rs("syfw")
+		cptd=rs("cptd")
+		syjx=rs("syjx")
+		relgoods=trim(rs("relgoods"))
+		
+		
 defaultpicurl=rs("defaultpicurl")
 hits=rs("hits")
 uploadfiles=rs("uploadfiles")
@@ -115,10 +124,10 @@ $(document).ready(function() {
         <a href="javascript:;" class="next"></a> </div>
     </div>
     <div class="right">
-      <h1><%=newstitle%></h1>
+      <h1 style="margin-bottom:30px;"><%=newstitle%></h1>
       <div class="gline">
         <div class="fl">产品单价：</div>
-        <div class="fr">￥ <%=price%></div>
+        <div class="fr price"><span style="font-size:18px;">￥</span><%=price%></div>
         <div class="clear"></div>
       </div>
       
@@ -130,7 +139,7 @@ $(document).ready(function() {
       
       <div class="gline">
         <div class="fl">适用范围：</div>
-        <div class="fr"><%=xyfw%></div>
+        <div class="fr"><%=syfw%></div>
         <div class="clear"></div>
       </div>
       
@@ -141,10 +150,32 @@ $(document).ready(function() {
       </div>
       <div class="gline">
         <div class="fl">适用机型：</div>
-        <div class="fr"><%=xyjx%></div>
+        <div class="fr"><%=syjx%></div>
         <div class="clear"></div>
       </div>
+     <%
+	 if relgoods<>"" then
+	 relgoods_arr=split(relgoods,",")
+	 %>
+     <div class="relgoods">
+     <div class="tit">相关产品：</div>
+     <div class="relgoodslist">
+     <ul>
+     <%
+	 
+	 for i= 0 to ubound(relgoods_arr)
+	 	temp =relgoods_arr(i)
+		temp_arr= split(relgoods_arr(i),"|")
+	 	response.write "<li><a href=""show.asp?id="& temp_arr(1) &""">"&temp_arr(0)&"</a></li>"
+	 next
+	 %>
+    
+     </ul>
+      <div class="clear"></div>
+     </div>
+     </div>
      
+     <%end if%>
      
       <div class="cart">
         <div class="cart_num">

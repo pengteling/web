@@ -69,7 +69,7 @@ function checkdb(the,payway,total,id)
                     </tr>
                     <tr>
                         <td class="info">订单编号：</td>
-                        <td><%=rs("orderNum")%>　<a href="orderDetial.asp?act=show&id=<%=rs("orderNum")%>">[查看订单详情]</a>
+                        <td><%=rs("orderNum")%>　<a href="orderDetail.asp?act=show&id=<%=rs("orderNum")%>">[查看订单详情]</a>
                         </td>
                     </tr>
                     <tr>

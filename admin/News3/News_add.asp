@@ -131,11 +131,11 @@ If data(3,i)>1 then class_list=class_list& "├"
         </select>
       </span></td>
     </tr>-->
-   <tr bgcolor="#ECF5FF">
+<!--   <tr bgcolor="#ECF5FF">
       <td align="center" height="25" class="tr_southidc">产品价格：</td>
       <td colspan="2"><input name="price" type="text" class="input" value="" size="30">元 RMB
 		  </td>
-    </tr>  
+    </tr>-->  
     <tr bgcolor="#ECF5FF">
       <td height="25" align="center" valign="top">规格型号：</td>
       <td colspan="2" valign="top"><input id="ggxh" name="ggxh" size="50">限255字</td>

@@ -40,31 +40,25 @@ $(function(){
         </div>
         <div class="user_index_plist mt20">
         <div class="tit">热销产品</div>
+        
         <ul>
+        
+        <%
+		rs.open "Select top 4 * from product where isdel=0 order by hits desc",conn,1,1
+		while not rs.eof
+		%>
         	<li>
-        		<div class="pic"><a href="">
-        				<img src="/images/user_index_p_pic.jpg" alt="" />
-        				<div class="txt"><a href="">单价：78</a></div>
-        			</a></div>
+        		<div class="pic"><a href="show.asp?id=<%=rs("id")%>">
+        				<img src="<%=rs("defaultpicurl")%>" alt="" />
+                        </a></div>
+        				<div class="txt"><a href="show.asp?id=<%=rs("id")%>">单价：￥ <%=rs("price")%></a></div>
+        			
         	</li>
-        	<li>
-        		<div class="pic"><a href="">
-        				<img src="/images/user_index_p_pic.jpg" alt="" />
-        				<div class="txt"><a href="">单价：78</a></div>
-        			</a></div>
-        	</li>
-        	<li>
-        		<div class="pic"><a href="">
-        				<img src="/images/user_index_p_pic.jpg" alt="" />
-        				<div class="txt"><a href="">单价：78</a></div>
-        			</a></div>
-        	</li>
-        	<li>
-        		<div class="pic"><a href="">
-        				<img src="/images/user_index_p_pic.jpg" alt="" />
-        				<div class="txt"><a href="">单价：78</a></div>
-        			</a></div>
-        	</li>
+        <%
+		rs.movenext
+		wend
+		rs.close
+		%>
         </ul>
         </div>
       </div>

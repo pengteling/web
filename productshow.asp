@@ -1,10 +1,12 @@
 <!--#include file="fiveinc/inc.asp"-->
 <!--#include file="FiveInc/Check_Sql.asp"-->
 <!--#include file="FiveInc/page.asp"-->
+<!--#include virtual="/User_Config.asp"-->
 <%
+ispshow=1
 newsid=strToNum(Request.QueryString("id"))
 
-rs.open "select * from news_c where id="&newsid&" ",conn,1,3
+rs.open "select * from product_cp where id="&newsid&" ",conn,1,3
 if not rs.eof then
 rs("hits")=rs("hits")+1
 rs.update
@@ -15,18 +17,23 @@ News_Content=rs("content")
 content_zy =rs("content_zy")
 posttime=formatdate(rs("posttime"),5)
 author=rs("ComeFrom")
+price=rs("price")
+
+ggxh=rs("ggxh")
+		syfw=rs("syfw")
+		cptd=rs("cptd")
+		syjx=rs("syjx")
+		relgoods=trim(rs("relgoods"))
+		
+		
 defaultpicurl=rs("defaultpicurl")
 hits=rs("hits")
-
-UploadFiles=rs("UploadFiles")
-
-pimage = split(UploadFiles,"|")
-if ubound(pimage)<1 then 
-redim pimage(1)
-pimage(0)=""
+uploadfiles=rs("uploadfiles")
+uploadfiles=split(uploadfiles,"|")
+if ubound(uploadfiles)<1 then
+redim uploadfiles(0)
+uploadfiles(0)="/images/nopic.jpg"
 end if
-
-
 
 a=instr(1,News_Content,"<a href=",1)+9
 	if a>9 then
@@ -45,21 +52,7 @@ response.end
 end if
 rs.close
 
-set ReadRs=server.CreateObject("adodb.recordset")
-ReadRs.open "select top 1 * from news_c where cateid="&nid&" and isdel=false and id>"&newsid &" order by id ",conn,1,1
-if not ReadRs.eof then
-prelink="<a href=""readnews.asp?id="&ReadRs("id")&""">"&ReadRs("Title")&"</a>"
-else
-prelink="这是第一篇"
-end if
-ReadRs.Close
-ReadRs.open "select top 1 * from news_c where  cateid="&nid&" and isdel=false and  id<"&newsid&" order by id desc",conn,1,1
-if not ReadRs.eof then
-nextlink="<a href=""readnews.asp?id="&ReadRs("id")&""">"&ReadRs("Title")&"</a>"
-else
-nextlink="已经是最后一篇"
-end if
-set ReadRs=nothing
+
 
 
 rs.open "select * from category where cateid="&nid,conn,1,1
@@ -81,54 +74,135 @@ end if
 rs.close
 
 
-catename="产品展示"
+
 %>
+
 <!--#include virtual="/lmenu.asp"-->
-
+<%
+curpagetitle = newstitle &"-"&curpagetitle
+%>
 <!--#include virtual="/top.asp"-->
-<div class="greybg">
-  <div class="main">
-    <div class="cleft fl"> 
-      <!--#include virtual="/cleft2.asp"--> 
-    </div>
-    <div class="cright fr">
-      <div class="curlocation">
-        <div class="fr"><%=menustr%></div>
-        <div class="fl"><%=catename%></div>
-      </div>
-      <div class="maincontent" >
-        <div class="pcontent">
-        <%if pimage(0)<>"" then
-			response.write "<div class=""pimg-big""><img src="""&pimage(0)&"""></div>"
-		end if
-		
-		%>
-       <!-- <div class="ptitle"><%=newstitle%></div>
-        <div class="p-introline">产品介绍</div>
-        
-<div>
-	<img src="/images/cpxxy.jpg" width="773" height="400" /> 
-</div>-->
-<div class="cp-title">
-	<%=newstitle%>
-</div>
-<div class="cp-cpjs">
-	产品介绍
-</div>
 
-        <div class="pcon">
-        <%=News_Content%>
+<style>
+.jqzoom{
+	text-decoration:none;
+	float:left;
+	z-index:999;
+}
+</style>
+<script>
+$(document).ready(function() {
+	$('.jqzoom').jqzoom({
+            zoomType: 'standard',
+            lens:true,
+            preloadImages: false,
+            alwaysOn:false,
+			position:'right'
+        });
+	
+});
+</script>
+<div class="width" id="position">您所在的位置：<%=menustr%> > <%=newstitle%></div>
+<div class="width">
+  <div id="goodsshow" class="mt10">
+    <div class="left">
+      <div class="shop_big"><a href="<%=uploadfiles(0)%>" class="jqzoom" rel='gal1' title="<%=newstitle%>" ><img src="<%=uploadfiles(0)%>" width="360" height="360" id="shop_big" alt="<%=newstitle%>" title="<%=newstitle%>" /></a>
+        <div class="clear"></div>
+      </div>
+      <div class="shop_plist"> <a href="javascript:;" class="prev"></a>
+        <div id="prolist">
+          <ul>
+            <%
+						for i = 0 to ubound(uploadfiles)-1
+						%>
+            <li <%if i=0 then response.write "class=""hover"""%>><a href="javascript:void(0);" rel="{gallery: 'gal1', smallimage: '<%=uploadfiles(i)%>',largeimage: '<%=uploadfiles(i)%>'}"><img src="<%=uploadfiles(i)%>" border="0" /></a></li>
+            <%
+							 next
+							 %>
+          </ul>
         </div>
-        
-        
-        
-        </div>
+        <a href="javascript:;" class="next"></a> </div>
+    </div>
+    <div class="right">
+      <h1 style="margin-bottom:30px;"><%=newstitle%></h1>
+    <!--  <div class="gline">
+        <div class="fl">产品单价：</div>
+        <div class="fr price"><span style="font-size:18px;">￥</span><%=price%></div>
+        <div class="clear"></div>
+      </div>-->
       
+      <div class="gline">
+        <div class="fl">规格型号：</div>
+        <div class="fr"><%=ggxh%></div>
+        <div class="clear"></div>
       </div>
+      
+      <div class="gline">
+        <div class="fl">适用范围：</div>
+        <div class="fr"><%=syfw%></div>
+        <div class="clear"></div>
+      </div>
+      
+      <div class="gline">
+        <div class="fl">产品特点：</div>
+        <div class="fr"><%=cptd%></div>
+        <div class="clear"></div>
+      </div>
+      <div class="gline">
+        <div class="fl">适用机型：</div>
+        <div class="fr"><%=syjx%></div>
+        <div class="clear"></div>
+      </div>
+     <%
+	 if relgoods<>"" then
+	 relgoods_arr=split(relgoods,",")
+	 %>
+     <div class="relgoods">
+     <div class="tit">相关产品：</div>
+     <div class="relgoodslist">
+     <ul>
+     <%
+	 
+	 for i= 0 to ubound(relgoods_arr)
+	 	temp =relgoods_arr(i)
+		temp_arr= split(relgoods_arr(i),"|")
+	 	response.write "<li><a href=""show.asp?id="& temp_arr(1) &""">"&temp_arr(0)&"</a></li>"
+	 next
+	 %>
+     <div class="clear"></div>
+     </ul>
+     </div>
+     </div>
+     
+     <%end if%>
+     
+      <!--<div class="cart">
+        <div class="cart_num">
+          <div class="amount"><span>数量：</span>
+            <input type="text" value="1" name="shopnum" id="shopnum" class="shopnum" />
+            <span class="uamount shopadd"></span><span class="damount shopminus"></span><span class="clear"></span></div>
+          <div class="soldnum">已售出<u><%
+		  set rs=Easp.Db.Sel("select sum([count]) from orderDetail where goodsid={=id}")
+		  if not isnull(rs(0)) then
+		   response.write rs(0)
+		   else
+		   response.write "0"
+		   end if
+		  rs.close
+		  %></u>件</div>
+        </div>
+        <div class="cart_bnt">
+          <input type="button" value="加入购物车" class="addcart" id="addcart" config="<%=newsid%>" />
+          <input type="button" value="进入结算中心" class="addfav" onClick="location.href='cart.asp'" />
+        </div>
+      </div>-->
     </div>
+    <div class="clear"></div>
   </div>
-
-<div class="clear"></div>
+</div>
+<div class="width" id="cpxj">
+<div class="tit">产品介绍</div>
+<div class="con"><%=News_Content%></div>
 </div>
 
 <!--#include virtual="/foot.asp"-->

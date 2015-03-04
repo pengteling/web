@@ -168,7 +168,62 @@ Function Showgoods()
 
 End Function
 
+Function Showproduct()
+	TrNum=0
+	cateid = strToNum(Request("id"))	
+	Keyword = ChkFormStr(Request("so"))
+	msql="Select * from product_cp where isdel=0 and passed=1 "
+	If cateid<>0 Then
+		'msql=msql&" and cateid="&cateid&""
+		msql=msql&" and cateid in ("&sonid&")"
+	End If
+	
+	If Keyword<>"" Then
+		msql=msql&" and (title like '%"&Keyword&"%' or content like '%"&Keyword&"%')"
+	End If
+	
+	msql=msql&" Order By px desc,posttime Desc,ID Desc"
+	Set mypage=new zh_Showpage
+	PSize=9
+	mypage.getconn=Conn	
+	mypage.getsql=msql
+	mypage.pagesize=PSize	
+	set NewsListRs=mypage.getrs()
+	
+	If 	NewsListRs.Eof Then
+		Response.Write "<br />&nbsp;&nbsp;&nbsp;没有找到信息!"
+	Else
+			Response.Write ("<div class=""goodslist productlist""><ul>")&vbcrlf
+		For TrNum=1 To mypage.pagesize
+			If NewsListRs.Eof Then Exit For
+			
+	
+%>
+       <li <%if TrNum mod 3=0 then response.write "style=""margin-right:0"""%>>
+       <div class="pro-pic">
+       <a href="productshow.asp?id=<%=NewsListRs("id")%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
+       </div>
+       <div class="l2">
+      <!-- <div class="price">单价：￥ <%=NewsListRs("price")%></div>-->
+       <div class="intro"><%=leftstr(clearAllhtml(NewsListRs("content")),50)%></div>
+       </div>
+              <div class="l3"><a href="productshow.asp?id=<%=NewsListRs("id")%>"><%=NewsListRs("title")%></a></div>
+            </li>
+            
+       
+<%
+		
+		
+			NewsListRs.MoveNext
+		Next
+			Response.Write("<div class=""clear""></div></div><div class=""dotline""></div>")&vbcrlf
+		Set NewsListRs = Nothing
+		If TrNum >=1 Then
+			Response.Write(""&mypage.showpage()&"")
+		End If
+	End If
 
+End Function
 
 Function ShowPics()
 	TrNum=0

@@ -25,7 +25,9 @@ isindex=1
   </div>
 </div>
 <script>
+$(function(){
 jQuery(".banner").slide({mainCell:".bd ul",titCell:".hd ul li",effect:"left",autoPlay:true});
+});
 </script>
 <div class="imain">
   <div class="main">
@@ -112,7 +114,9 @@ jQuery(".banner").slide({mainCell:".bd ul",titCell:".hd ul li",effect:"left",aut
       </div>
     </div>
     <script>
+	$(function(){
 jQuery(".im3").slide({mainCell:".im3-body",titCell:".im3-head div.news",effect:"fade",autoPlay:true,interTime:5000});
+	});
 </script>
     <div class="clear"></div>
     <!-- <div class="imainback"> <img src="images/qietu/imainback2.png" alt=""/> </div>--> 

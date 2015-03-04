@@ -82,7 +82,7 @@ Session("RandomNumber")=GetRndPassword(16)
 
 
 nid=strToNum(Request.QueryString("id"))
-nid=13
+nid=82
 rs.open "select * from category where cateid="&nid,conn,1,1
 if not rs.eof then
 	cateid=rs("cateid")
@@ -112,42 +112,21 @@ rs.close
 <div class="greybg">
   <div class="main">
     <div class="cleft fl">
-      <div class="nlogo"><a href="/"><img src="/images/logo-nei.png" alt="" /></a></div>
+     
       <!--#include virtual="/cleft.asp"--> 
     </div>
     <div class="cright fr">
-      <div class="subtit"><img src="images/subtitle-<%=cateid_d1%>.png" height="36" /></div>
-      <%	
-	 if instr(sonid_d1,",")>0 then%>
-      <!--#include virtual="/subnav.asp"-->
-      <%end if%>
-      <div class="maincontent" >
-        <div class="map">
-          <iframe style="border:0px currentColor;" height="250" marginheight="0" src="/map.html" frameborder="0" width="680" marginwidth="0" scrolling="no"></iframe>
-        </div>
-        <div class="dizhi">
-          <div class="fl"> <%=CompanyAddress%>  <br />
-            <%=CompanyTel%> <br />
-            <%=CompanyFax%>  <br />
-            <%=CompanyTel400%><br />
-            <%=CompanyEmail%><br />
-          </div>
-          <div class="fr">
-            <div class="wbwx">
-              <div class="wb"><a href="<%=wburl%>" target="_blank"></a></div>
-              <div class="wx"><a href="javascript:;"></a></div>
-              <div class="erwcode">
-                <div class="img"><img src="<%=wxurl%>"></div>
-                <div class="con"> 扫一扫<br>
-                  关注旅发集团 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!--<div class="tit"><%=com_title%></div> -->
+      
+    <div class="curlocation">
+      <div class="fr"><%=menustr%></div>
+     <!-- <div class="fl"><%=catename%></div>-->
+     
+    </div>
+     
+      <div class="maincontent" > 
+    
         <div class="mcontent xh">
-          <div class="midtitle">在线留言</div>
+          <!--<div class="midtitle">在线留言</div>-->
           <div class="guestbook">
             <form action="guestbook.asp" id="frmGuestbook" method="post">
               <div class="gtable">
@@ -188,6 +167,7 @@ rs.close
             </form>
           </div>
         </div>
+        
       </div>
     </div>
     <div class="clear"></div>
@@ -257,20 +237,24 @@ $(function(){
 	
 	$("#frmGuestbook").submit(function(e){
 			if( !valid_tel( $("#fm_tel").val())){
-				ZENG.msgbox.show("您的电话格式有误，请重新输入！", 5, 3000);
+				$.message({type:"error",content:"您的电话格式有误，请重新输入！",time:2500});
+				
 				return false;
 				};
 				
 				if( !valid_email( $("#fm_email").val())){
-				ZENG.msgbox.show("您的邮箱格式有误，请重新输入！", 5, 3000);
+				
+				$.message({type:"error",content:"您的邮箱格式有误，请重新输入！",time:2500});
 				return false;
 				};
 				if( $("#fm_name").val()=="姓名..."){
-				ZENG.msgbox.show("请填写您的姓名！", 5, 3000);
+				
+				$.message({type:"error",content:"请填写您的姓名！",time:2500});
 				return false;
 				};
 				if( $("#fm_content").val()=="留言内容..."){
-				ZENG.msgbox.show("请填写留言内容！", 5, 3000);
+				
+				$.message({type:"error",content:"请填写留言内容！",time:2500});
 				return false;
 				};
 	})
@@ -278,3 +262,4 @@ $(function(){
 });
 </script> 
 <!--#include virtual="/foot.asp"-->
+
