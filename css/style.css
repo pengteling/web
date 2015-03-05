@@ -19,7 +19,6 @@ h2 {
 }
 body {
   font-family: "Microsoft YaHei", "微软雅黑", Arial;
-  max-width: 1440px;
   margin: 0 auto;
   min-width: 1002px;
 }
@@ -306,6 +305,7 @@ body {
   top: 0;
   max-width: 1440px;
   overflow: hidden;
+  margin: 0 auto;
 }
 .banner .hd {
   position: absolute;

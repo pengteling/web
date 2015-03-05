@@ -102,7 +102,7 @@ ul li {
 	top: 502px;
 }
 .nav ul li:hover ,.nav ul li.select{
-	background:url(../images/nav-li-bg.jpg);
+	background:url(../images/nav-li-bg.png);
 	}
 .nav ul li:hover a,.nav ul li.select a{color: #fff;
 }
@@ -120,12 +120,12 @@ ul li {
 .nav ul li .xiala li {
 	float: none;
 	width:105px; height:30px; 
-	background:url(../images/nav-xiala-li-bg.jpg);
+	background:url(../images/nav-xiala-li-bg.png);
 	margin-top:2px;
 	margin-left:0;
 }
 .nav ul li .xiala li:hover{
-background:url(../images/nav-xiala-li-bg-h.jpg);	
+background:url(../images/nav-xiala-li-bg-h.png);	
 
 	}
 

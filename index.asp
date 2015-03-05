@@ -11,16 +11,29 @@ isindex=1
 <div class="banner">
   <div class="hd">
     <ul>
-      <li><img src="<%=Thumb_getUrl("images/banner2_02.jpg",121,48)%>" /></li>
-      <li><img src="<%=Thumb_getUrl("images/banner2_02.jpg",121,48)%>" /></li>
-      <li><img src="<%=Thumb_getUrl("images/banner2_02.jpg",121,48)%>" /></li>
+    <%
+	rs.open "Select top 3 * from [ad] order by id ",conn,1,1
+	while not rs.eof
+	%>
+      <li><img src="<%=Thumb_getUrl(rs("photo"),121,48)%>" /></li>
+      <%
+	  rs.movenext
+	  wend
+	  rs.movefirst
+	  %>
     </ul>
   </div>
   <div class="bd">
     <ul>
-      <li style="background:url(images/banner2_02.jpg)"></li>
-      <li style="background:url(images/banner2_02.jpg)"></li>
-      <li style="background:url(images/banner2_02.jpg)"></li>
+    <%while not rs.eof
+	%>
+      
+      <li style="background:url(<%=rs("photo")%>)"></li>
+      <%
+	  rs.movenext
+	  wend
+	rs.close%>  
+    
     </ul>
   </div>
 </div>
