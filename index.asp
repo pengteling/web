@@ -46,8 +46,8 @@ jQuery(".banner").slide({mainCell:".bd ul",titCell:".hd ul li",effect:"left",aut
   <div class="main">
     <div class="im1 fl">
       <div class="im1-head">
-        <div class="tit fl"><a href="">关于我们</a> ></div>
-        <div class="more fr"><a href="">MORE +</a></div>
+        <div class="tit fl"><a href="<%=companyUrl_DB(68)%>">关于我们</a> ></div>
+        <div class="more fr"><a href="<%=companyUrl_DB(68)%>">MORE +</a></div>
         <div class="clear"></div>
       </div>
       <div class="im1-body">
@@ -62,22 +62,22 @@ jQuery(".banner").slide({mainCell:".bd ul",titCell:".hd ul li",effect:"left",aut
     </div>
     <div class="im2 fl">
       <div class="im1-head">
-        <div class="tit fl"><a href="">我们的产品</a> ></div>
-        <div class="more fr"><a href="">MORE +</a></div>
+        <div class="tit fl"><a href="<%=companyUrl_DB(42)%>">我们的产品</a> ></div>
+        <div class="more fr"><a href="<%=companyUrl_DB(42)%>">MORE +</a></div>
         <div class="clear"></div>
       </div>
       <div class="im2-body">
         <ul>
           <li>
-            <div class="pic"><a href=""><img src="images/chanpin1_07.png" alt="" /></a></div>
+            <div class="pic"><a href="<%=companyUrl_DB(61)%>"><img src="images/chanpin01.png" alt="" /></a></div>
             <div class="txt"><a href="">刀具总成</a></div>
           </li>
           <li>
-            <div class="pic"><a href=""><img src="images/chanpin1_07.png" alt="" /></a></div>
+            <div class="pic"><a href="<%=companyUrl_DB(62)%>"><img src="images/chanpin1_07.png" alt="" /></a></div>
             <div class="txt"><a href="">刀　片</a></div>
           </li>
           <li class="last">
-            <div class="pic"><a href=""><img src="images/chanpin1_07.png" alt="" /></a></div>
+            <div class="pic"><a href="<%=companyUrl_DB(63)%>"><img src="images/chanpin03.png" alt="" /></a></div>
             <div class="txt"><a href="">附　件</a></div>
           </li>
           <div class="clear"></div>
@@ -102,27 +102,36 @@ jQuery(".banner").slide({mainCell:".bd ul",titCell:".hd ul li",effect:"left",aut
     </div>
     <div class="im3 fl">
       <div class="im3-head">
-        <div class="news on"><a href="">最新资讯</a></div>
-        <div class="news"><a href="">行业新闻</a></div>
+        <div class="news on"><a href="<%=companyUrl_DB(64)%>">最新资讯</a></div>
+        <div class="news"><a href="<%=companyUrl_DB(65)%>">行业新闻</a></div>
         <div class="more fr"></div>
         <div class="clear"></div>
       </div>
       <div class="im3-body">
         <ul class="newslist">
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <div class="more fr"><a href="">MORE +</a></div>
+        <%
+		rs.open "Select top 5 * from news_c where cateid=64  Order By px desc,posttime Desc,ID Desc",conn,1,1
+		while not rs.eof
+		%>
+          <li> <a href="<%=infoURL(rs("staticUrl"),rs("dynamicUrl"),supportHtml)%>"> · <%=leftstr(rs("title"),30)%> </a> </li>
+          <%rs.movenext
+		  wend
+		  rs.close
+		  %>
+         
+          <div class="more fr"><a href="<%=companyUrl_DB(64)%>">MORE +</a></div>
         </ul>
         <ul class="newslist">
-          <li> <a href="readnews.asp?id=5"> · 2大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <li> <a href="readnews.asp?id=5"> · 大理州政府领导莅临俊发地产考察 </a> </li>
-          <div class="more fr"><a href="">MORE +</a></div>
+         <%
+		rs.open "Select top 5 * from news_c where cateid=65  Order By px desc,posttime Desc,ID Desc",conn,1,1
+		while not rs.eof
+		%>
+          <li> <a href="<%=infoURL(rs("staticUrl"),rs("dynamicUrl"),supportHtml)%>"> · <%=leftstr(rs("title"),30)%> </a> </li>
+          <%rs.movenext
+		  wend
+		  rs.close
+		  %>
+          <div class="more fr"><a href="<%=companyUrl_DB(65)%>">MORE +</a></div>
         </ul>
       </div>
     </div>

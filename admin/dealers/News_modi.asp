@@ -21,7 +21,7 @@ dim rs,sql,count,ID,bclass,sclass,DefaultPic
 ID=strToNum(Request("ID"))
 Set NewsRs=Conn.execute("select * from "&news_table&" Where ID="&ID)
 If NewsRs.Eof then
-	Response.Write "产品不存在"
+	Response.Write "记录不存在"
     Response.End
 End If
 DefaultPic=Trim(NewsRs("DefaultPicUrl"))
@@ -41,7 +41,7 @@ function CheckForm()
 {
 
 	if (document.myform.title.value.length == 0) {
-		alert("产品标题没有填写.");
+		alert("记录标题没有填写.");
 		document.myform.title.focus();
 		return false;
 	}
@@ -49,7 +49,7 @@ function CheckForm()
 	editor1.sync();
 	//editor2.sync();
 	if (document.myform.content.value.length == 0){
-		alert("产品内容不能为空！");
+		alert("记录内容不能为空！");
 		
 		return false;
 	}
@@ -72,10 +72,10 @@ function SetDropDownPic(url){
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="table_southidc">
   <form name="myform" method="post" action="News_save.asp" onSubmit="return CheckForm();">
     <tr>
-      <td height="30" colspan="3" align="center" class="blod">修改产品</td>
+      <td height="30" colspan="3" align="center" class="blod">修改记录</td>
     </tr>
     <tr bgcolor="#ECF5FF">
-      <td width="20%" height="25" align="center">产品标题：</td>
+      <td width="20%" height="25" align="center">记录标题：</td>
       <td colspan="2"><input name="title" type="text" class="input" value="<%=NewsRs("title")%>" size="30">
 		  </td>
     </tr>
@@ -122,50 +122,63 @@ If data(3,i)>1 then class_list=class_list& "├"
 %>    </select></td>
     </tr>
     
+    
+    <script type="text/javascript" src="/js/jquery.cityselect.js"></script>
+    <script>
+	$(function(){
+		$("#city_4").citySelect({
+    	prov:"<%=NewsRs("prov")%>", 
+    	city:"<%=NewsRs("city")%>",
+		dist:"<%=NewsRs("dist")%>",
+		nodata:"none"
+	}); 
+
+	});
+	</script>
+ <tr bgcolor="#ECF5FF">
+      <td height="22" align="center" class="tr_southidc">地域：</td>
+      <td colspan="2">
+      <div id="city_4">
+  		<select class="prov" name="prov"></select> 
+    	<select class="city" name="city" disabled="disabled"></select>
+        <select class="dist" name="dist" disabled="disabled"></select>
+    </div>
+
+      </td>
+      </tr>
+   <tr bgcolor="#ECF5FF">
+      <td height="22" align="center" class="tr_southidc">详细地址：</td>
+      <td colspan="2" width="80%"><input name="address" type="text" class="input" size="80" value="<%=NewsRs("address")%>">
+        
+       
+        
+      
+            </td>
+    </tr>   
+    
       <tr bgcolor="#ECF5FF">
-      <td height="25" align="center">产品价格：</td>
-      <td colspan="2"><input name="price" type="text" class="input" value="<%=NewsRs("price")%>" size="30">元 RMB
-		  </td>
-    </tr>
-    
-     <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">规格型号：</td>
-      <td colspan="2" valign="top"><input id="ggxh" name="ggxh" size="50" value="<%=NewsRs("ggxh")%>">限255字</td>
-    </tr>
-    
-     <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">适用范围：</td>
-      <td colspan="2" valign="top"><textarea id="syfw" name="syfw" style="width:700px;height:60px;visibility:;"><%=NewsRs("syfw")%></textarea>限255字</td>
-    </tr>
-    
-     <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">产品特点：</td>
-      <td colspan="2" valign="top"><textarea id="cptd" name="cptd" style="width:700px;height:60px;visibility:;"><%=NewsRs("cptd")%></textarea>限255字</td>
-    </tr>
-    
-     <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">适用机型：</td>
-      <td colspan="2" valign="top"><textarea id="syjx" name="syjx" style="width:700px;height:60px;visibility:;"><%=NewsRs("syjx")%></textarea>限255字</td>
-    </tr>
-    
-    <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">关联产品：</td>
-      <td colspan="2" valign="top"><input id="relgoods" name="relgoods" size="60" value="<%=NewsRs("relgoods")%>">格式： 32六方未装配|89,23六方未装配|90,23六方已装配|99</td>
+      <td height="22" align="center" class="tr_southidc">电话：</td>
+      <td colspan="2" width="80%"><input name="tel" type="text" class="input" size="30" value="<%=NewsRs("tel")%>">
+        
+       
+        
+      
+            </td>
     </tr>
     
     
 <tr>
-      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">产品小图：</span></td>
+      <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">小图：</span></td>
       <td width="314" height="30" bgcolor="#ECF5FF"><span class="tr_southidc">
         <input name="DefaultPicUrl" type="text" id="DefaultPicUrl" value="<%=DefaultPic%>" size="30" maxlength="120" /> <input name="UploadFiles" type="hidden" id="UploadFiles" value="<%=NewsRs("UploadFiles")%>" />
       </span></td>
       <td width="499" bgcolor="#ECF5FF"><span class="tr_southidc">
         
-        <input name="Submit222" type="button" value="上传图片"   id="image3"><input type="button" id="J_selectImage" value="上传产品大图" />
+        <input name="Submit222" type="button" value="上传图片"   id="image3"><input type="button" id="J_selectImage" value="上传记录大图" />
       </span></td>
     </tr> 
  	<tr>
-      <td height="22" align="center" bgcolor="#C0C0C0" class="tr_southidc">产品大图：</td>
+      <td height="22" align="center" bgcolor="#C0C0C0" class="tr_southidc">大图：</td>
 	  <td colspan="2" bgcolor="#E3E3E3" class="tr_southidc"><ul id="productimages">
 <script language="javascript">
 var ImgUrl,ImgList;
@@ -205,7 +218,7 @@ document.getElementById("productimages").innerHTML=ImgList;
     </tr>
       
     <tr bgcolor="#ECF5FF">
-      <td height="25" align="center" valign="top">产品内容：</td>
+      <td height="25" align="center" valign="top">记录内容：</td>
       <td colspan="2" valign="top">      
 
 <link rel="stylesheet" href="/kindeditor/themes/default/default.css" />
@@ -288,7 +301,7 @@ document.getElementById("productimages").innerHTML=ImgList;
     <tr>
       <td height="30" align="center" bgcolor="#ECF5FF"><span class="tr_southidc">是否推荐：</span></td>
       <td height="30" colspan="2" align="left" bgcolor="#ECF5FF"><input name="Elite" type="checkbox" id="Elite" value="yes" <%if NewsRs("Elite")=true then%>checked<%end if%>>
-      是<font color="#0000FF">（如果选中的话将在首页做为图片产品显示）</font></td>
+      是<font color="#0000FF">（如果选中的话将在首页做为图片记录显示）</font></td>
     </tr>
 	<tr>
       <td height="30" align="center" bgcolor="#ECF5FF">排序：</td>
@@ -314,17 +327,7 @@ document.getElementById("productimages").innerHTML=ImgList;
         <input type="button" name="Submit2" value="返回上一页" class="input" onClick="history.go(-1);">
         <input name="Act" type="hidden" id="Act" value="Edit">        <input name="ID" type="hidden" id="ID" value="<%=ID%>">
        
-        <span class="tr_southidc">
-		<%
-		If NewsRs("IncludePic") Then
-		    ii=1
-		Else
-		    ii=0
-		End If	
-		'Response.Write ii
-		%>
-        <input name="IncludePic" type="hidden" id="IncludePic" value="<%=ii%>" />
-        </span></td>
+        </td>
     </tr>
   </form>
 </table>

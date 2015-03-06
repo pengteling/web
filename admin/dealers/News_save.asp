@@ -14,12 +14,12 @@ hx_type=ChkFormStr(request("hx_type"))
 
 Passed=ChkFormStr(request.form("Passed"))
 cateid=strToNum(Request("cateid"))
-price = cdbl(Request("price"))
-ggxh=ChkFormStr(request.form("ggxh"))
-syfw=ChkFormStr(request.form("syfw"))
-cptd=ChkFormStr(request.form("cptd"))
-syjx=ChkFormStr(request.form("syjx"))
-relgoods=ChkFormStr(request.form("relgoods"))
+
+address=ChkFormStr(request.form("address"))
+tel=ChkFormStr(request.form("tel"))
+prov=ChkFormStr(request.form("prov"))
+city=ChkFormStr(request.form("city"))
+dist=ChkFormStr(request.form("dist"))
 
 
 DefaultPicUrl=LCase(ChkFormStr(request.form("DefaultPicUrl")))
@@ -68,20 +68,20 @@ If lcase(Request("Act"))="add" Then
 	
 		rs("px")=px
 		rs("title")=title
-		rs("Color")=Color
-		rs("author")=author
-		rs("ComeFrom")=ComeFrom
+		'rs("Color")=Color
+		'rs("author")=author
+		'rs("ComeFrom")=ComeFrom
 		rs("Content")=Content
-		rs("Content_zy")=Content_zy
+		'rs("Content_zy")=Content_zy
 		rs("UploadFiles")=UploadFiles
 		rs("DefaultPicUrl")=DefaultPicUrl
-		rs("price")=price
+		rs("address")=address
 		
-		rs("ggxh")=ggxh
-		rs("syfw")=syfw
-		rs("cptd")=cptd
-		rs("syjx")=syjx
-		rs("relgoods")=relgoods
+		rs("tel")=tel
+		rs("prov")=prov
+		rs("city")=city
+		rs("dist")=dist
+		
 		
 		'rs("area")=area
 		'rs("hx_type")=hx_type
@@ -93,11 +93,7 @@ If supportAspjpeg="1" And DefaultPicUrl<>"images/nopic.jpg" Then
 	
 End if
 
-		if instr(DefaultPicUrl,"Nopic")>0 then		
-			rs("IncludePic")=0
-		else
-			rs("IncludePic")=1
-		end if
+		
 				
 		rs("cateid")=cateid
 		if Elite="yes" then
@@ -133,11 +129,11 @@ Else
 		rs("px")=px
 		
 		rs("title")=title
-		rs("Color")=Color
-		rs("author")=author
-		rs("ComeFrom")=ComeFrom
+		'rs("Color")=Color
+		'rs("author")=author
+		'rs("ComeFrom")=ComeFrom
 		rs("Content")=Content
-		rs("Content_zy")=Content_zy
+		'rs("Content_zy")=Content_zy
 		rs("cateid")=cateid
 	
 		rs("UploadFiles")=UploadFiles
@@ -146,23 +142,19 @@ If supportAspjpeg="1" And DefaultPicUrl<>"images/nopic.jpg" and rs("DefaultPicUr
 	'thumb2 = Thumb(DefaultPicUrl,"s2",182,95)
 End if
 		rs("DefaultPicUrl")=DefaultPicUrl
-		rs("price")=price
+		'rs("price")=price
 		'rs("area")=area
 		'rs("hx_type")=hx_type
+		rs("address")=address
 		
-		rs("ggxh")=ggxh
-		rs("syfw")=syfw
-		rs("cptd")=cptd
-		rs("syjx")=syjx
-		rs("relgoods")=relgoods
+		rs("tel")=tel
+		rs("prov")=prov
+		rs("city")=city
+		rs("dist")=dist
 		
 		
-		if instr(DefaultPicUrl,"Nopic")>0 then
 		
-			rs("IncludePic")=0
-		else
-			rs("IncludePic")=1
-			end if
+		
 		
 		if Elite="yes" then
 			rs("Elite")=True

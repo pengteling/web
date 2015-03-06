@@ -491,6 +491,7 @@ ul.newslist li {
 }
 .newscenter .newscontent {
   font-size: 14px;
+  padding-bottom: 50px;
 }
 .newscenter .newscontent img {
   text-align: center;
@@ -500,7 +501,8 @@ ul.newslist li {
   margin: 0 auto;
 }
 .newscenter .newscontent p {
-  margin: 10px 0;
+  margin: 10px 0 ;
+  line-height: 24px;
 }
 .cleft .subnav ul li.subnav-d3 {
   height: 26px;
@@ -708,4 +710,34 @@ ul.newslist li {
   margin: 0;
   padding: 0;
   margin-top: 20px;
+}
+.maincontent .imgpic ul li {
+  width: 300px;
+  float: left;
+  margin: 25px;
+}
+.maincontent .imgpic ul li .pro-tit {
+  text-align: center;
+  line-height: 30px;
+}
+.maincontent .imgpic ul li .pro-tit a {
+  font-size: 14px;
+}
+.maincontent .imgpic ul li .pro-pic {
+  width: 290px;
+  height: 230px;
+  overflow: hidden;
+  border: #b2b2b2 5px solid;
+  text-align: center;
+  display: table-cell;
+  line-height: 230px;
+  vertical-align: middle;
+}
+.maincontent .imgpic ul li .pro-pic a {
+  vertical-align: middle;
+}
+.maincontent .imgpic ul li .pro-pic img {
+  max-width: 290px;
+  max-height: 230px;
+  vertical-align: middle;
 }

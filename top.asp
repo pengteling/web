@@ -33,7 +33,7 @@
   <%if request.Cookies("username")<>"" then%>
   <div class="loginin">
     <div class="rt-cart"><a href="cart.asp">购物车<span id="cartnum">0</span>件</a></div>
-    <div class="rt-user"><%=request.Cookies("username")%>，欢迎您！<a href="user_index.asp">[会员中心]</a> <a href="user_out.asp">[退出登陆]</a></div>
+    <div class="rt-user"><%=request.Cookies("username")%>，欢迎您！<a href="<%=companyUrl_db(37)%>">[订购产品]</a> <a href="user_index.asp">[会员中心]</a> <a href="user_out.asp">[退出登陆]</a></div>
   </div>
   <%else%>
   <div class="login">
@@ -42,7 +42,7 @@
       <div class="i-btnbg "><a href="user_login.asp">经销商登陆</a></div>
     </div>
      <div>
-      <div class="i-btnbg log-jxs"><a href="">English</a></div>
+      <div class="i-btnbg log-jxs"><a href="#">English</a></div>
     </div>
   </div>
   <%end if%>

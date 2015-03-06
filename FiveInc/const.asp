@@ -260,7 +260,7 @@ Function ShowPics()
        <div class="pro-pic">
        <a href="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
        </div>
-              <p><a href1="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><%=NewsListRs("title")%></a></p>
+              <div class="pro-tit"><a href1="<%=infoURL(NewsListRs("staticUrl"),NewsListRs("dynamicUrl"),supportHtml)%>"><%=NewsListRs("title")%></a></div>
             </li>
             
        

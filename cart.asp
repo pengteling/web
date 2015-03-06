@@ -54,7 +54,7 @@ sub loadcart()
 		  if rs.eof then
 		  cartIsempty=1
 		  %>
-          <td colspan="6"><a href="/">购物车中还没有商品，赶紧选购吧！</a></td>
+          <td colspan="6"><a href="<%=companyUrl_db(37)%>">购物车中还没有商品，赶紧选购吧！</a></td>
           <%else
 		  while not rs.eof 
 		  %>
@@ -164,7 +164,7 @@ end sub
     <%else%>
     <div class="cart_none"><img src="/images/cart_search.gif" />
       <p>亲，您的购物车还是空的，您可以：</p>
-      <a href="./">● 去首页挑选喜欢的商品 </a>
+      <a href="<%=companyUrl_db(37)%>">● 去挑选喜欢的商品 </a>
       <div class="clear"></div>
     </div>
     <%end if

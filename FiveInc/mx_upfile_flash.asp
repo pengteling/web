@@ -24,7 +24,7 @@ else
 			result = file.saveToFile(savepath,-1,false)
 			if result then
 
-FileName="/uploadfiles/"&filepath&"/"&file.filename
+FileName="/uploadfiles/"&filepath&""&file.filename
   response.write "<script>window.opener.document."&upload.forms("FormName")&"."&upload.forms("EditName")&".value='"&FileName&"'</script>"
 %>
 <script>

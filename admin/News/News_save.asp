@@ -28,12 +28,14 @@ end if
 'end if
 
 rfiles= relativeUploadfiles(Content,"/uploadfiles","gif|jpg|bmp|png|jpeg|zip|rar|doc|xls|docx|xlsx|pdf|mp4|flv|wmv" )
-'response.write rfiles
+
 rfiles=split(rfiles,"|")
 
-if DefaultPicUrl="" and ubound(rfiles)>0 then
+if DefaultPicUrl="" and ubound(rfiles)>=0 then
 DefaultPicUrl=rfiles(0)
 end if
+
+'response.write ubound(rfiles)
 'response.End()
 Elite=ChkFormStr(request.form("Elite"))
 cateid=strToNum(request("cateid"))

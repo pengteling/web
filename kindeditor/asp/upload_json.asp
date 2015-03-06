@@ -109,7 +109,7 @@ Set file = nothing
 
 if dirName="image" then
 '存缩略图
-MakeThumb filePath ,filePath,800,0,1
+MakeThumb filePath ,filePath,700,0,1
 end if
 
 'set result=Easp.Db.Ins("uploadfiles","path:'32434'")

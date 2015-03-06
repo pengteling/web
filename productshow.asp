@@ -1,7 +1,7 @@
 <!--#include file="fiveinc/inc.asp"-->
 <!--#include file="FiveInc/Check_Sql.asp"-->
 <!--#include file="FiveInc/page.asp"-->
-<!--#include virtual="/User_Config.asp"-->
+
 <%
 ispshow=1
 newsid=strToNum(Request.QueryString("id"))

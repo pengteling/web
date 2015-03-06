@@ -45,7 +45,7 @@ function SetDropDownPic(url){
       <td height="30" colspan="3" align="center" class="blod">增加记录</td>
     </tr>
     <tr bgcolor="#ECF5FF">
-      <td height="22" align="center" class="tr_southidc">标题：</td>
+      <td height="22" align="center" class="tr_southidc">名称：</td>
       <td colspan="2" width="80%"><input name="title" type="text" class="input" size="30">
         
        
@@ -150,17 +150,35 @@ If data(3,i)>1 then class_list=class_list& "├"
 	});
 	</script>
  <tr bgcolor="#ECF5FF">
-      <td height="22" align="center" class="tr_southidc">标题：</td>
+      <td height="22" align="center" class="tr_southidc">地域：</td>
       <td colspan="2">
       <div id="city_4">
-  		<select class="prov"></select> 
-    	<select class="city" disabled="disabled"></select>
-        <select class="dist" disabled="disabled"></select>
+  		<select class="prov" name="prov"></select> 
+    	<select class="city" name="city" disabled="disabled"></select>
+        <select class="dist" name="dist" disabled="disabled"></select>
     </div>
 
       </td>
       </tr>
+   <tr bgcolor="#ECF5FF">
+      <td height="22" align="center" class="tr_southidc">详细地址：</td>
+      <td colspan="2" width="80%"><input name="address" type="text" class="input" size="80">
+        
+       
+        
+      
+            </td>
+    </tr>   
     
+      <tr bgcolor="#ECF5FF">
+      <td height="22" align="center" class="tr_southidc">电话：</td>
+      <td colspan="2" width="80%"><input name="tel" type="text" class="input" size="30">
+        
+       
+        
+      
+            </td>
+    </tr>
     <tr bgcolor="#ECF5FF">
       <td height="25" align="center" valign="top">详细介绍：</td>
       <td colspan="2" valign="top"> 
