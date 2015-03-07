@@ -52,7 +52,7 @@ if Easp.var("act") ="orderdb" then '提交订单的处理函数
 	 
 	  cart_num=0
 	  cart_totalprice=0
-	  floatmeony=0
+	  floatmoney=0
 	  '随机产生订单号 
 	  
 	   RANDOMIZE
