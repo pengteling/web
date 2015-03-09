@@ -303,7 +303,7 @@ If pagecount>=1 then
 			If i<=pagenow+ON_EACH_SIDE or i>=pagecount-ON_ENDS Then '右挨着pagenow的ON_EACH_SIDE页
 			str_tmp = str_tmp& "<a href="""&geturl&i&"""> "&i&"</a>"		
 			
-			ElseIf i=pagecount-ON_ENDS and pagenow+ON_EACH_SIDE<pagecount-ON_ENDS Then '有倒数第三页
+			ElseIf i=pagecount-ON_ENDS-1 and pagenow+ON_EACH_SIDE<pagecount-ON_ENDS Then '有倒数第三页
 			str_tmp = str_tmp& "<a class=""page_dian"">...</a>"
 			
 			End if		
