@@ -190,14 +190,14 @@ $(function(){
 		var img1="../Images/tree_folder3.gif";		
 		var img2="../Images/tree_folder4.gif";
 		var isOpen=true;
-		if ($(tr_this).find("img").attr("src")==img1)
+		if ($(tr_this).find("img").prop("src").indexOf("tree_folder3")>0)
 		{
-			$(tr_this).find("img").attr("src",img2);
+			$(tr_this).find("img").prop("src",img2);
 			isOpen=false;
 		}
 		else
 		{
-			$(tr_this).find("img").attr("src",img1);
+			$(tr_this).find("img").prop("src",img1);
 			isOpen=true;
 		}
 		
@@ -213,11 +213,11 @@ $(function(){
 				 {
 					if(isOpen){
 						$(element).show();
-						$(this).find("img").attr("src",img1);
+						$(this).find("img").prop("src",img1);
 					}
 					else{
 						$(element).hide();
-						$(this).find("img").attr("src",img2);
+						$(this).find("img").prop("src",img2);
 					}
 					
 				 }
