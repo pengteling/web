@@ -42,7 +42,7 @@ sub loadcart()
       <th>商品</th>
       <th width="80">价格</th>
 
-      <th width="90">数量</th>
+      <th width="120">数量</th>
       <th width="80">小计</th>
       <th width="50">操作</th>
     </tr>
@@ -65,10 +65,10 @@ sub loadcart()
      
       <td>¥<%=rs("price")%></td>
       <td><a title="减少" class="min" productid="<%=rs("shopid")%>" old="<%=rs("shopnum")%>">-</a>
-        <input name="quantity" class="quantity" onBlur="editcard(this,this.value)" type="text" maxlength="4" value="<%=rs("shopnum")%>" productid="<%=rs("shopid")%>">
+        <input name="quantity" class="quantity" onBlur="editcard(this,this.value)" type="text" maxlength="7" value="<%=rs("shopnum")%>" productid="<%=rs("shopid")%>" style="width:60px;">
         <a title="增加" class="max" productid="<%=rs("shopid")%>" old="<%=rs("shopnum")%>">+</a></td>
       <td class="price">¥<%=rs("shopnum")*rs("price")%></td>
-      <td><a class="del" onClick="delcart(<%=rs("id")%>)" href="javascript:">删除</a></td>
+      <td><a class="del" onClick="delcart(<%=rs("shopid")%>)" href="javascript:">删除</a></td>
     </tr>
       
 		  <%

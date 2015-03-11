@@ -52,7 +52,7 @@ $(function() {
         var a = $(this).attr("old"),
         b = $(this).attr("productid");
         a++,
-        a >= 999 && (a = 999),
+        a >= 9990000 && (a = 9990000),
         editnum(b, a)
     })
 });
