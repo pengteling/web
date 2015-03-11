@@ -25,7 +25,7 @@ if ucase(request("act"))="CONFIRMGOODS" then
 	
 	set rs=Easp.Db.Sel("select floatmoney , totalmoney,userid  from orderList where ordernum={id}")
 	if not rs.eof then
-		totalpoints = cint(rs(0)+rs(1))
+		totalpoints = clng(rs(0)+rs(1))
 		temp_userid=rs(2)
 	end if
 	

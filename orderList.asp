@@ -14,7 +14,7 @@ curpageTitle = "我的订单"
 	
 	set rs=Easp.Db.Sel("select floatmoney , totalmoney  from orderList where ordernum={id}")
 	if not rs.eof then
-		totalpoints = cint(rs(0)+rs(1))
+		totalpoints = clng(rs(0)+rs(1))
 	end if
 	
 	result2= Easp.Db.Upd("User","points=points+"&totalpoints&"","userId={userid}")
