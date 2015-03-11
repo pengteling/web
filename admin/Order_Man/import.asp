@@ -22,7 +22,7 @@
 <%'response.ContentType ="application/vnd.ms-excel"
 
 date1=cdate(request.Form("date1"))
-date2=cdate(request.Form("date2"))
+date2=cdate(request.Form("date2"))+1
 
 Response.AddHeader "Content-Disposition","attachment;filename=hc"&date1&"-"&date2&".xls"
 

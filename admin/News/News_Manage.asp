@@ -96,7 +96,7 @@ end if
 if keywords<>"" then
 	sql=sql &" and (news.title like '%"&keywords&"%' or news.content like '%"&keywords&"%')"
 end if
-sql=sql & " order by elite, px desc,posttime desc,id desc"
+sql=sql & " order by elite desc, px desc,posttime desc,id desc"
 
 
 'response.write sql
