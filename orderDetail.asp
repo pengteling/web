@@ -47,7 +47,10 @@ $(function(){
                     </tr>
                     <tr>
                         <td class="info">订单总金额：</td>
-                        <td><span>¥<%=rs("totalmoney") + rs("floatmoney")%></span> 元  （优惠<span><%=-rs("floatmoney")%></span>元）</td>
+                        <td><span>¥<%=rs("totalmoney") + rs("floatmoney")%></span> 元  
+                        <%if Abs( Cdbl(rs("floatmoney")))>0 then%>
+                        （优惠<span><%=-rs("floatmoney")%></span>元）
+						<%end if%></td>
                     </tr>
                     <tr>
                         <td class="info">付款方式：</td>
