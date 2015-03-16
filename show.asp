@@ -127,7 +127,7 @@ $(document).ready(function() {
       <h1 style="margin-bottom:30px;"><%=newstitle%></h1>
       <div class="gline">
         <div class="fl">产品单价：</div>
-        <div class="fr price"><span style="font-size:18px;">￥</span><%=price%> <%if cateid_d2=49 then response.write " /套" else response.write " /件" end if%></div>
+        <div class="fr price"><span style="font-size:18px;">￥</span><%=formatNum(price)%> <%if cateid_d2=49 then response.write " /套" else response.write " /件" end if%></div>
         <div class="clear"></div>
       </div>
       

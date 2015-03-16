@@ -1,4 +1,11 @@
 <%
+function formatNum(num)
+	if cdbl(num)<1 and  cdbl(num)>0 then
+		formatNum = "0"&num 
+	else
+		formatNum=num
+	end if
+end function
 function wrongMsg(str)
 	response.write str &"<a href=""javascript:history.back();"">返回</a>"
 	response.End()

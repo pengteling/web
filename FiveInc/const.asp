@@ -147,7 +147,7 @@ Function Showgoods()
        <a href="show.asp?id=<%=NewsListRs("id")%>"><img src="<%=NewsListRs("defaultpicurl")%>" /></a>
        </div>
        <div class="l2">
-       <div class="price">单价：￥ <%=NewsListRs("price")%></div>
+       <div class="price">单价：￥ <%=formatnum(NewsListRs("price"))%></div>
        <div class="intro"><%=leftstr(clearAllhtml(NewsListRs("content")),50)%></div>
        </div>
               <div class="l3"><a href="show.asp?id=<%=NewsListRs("id")%>"><%=NewsListRs("title")%></a></div>
