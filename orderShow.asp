@@ -74,7 +74,7 @@ function checkdb(the,payway,total,id)
                     </tr>
                     <tr>
                         <td class="info">订单总金额：</td>
-                        <td><span>¥<%=orderMoney%> 元</span></td>
+                        <td><span>¥<%=formatnum(orderMoney)%> 元</span></td>
                     </tr>
                 </table>
                 <table>

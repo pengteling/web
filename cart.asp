@@ -63,11 +63,11 @@ sub loadcart()
       <td><a href="/show.asp?id=<%=rs("shopid")%>" target="_blank"><img class="pro" src="<%=rs("pimg")%>" border="0"></a></td>
       <td><a href="/show.asp?id=<%=rs("shopid")%>" target="_blank"><%=rs("pname")%></a></td>
      
-      <td>¥<%=rs("price")%></td>
+      <td>¥<%=formatnum(rs("price"))%></td>
       <td><a title="减少" class="min" productid="<%=rs("shopid")%>" old="<%=rs("shopnum")%>">-</a>
         <input name="quantity" class="quantity" onBlur="editcard(this,this.value)" type="text" maxlength="7" value="<%=rs("shopnum")%>" productid="<%=rs("shopid")%>" style="width:60px;">
         <a title="增加" class="max" productid="<%=rs("shopid")%>" old="<%=rs("shopnum")%>">+</a></td>
-      <td class="price">¥<%=rs("shopnum")*rs("price")%></td>
+      <td class="price">¥<%=formatnum(rs("shopnum")*rs("price"))%></td>
       <td><a class="del" onClick="delcart(<%=rs("shopid")%>)" href="javascript:">删除</a></td>
     </tr>
       
@@ -83,7 +83,7 @@ sub loadcart()
     
     
     <tr>
-      <td class="info" colspan="6">商品共计：<span><%=cart_num%></span>件　商品总金额：<span>¥<%=cart_totalprice%></span>元</td>
+      <td class="info" colspan="6">商品共计：<span><%=cart_num%></span>件　商品总金额：<span>¥<%=formatnum(cart_totalprice)%></span>元</td>
     </tr>
     <%end if%>
   </tbody>

@@ -47,9 +47,9 @@ $(function(){
                     </tr>
                     <tr>
                         <td class="info">订单总金额：</td>
-                        <td><span>¥<%=rs("totalmoney") + rs("floatmoney")%></span> 元  
+                        <td><span>¥<%=formatnum(rs("totalmoney") + rs("floatmoney"))%></span> 元  
                         <%if Abs( Cdbl(rs("floatmoney")))>0 then%>
-                        （优惠<span><%=-rs("floatmoney")%></span>元）
+                        （优惠<span><%=formatnum(-rs("floatmoney"))%></span>元）
 						<%end if%></td>
                     </tr>
                     <tr>
@@ -139,9 +139,9 @@ $(function(){
                     <tr>
                         <td><a href="../show.asp?id=<%=rs("goodsid")%>" target="_blank"><%=rs("goodsName")%></a></td>	
                        
-                        <td>¥<%=rs("price")%></td>
+                        <td>¥<%=formatnum(rs("price"))%></td>
                         <td><%=rs("count")%></td>
-                        <td class="price">¥<%=rs("totalprice")%></td>
+                        <td class="price">¥<%=formatnum(rs("totalprice"))%></td>
                     </tr>
                     
                   <%
@@ -151,7 +151,7 @@ $(function(){
 				  %>  
                     
                     <tr>
-                        <td colspan="4" class="info">商品共计：<span><%=countNum%></span>件　商品总金额：<span>¥<%=totalmoeny%></span>元</td>
+                        <td colspan="4" class="info">商品共计：<span><%=countNum%></span>件　商品总金额：<span>¥<%=formatnum(totalmoeny)%></span>元</td>
                     </tr>
                         
                         

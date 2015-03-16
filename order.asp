@@ -369,9 +369,9 @@ while not rs.eof
     <tr>
       <td><a href="/show.asp?id=<%=rs("shopid")%>" target="_blank"><%=rs("pname")%></a></td>
     
-       <td>¥<%=rs("price")%></td>
+       <td>¥<%=formatnum(rs("price"))%></td>
         <td><%=rs("shopnum")%></td>
-        <td class="price">¥<%=rs("shopnum")*rs("price")%></td>
+        <td class="price">¥<%=formatnum(rs("shopnum")*rs("price"))%></td>
       </tr>
       
       <%
@@ -386,7 +386,7 @@ while not rs.eof
 	  
 	  %>
             <tr>
-              <td colspan="4" class="info">商品共计：<span><%=cart_num%></span>件　商品总金额：<span>¥<%=cart_totalprice%></span>元
+              <td colspan="4" class="info">商品共计：<span><%=cart_num%></span>件　商品总金额：<span>¥<%=formatnum(cart_totalprice)%></span>元
               <%if user_rate<>1 then
 			 
 			  	floatmoney =cart_totalprice-round( cart_totalprice* cdbl(user_rate),2)

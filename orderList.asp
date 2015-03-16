@@ -196,7 +196,7 @@ $(function(){
                         <tr>
                             <td class="item"><a href="orderDetail.asp?id=<%=rs("orderNum")%>"><%=rs("orderNum")%></a></td>
                             <td align="center"><%=rs("xm")%></td>
-                            <td align="center">¥<%=rs("totalmoney") + rs("floatmoney")%> 元</td>
+                            <td align="center">¥<%=formatnum(rs("totalmoney") + rs("floatmoney"))%> 元</td>
                             <td align="center"><%=rs("addtime")%></td>
                             <td align="center">线下汇款</td>
                             <td align="center"><span><%=Easp.Var(trim(rs("refund_status")))%></span></td>
