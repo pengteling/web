@@ -44,20 +44,27 @@ $(function(){
         <ul>
         
         <%
-		rs.open "Select top 4 * from product where isdel=0 order by hits desc",conn,1,1
+		Easp.var("date1") = Date()-7
+		Easp.var("date2") = Date()+1
+		
+		set proc=Easp.Db.Query("exec goodsSalesCount_sel {date1},{date2}")
+	If Not IsNull(proc("rs")) Then
+	
+		Set rs = proc("rs")
 		while not rs.eof
 		%>
         	<li>
-        		<div class="pic"><a href="show.asp?id=<%=rs("id")%>">
+        		<div class="pic"><a href="show.asp?id=<%=rs("goodsid")%>">
         				<img src="<%=rs("defaultpicurl")%>" alt="" />
                         </a></div>
-        				<div class="txt"><a href="show.asp?id=<%=rs("id")%>">单价：￥ <%=rs("price")%></a></div>
+        				<div class="txt"><a href="show.asp?id=<%=rs("goodsid")%>">单价：￥ <%=formatnum(rs("price"))%></a></div>
         			
         	</li>
         <%
 		rs.movenext
 		wend
 		rs.close
+	end if
 		%>
         </ul>
         </div>
