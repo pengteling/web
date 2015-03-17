@@ -8,7 +8,7 @@ isindex=1
 <!--#include virtual="/top.asp"-->
 
 
-<div class="banner">
+<div class="banner" style="width:1440px; margin:0 auto;">
   <div class="hd">
     <ul>
     <%
