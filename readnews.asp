@@ -101,6 +101,14 @@ rs.close
 		<div class="newscontent">
 		<%=News_Content%>
         </div>
+        <div class="newspage" style="height:100px;">
+        
+        <div class="newspage2 fr">下一篇：<%=nextlink%></a></div>
+        <div class="newspage1 fl">上一篇：<%=prelink%></div>
+        <div class="clear"></div>
+        
+      </div>
+
     </div>
       </div>
     </div>
