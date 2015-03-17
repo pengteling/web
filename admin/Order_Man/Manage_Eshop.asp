@@ -13,6 +13,23 @@ window.location.href="Manage_Eshop.asp?id="+id+"&ordernum="+oid+"&page="+page
   <form action="manage_Eshop.asp" method="get">请输入关键词进行查询：
         <input name="keywords" value=""><input type="submit" value="搜索">
         </form></td>
+        <td><form action="manage_Eshop.asp" method="get">请输入准确金额进行查询：
+        <input name="c_money" value="" size="5"><input type="submit" value="搜索">
+        </form></td>
+        <td>
+        <form action="manage_Eshop.asp" method="get">
+        <select  name="refund_status" id="refund_status">
+        <option value="">所有状态</option>
+        <option value="WAIT_BUYER_PAY"><%=Easp.var("WAIT_BUYER_PAY")%></option>
+        <option value="WAIT_SELLER_SEND_GOODS"><%=Easp.var("WAIT_SELLER_SEND_GOODS")%></option>
+        <option value="WAIT_BUYER_CONFIRM_GOODS"><%=Easp.var("WAIT_BUYER_CONFIRM_GOODS")%></option>
+        <option value="TRADE_FINISHED"><%=Easp.var("TRADE_FINISHED")%></option>
+        <option value="TRADE_CLOSED"><%=Easp.var("TRADE_CLOSED")%></option>
+       
+        </select>
+        <input type="submit" value="搜索">
+        </form>
+        </td>
   </tr>
  </table>
 <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="table_southidc">
@@ -40,6 +57,14 @@ sqltext="select * from OrderList_c  order by addtime desc"
 if keywords<>"" then
 strFileName=strFileName&"&keywords="&server.URLEncode(keywords)
 sqltext="select * from OrderList_c where  (ordernum like '%"&keywords&"%' or username like '%"&keywords&"%' or tel like '%"&keywords&"%' or xm like '%"&keywords&"%') order by addtime desc"
+end if
+if Request("c_money")<>"" then
+	c_money =cdbl(Request("c_money"))
+	sqltext = "select * from OrderList_c where totalmoney+floatmoney ="&c_money&" order by addtime desc"
+end if
+if request("refund_status")<>"" then
+	refund_status =ChkFormStr(Request("refund_status"))
+	sqltext = "select * from OrderList_c where refund_status ='"&refund_status&"' order by addtime desc"
 end if
 
 if Easp.var("Cuserid")<>"" then
@@ -110,11 +135,11 @@ do while not rs.eof
                 <td align="center" bgcolor="#ECF5FF"> 
                 <%=rs("username")%></td>
                 <td align="center" bgcolor="#ECF5FF"> 
-                <%=rs("totalmoney")%></td>
+                <%=formatNumber(rs("totalmoney"),2,-1)%></td>
                 <td align="center" bgcolor="#ECF5FF"> 
-                <%=rs("floatmoney")%></td>
+                <%=formatNumber(rs("floatmoney"),2,-1)%></td>
                 <td align="center" bgcolor="#ECF5FF"><span style="color:red" >
-                <%=rs("totalmoney")+rs("floatmoney")%></span></td>
+                <%=formatNumber(rs("totalmoney")+rs("floatmoney"),2,-1)%></span></td>
                 <td align="center" bgcolor="#ECF5FF"> 
                   <%=Easp.var(trim(rs("refund_status")))%>
                 </td>
