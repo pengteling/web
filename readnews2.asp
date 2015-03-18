@@ -47,8 +47,8 @@ prelink="这是第一篇"
 end if
 ReadRs.Close
 'ReadRs.open "select top 1 * from news_c where  cateid="&nid&" and isdel=0 and  id<"&newsid&" order by id desc",conn,1,1
-'ReadRs.open "with tb as (select *,row_number() over(order by Elite desc,px desc ,posttime desc) as rowid from news_c  where cateid="&nid&" and isdel=0) SELECT * FROM  TB WHERE rowid= (select rowid+1 from tb where id="&newsid &")",conn,1,1
-ReadRs.open " SELECT * FROM   (select *,row_number() over(order by Elite desc,px desc ,posttime desc) as rowid from news_c  where cateid="&nid&" and isdel=0) g WHERE rowid= (select rowid+1 from  (select *,row_number() over(order by Elite desc,px desc ,posttime desc) as rowid from news_c  where cateid="&nid&" and isdel=0) g where id="&newsid &")",conn,1,1
+ReadRs.open "WITH tbtemp as (select *,row_number() over(order by Elite desc,px desc ,posttime desc) as rowid from news_c  where cateid="&nid&" and isdel=0) SELECT * FROM  tbtemp WHERE rowid= (select rowid+1 from tbtemp where id="&newsid &")",conn,1,1
+'ReadRs.open " SELECT * FROM   (select *,row_number() over(order by Elite desc,px desc ,posttime desc) as rowid from news_c  where cateid="&nid&" and isdel=0) g WHERE rowid= (select rowid+1 from  (select *,row_number() over(order by Elite desc,px desc ,posttime desc) as rowid from news_c  where cateid="&nid&" and isdel=0) g where id="&newsid &")",conn,1,1
 
 if not ReadRs.eof then
 nextlink="<a href=""readnews.asp?id="&ReadRs("id")&""">"&ReadRs("Title")&"</a>"
