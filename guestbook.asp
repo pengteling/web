@@ -75,7 +75,7 @@ set Rs=nothing
 
 
 Session("RandomNumber")=""
- Response.Write "<script lanaguage='javascript'>alert('信息提交成功,我们会尽快为您审核,请耐心等待!');document.location='index.asp';</script>"
+ Response.Write "<script lanaguage='javascript'>alert('信息提交成功,我们会尽快联系您!');document.location='index.asp';</script>"
  End if
  
 Session("RandomNumber")=GetRndPassword(16)
